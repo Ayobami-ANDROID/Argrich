@@ -54,7 +54,7 @@ const Signup = () => {
   };
   return (
     <div className="min-h-screen bg-[#F5F5F5] grid lg:grid-cols-2  p-4">
-      <div className="flex   bg-[#D9D9D9]  rounded-[30px]"></div>
+      <div className="flex   bg-[#D9D9D9]  rounded-[30px] sm:hidden lg:block"></div>
       <div className="flex flex-col items-center py-10">
         <div>
           <div>
@@ -91,7 +91,7 @@ const Signup = () => {
               errorText={formik.errors.email}
               placeHolder={`Enter Your E-mail Address`}
             />
-            <SelectField
+            {/* <SelectField
               label={`Country`}
               name="country"
               value={formik.values.country}
@@ -108,8 +108,8 @@ const Signup = () => {
               errorText={formik.errors.country}
               placeHolder={"Nigeria"}
               options={country}
-            />
-              <div className="flex flex-col">
+            /> */}
+              {/* <div className="flex flex-col">
                 <div>
                   <label>Phone Number</label>
                 </div>
@@ -144,7 +144,7 @@ const Signup = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="relative">
               <InputField
                 label={`Password`}
@@ -157,7 +157,7 @@ const Signup = () => {
                 placeHolder={"••••••••"}
                 onBlur={formik.handleBlur}
               />
-              <div className="absolute text-[#030940] inset-y-[2.2rem] right-3 text-lg ">
+              <div className="absolute text-[#008A2F] inset-y-[2.2rem] right-3 text-lg ">
                 {" "}
                 {toggle ? (
                   <RiEyeFill
@@ -173,14 +173,14 @@ const Signup = () => {
                   />
                 )}
               </div>
-              <div>
+              {/* <div>
                 <p className="text-sm text-contentFade">Password must have</p>
 
                 <div className="flex flex-wrap mt-4 gap-3 text-[13px]">
                   <p
                     className={`${
                       /^(?=.*[a-z])/.test(formik.values.password)
-                        ? "text-[#FFFFFF] bg-[#030940]"
+                        ? "text-[#FFFFFF] bg-[#008A2F]"
                         : "text-fadedBlue bg-[#FFFFFF]"
                     } py-1 px-2 rounded-[20px]`}
                   >
@@ -189,7 +189,7 @@ const Signup = () => {
                   <p
                     className={`${
                       /^(?=.*[A-Z])/.test(formik.values.password)
-                        ? "text-[#FFFFFF] bg-[#030940]"
+                        ? "text-[#FFFFFF] bg-[#008A2F]"
                         : "text-fadedBlue bg-[#FFFFFF]"
                     } py-1 px-2 rounded-[20px]`}
                   >
@@ -198,7 +198,7 @@ const Signup = () => {
                   <p
                     className={`${
                       /^.{8,}$/.test(formik.values.password)
-                        ? "text-[#FFFFFF] bg-[#030940]"
+                        ? "text-[#FFFFFF] bg-[#008A2F]"
                         : "text-fadedBlue bg-[#FFFFFF]"
                     } py-1 px-2 rounded-[20px]`}
                   >
@@ -209,7 +209,7 @@ const Signup = () => {
                       /^(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\/-])/.test(
                         formik.values.password
                       )
-                        ? "text-[#FFFFFF] bg-[#030940]"
+                        ? "text-[#FFFFFF] bg-[#008A2F]"
                         : "text-fadedBlue bg-[#FFFFFF]"
                     } py-1 px-2 rounded-[20px]`}
                   >
@@ -218,14 +218,14 @@ const Signup = () => {
                   <p
                     className={`${
                       /^(?=.*\d)/.test(formik.values.password)
-                        ? "text-[#FFFFFF] bg-[#030940]"
+                        ? "text-[#FFFFFF] bg-[#008A2F]"
                         : "text-fadedBlue bg-[#FFFFFF]"
                     } py-1 px-2 rounded-[20px]`}
                   >
                     1 Number
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="relative">
               {" "}
@@ -243,7 +243,7 @@ const Signup = () => {
                 errorText={formik.errors.passwordConfirmation}
                 onBlur={formik.handleBlur}
               />
-              <div className="absolute text-[#030940] inset-y-[2.2rem] right-3 text-lg ">
+              <div className="absolute text-[#008A2F] inset-y-[2.2rem] right-3 text-lg ">
                 {" "}
                 {toggle2 ? (
                   <RiEyeFill
@@ -260,7 +260,21 @@ const Signup = () => {
                 )}
               </div>
             </div>
+            <div>
+            <button
+                  type="submit"
+                  className=
+                 "bg-[#008A2F]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 text-white rounded-[5px]"
+                  
+                >
+                  Create account
+                </button>
+            </div>
           </form>
+          <div className="relative border-t-2 border-[#E6E6E6] mt-8 w-full ">
+            <div></div>
+            <h1 className="text-center  absolute bg-[#F5F5F5]  w-[1/2] mt-[-17px] left-[30%]">or continue with</h1>
+          </div>
         </div>
       </div>
     </div>
