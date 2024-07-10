@@ -28,3 +28,12 @@ export const SignUpValidate = yup.object().shape({
     .oneOf([yup.ref("password")], "Passwords must match")
     .required("required"),
 });
+
+
+export const signinValidate = yup.object().shape({
+    email: yup.string().email("enter valid email").required("required"),
+    password: yup
+      .string()
+      .min(8, "password must containat least 8 characters ")
+      .required("required"),
+  });

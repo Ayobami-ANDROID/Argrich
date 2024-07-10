@@ -9,6 +9,7 @@ import Spinner from "../components/Spinner";
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import countries from "../../Services/callcode.json";
+import Google from "../images/Google.png";
 
 const Signup = () => {
   const [isLoading, setisLoading] = useState(false);
@@ -19,11 +20,9 @@ const Signup = () => {
 
   const formik = useFormik({
     initialValues: {
-      country: "NG",
       firstName: "",
       lastName: "",
       email: "",
-      callCode: "+234",
       password: "",
       passwordConfirmation: "",
     },
@@ -60,7 +59,7 @@ const Signup = () => {
           <div>
             <h1 className="font-bold text-[30px]">Create an Account</h1>
           </div>
-          <div className="text-[#8C8C8C]">
+          <div className="text-[#8C8C8C] mb-4">
             Enter your email and password to create an account
           </div>
           <form>
@@ -109,7 +108,7 @@ const Signup = () => {
               placeHolder={"Nigeria"}
               options={country}
             /> */}
-              {/* <div className="flex flex-col">
+            {/* <div className="flex flex-col">
                 <div>
                   <label>Phone Number</label>
                 </div>
@@ -145,7 +144,7 @@ const Signup = () => {
                   </div>
                 </div>
               </div> */}
-              <div className="relative">
+            <div className="relative">
               <InputField
                 label={`Password`}
                 name={`password`}
@@ -261,19 +260,35 @@ const Signup = () => {
               </div>
             </div>
             <div>
-            <button
-                  type="submit"
-                  className=
-                 "bg-[#008A2F]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 text-white rounded-[5px]"
-                  
-                >
-                  Create account
-                </button>
+              <button
+                type="submit"
+                className="bg-[#008A2F]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 mt-4 text-white rounded-[5px]"
+              >
+                Create account
+              </button>
             </div>
           </form>
-          <div className="relative border-t-2 border-[#E6E6E6] mt-8 w-full ">
-            <div></div>
-            <h1 className="text-center  absolute bg-[#F5F5F5]  w-[1/2] mt-[-17px] left-[30%]">or continue with</h1>
+          <div className="mt-12">
+            <div className="relative border-t-2 border-[#E6E6E6]  w-full my-8 ">
+              <div></div>
+              <h1 className="text-center  absolute bg-[#F5F5F5] text-[#828282]  w-[1/2] mt-[-17px] left-[30%]">
+                or continue with
+              </h1>
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="bg-[#DBDBDB]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 text-[#000000] rounded-[5px] flex justify-center p-4"
+              >
+                <img src={Google} className="mr-2"></img>
+                Google
+              </button>
+            </div>
+            <div className="mt-4 flex justify-center">
+              <p className="text-[12px]">
+                Have an account Already?<Link className="text-[#008A2F]">Click here to Login</Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
