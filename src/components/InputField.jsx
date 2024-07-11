@@ -28,7 +28,7 @@ const InputField = ({
       placeholder={placeHolder}
       className={`border ${
         error ? "border-red-500" : "border"
-      } ${className}  rounded-[5px] shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] h-10 border w-full pl-4 text-[#11233D] text-md font-normal placeholder:font-normal outline-none ${
+      } ${className}  rounded-[5px] shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] h-10 border w-full pl-4 text-[#11233D] bg-[#fff] text-md font-normal placeholder:font-normal outline-none ${
         InputStyle && InputStyle.className
       }`}
       style={InputStyle && InputStyle.style}

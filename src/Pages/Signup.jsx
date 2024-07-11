@@ -57,7 +57,7 @@ const Signup = () => {
       <div className="flex flex-col items-center py-10">
         <div>
           <div>
-            <h1 className="font-bold text-[30px]">Create an Account</h1>
+            <h1 className="font-bold text-[30px] text-[#000]">Create an Account</h1>
           </div>
           <div className="text-[#8C8C8C] mb-4">
             Enter your email and password to create an account
@@ -285,7 +285,7 @@ const Signup = () => {
               </button>
             </div>
             <div className="mt-4 flex justify-center">
-              <p className="text-[12px]">
+              <p className="text-[12px] text-[#000]">
                 Have an account Already?<Link className="text-[#008A2F]">Click here to Login</Link>
               </p>
             </div>

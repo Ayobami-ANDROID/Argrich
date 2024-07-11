@@ -6,6 +6,8 @@ import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Advert from "./components/Advert";
+import Header from "./components/Header";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -13,6 +15,8 @@ function App() {
   return (
     <>
       <ToastContainer position="top-center" autoClose={2000} />
+      <Advert/>
+      <Header/>
       <Routes>
         <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
