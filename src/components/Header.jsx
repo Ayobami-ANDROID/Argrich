@@ -10,7 +10,7 @@ import Profile from "../images/Ellipse 1.png"
 const Header = () => {
   const [clicked, setClicked] = useState(false);
   return (
-    <div className="bg-[#fff] p-4">
+    <div className="bg-[#fff] px-12 py-4">
       <div className="grid grid-cols-2">
         <div className="flex">
           <img src={Logo}></img>
