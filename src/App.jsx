@@ -15,8 +15,7 @@ function App() {
   return (
     <>
       <ToastContainer position="top-center" autoClose={2000} />
-      <Advert/>
-      <Header/>
+      
       <Routes>
         <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />

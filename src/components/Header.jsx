@@ -6,15 +6,16 @@ import { BiSearch } from "react-icons/bi";
 import { IoPersonOutline } from "react-icons/io5";
 import { CiShoppingCart } from "react-icons/ci";
 import Profile from "../images/Ellipse 1.png";
+import { TfiAlignJustify } from "react-icons/tfi";
 
 const Header = () => {
   const [clicked, setClicked] = useState(false);
   const [click, setClick] = useState(false);
   return (
-    <div className="bg-[rgb(255,255,255)] lg:px-12 px-6 py-4 w-full">
-      <div className="grid grid-cols-2  w-full">
-        <div className="flex ">
-          <img src={Logo} className="lg:w-20 w-12 mr-2"></img>
+    <div className="bg-[rgb(255,255,255)] lg:px-12 px-4 py-4 w-full">
+      <div className="grid grid-cols-2 w-full">
+        <div className="flex w-full">
+          <img src={Logo} className="lg:w-20 w-12 lg:mr-8 mr-2"></img>
           {/* <details className="dropdown ">
             <summary
               className="btn bg-[#fff] border-none text-[#000000] hover:bg-white m-1  shadow-none outline-none"
@@ -83,7 +84,7 @@ const Header = () => {
                 )}
                 {clicked ? (
                   <div className="absolute top-[100%] left-[10%]">
-                    <ul className="  rounded-box z-[1] lg:w-[30rem] rounded-[5px] w-[20rem] p-2 grid lg:grid-cols-3 grid-cols-2 gap-4 bg-[#fff]">
+                    <ul className="  rounded-box z-[1] lg:w-[30rem] rounded-[5px] w-[16rem] p-2 grid lg:grid-cols-3 grid-cols-1 gap-4 bg-[#fff]">
                       <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
                         <div>
                           {" "}
@@ -129,18 +130,18 @@ const Header = () => {
             </div>
           </button>
         </div>
-        <div className="flex border-none ">
-          <div className="flex bg-[#E4E4E4] rounded-[300px] border-2 border-solid border-[#E4E4E4] min-w-10 w-full p-4">
+        <div className="flex border-none w-full">
+          <div className="flex bg-[#E4E4E4] rounded-[300px] border-2 border-solid border-[#E4E4E4] min-w-36 w-full lg:p-4 p-2">
             <input
               placeholder="Search Product"
               type="text "
               className="bg-[#E4E4E4] outline-none h-full border-none rounded-[300px] w-full"
             ></input>
-            <div>
+            <div className="flex items-center">
               <BiSearch />
             </div>
           </div>
-          <div className="flex items-center text-[#000]">
+          <div className="lg:flex  hidden items-center text-[#000] mx-2">
             {/* <details className="dropdown open w-full">
               <summary
                 className="btn bg-[#fff] border-none text-[#000000] hover:bg-white m-1 shadow-none outline-none  "
@@ -195,69 +196,29 @@ const Header = () => {
                 </li>
               </ul>
             </details> */}
-            <button className="flex relative" onClick={() => setClick(!click)}>
+            <button className="flex relative " onClick={() => setClick(!click)}>
               <IoPersonOutline
                 size={"1.5em"}
                 className="mr-2"
                 
               />
               Account
-              {click ? (
-                <div>
-                  <ul className="absolute top-[150%] left-0 rounded-[10px]  rounded-box z-[1] w-52 p-2 grid grid-cols-1 gap-2 bg-[#fff]">
-                    <li className="p-2 rounded-[5px] text-[#000000] ">
-                      <div>
-                        {" "}
-                        <a>Item 1</a>
-                      </div>
-                    </li>
-                    <li className="p-2  rounded-[5px] text-[#000000]">
-                      <div>
-                        {" "}
-                        <a>Item 1</a>
-                      </div>
-                    </li>
-                    <li className="p-2  rounded-[5px] text-[#000000]">
-                      <div>
-                        {" "}
-                        <a>Item 1</a>
-                      </div>
-                    </li>
-                    <li className="p-2  rounded-[5px] text-[#000000]">
-                      <div>
-                        {" "}
-                        <a>Item 1</a>
-                      </div>
-                    </li>
-                    <li className="p-2  rounded-[5px] text-[#000000]">
-                      <div>
-                        {" "}
-                        <a>Item 1</a>
-                      </div>
-                    </li>
-                    <li className="p-2  rounded-[5px] text-[#000000]">
-                      <div>
-                        {" "}
-                        <a>Item 1</a>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              ) : (
-                ""
-              )}
+              
             </button>
           </div>
-          <div className="flex items-center text-[#000]">
+          <div className="lg:flex items-center text-[#000] hidden mx-2">
             <div className="mr-2">
               <CiShoppingCart size={"1.5em"} />
             </div>
             <div>Cart</div>
           </div>
-          <div className="flex items-center ml-2">
-            <div className="rounded-full bg-[#EEEEEE] lg:h-12 lg:w-12 w-8 w-8">
+          <div className="lg:flex items-center ml-2 hidden">
+            <div className="rounded-full bg-[#EEEEEE] lg:h-12 lg:w-12  w-8">
               <img src={Profile} className="w-full rounded-full h-full"></img>
             </div>
+          </div>
+          <div className="flex items-center ml-2 lg:hidden">
+          <TfiAlignJustify size={'1.2em'} className="cursor-pointer" />
           </div>
         </div>
       </div>

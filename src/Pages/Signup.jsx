@@ -10,6 +10,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import countries from "../../Services/callcode.json";
 import Google from "../images/Google.png";
+import Crop from '../images/Crop.jpg'
+
 
 const Signup = () => {
   const [isLoading, setisLoading] = useState(false);
@@ -53,7 +55,7 @@ const Signup = () => {
   };
   return (
     <div className="min-h-screen bg-[#F5F5F5] grid lg:grid-cols-2  p-4">
-      <div className="lg:flex   bg-[#D9D9D9]  rounded-[30px] hidden "></div>
+      <div className="lg:flex   bg-[#D9D9D9]  rounded-[30px] hidden   bg-no-repeat bg-cover bg-center  bg-opacity-100  opacity-[.57] " style={{ backgroundImage: `url(${Crop})` }}></div>
       <div className="flex flex-col items-center py-10">
         <div>
           <div>
