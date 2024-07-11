@@ -4,7 +4,7 @@ import Logo from "../images/Mask group.png";
 const Footer = () => {
   return (
     <div className="bg-[#005C2D] p-8 text-[#FFEEDC]">
-      <div className="grid grid-cols-2 gap-16 p-8">
+      <div className="grid lg:grid-cols-2 gap-16 p-8">
         <div className="flex flex-col">
           <img src={Logo} className="w-32 mb-4"></img>
           <p>
@@ -13,7 +13,7 @@ const Footer = () => {
             ever since the 1500s.
           </p>
         </div>
-        <div className="grid grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="flex flex-col">
             <h1  className="text-[#7CD032] font-bold mb-2">Categories</h1>
 
@@ -49,10 +49,10 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="border-t-[1px] border-white border-solid flex justify-between px-20 py-2">
+      <div className="border-t-[1px] border-white gap-y-2  border-solid flex flex-col md:flex-row justify-between p-8 lg:px-20 py-2">
         <div>Terms of use</div>
         <div>Privacy Policy</div>
-        <div>All Rights Reserved by Argrich | 2024</div>
+        <div >All Rights Reserved by Argrich | 2024</div>
       </div>
     </div>
   );

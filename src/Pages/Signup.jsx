@@ -64,7 +64,7 @@ const Signup = () => {
           <div className="text-[#8C8C8C] mb-4">
             Enter your email and password to create an account
           </div>
-          <form>
+          <form className="space-y-3">
             <InputField
               label={`First Name`}
               name={`firstName`}
@@ -280,14 +280,14 @@ const Signup = () => {
             <div>
               <button
                 type="submit"
-                className="bg-[#DBDBDB]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 text-[#000000] rounded-[5px] flex justify-center p-4"
+                className="bg-[#DBDBDB]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full items-center text-[#000000] rounded-[5px] flex justify-center p-4"
               >
                 <img src={Google} className="mr-2"></img>
                 Google
               </button>
             </div>
             <div className="mt-4 flex justify-center">
-              <p className="text-[12px] text-[#000]">
+              <p className="text-[12px] text-[#000] gap-1 flex items-center">
                 Have an account Already?<Link className="text-[#008A2F]">Click here to Login</Link>
               </p>
             </div>
