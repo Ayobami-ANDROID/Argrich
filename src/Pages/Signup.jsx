@@ -53,7 +53,7 @@ const Signup = () => {
   };
   return (
     <div className="min-h-screen bg-[#F5F5F5] grid lg:grid-cols-2  p-4">
-      <div className="flex   bg-[#D9D9D9]  rounded-[30px] sm:hidden lg:block"></div>
+      <div className="lg:flex   bg-[#D9D9D9]  rounded-[30px] hidden "></div>
       <div className="flex flex-col items-center py-10">
         <div>
           <div>

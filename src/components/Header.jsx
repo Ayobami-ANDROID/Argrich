@@ -5,28 +5,35 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { BiSearch } from "react-icons/bi";
 import { IoPersonOutline } from "react-icons/io5";
 import { CiShoppingCart } from "react-icons/ci";
-import Profile from "../images/Ellipse 1.png"
+import Profile from "../images/Ellipse 1.png";
 
 const Header = () => {
   const [clicked, setClicked] = useState(false);
+  const [click, setClick] = useState(false);
   return (
-    <div className="bg-[#fff] px-12 py-4">
-      <div className="grid grid-cols-2">
-        <div className="flex">
-          <img src={Logo}></img>
-          <details className="dropdown open">
+    <div className="bg-[rgb(255,255,255)] lg:px-12 px-6 py-4 w-full">
+      <div className="grid grid-cols-2  w-full">
+        <div className="flex ">
+          <img src={Logo} className="lg:w-20 w-12 mr-2"></img>
+          {/* <details className="dropdown ">
             <summary
-              className="btn bg-[#fff] border-none text-[#000000] hover:bg-white m-1 shadow-none outline-none"
+              className="btn bg-[#fff] border-none text-[#000000] hover:bg-white m-1  shadow-none outline-none"
               onClick={() => setClicked(!clicked)}
             >
-              Categories{" "}
-              {clicked ? (
+                <div className="flex">
+                    <div className="mr-2"> Categories{" "}</div>
+                    <div>
+                    {clicked ? (
                 <IoIosArrowUp className="text-[12px]" />
               ) : (
                 <IoIosArrowDown className="text-[12px]" />
               )}
+                    </div>
+                </div>
+             
+             
             </summary>
-            <ul className="menu dropdown-content  rounded-box z-[1] w-[30rem] p-2 grid grid-cols-3 gap-4 bg-[#fff]">
+            <ul className="menu dropdown-content  rounded-box z-[1] lg:w-[30rem] w-[20rem] p-2 grid lg:grid-cols-3 grid-cols-2 gap-4 bg-[#fff]">
               <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
                 <div>
                   {" "}
@@ -64,10 +71,66 @@ const Header = () => {
                 </div>
               </li>
             </ul>
-          </details>
+          </details> */}
+          <button onClick={() => setClicked(!clicked)} className="relative">
+            <div className="flex">
+              <div className="mr-2"> Categories </div>
+              <div className="flex items-center">
+                {clicked ? (
+                  <IoIosArrowUp className="text-[12px]" />
+                ) : (
+                  <IoIosArrowDown className="text-[12px]" />
+                )}
+                {clicked ? (
+                  <div className="absolute top-[100%] left-[10%]">
+                    <ul className="  rounded-box z-[1] lg:w-[30rem] rounded-[5px] w-[20rem] p-2 grid lg:grid-cols-3 grid-cols-2 gap-4 bg-[#fff]">
+                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                        <div>
+                          {" "}
+                          <a>Item 1</a>
+                        </div>
+                      </li>
+                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                        <div>
+                          {" "}
+                          <a>Item 1</a>
+                        </div>
+                      </li>
+                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                        <div>
+                          {" "}
+                          <a>Item 1</a>
+                        </div>
+                      </li>
+                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                        <div>
+                          {" "}
+                          <a>Item 1</a>
+                        </div>
+                      </li>
+                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                        <div>
+                          {" "}
+                          <a>Item 1</a>
+                        </div>
+                      </li>
+                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                        <div>
+                          {" "}
+                          <a>Item 1</a>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+          </button>
         </div>
-        <div className="flex border-none">
-          <div className="flex bg-[#E4E4E4] rounded-[300px] border-2 border-solid border-[#E4E4E4] w-full p-4">
+        <div className="flex border-none ">
+          <div className="flex bg-[#E4E4E4] rounded-[300px] border-2 border-solid border-[#E4E4E4] min-w-10 w-full p-4">
             <input
               placeholder="Search Product"
               type="text "
@@ -78,7 +141,7 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center text-[#000]">
-            <details className="dropdown open w-full">
+            {/* <details className="dropdown open w-full">
               <summary
                 className="btn bg-[#fff] border-none text-[#000000] hover:bg-white m-1 shadow-none outline-none  "
                 onClick={() => setClicked(!clicked)}
@@ -93,8 +156,8 @@ const Header = () => {
                 </div>
               
               </summary>
-              <ul className="menu dropdown-content  rounded-box z-[1] w-full p-2 grid grid-cols-1 gap-2 bg-[#fff]">
-                <li className="p-2 rounded-[5px] text-[#000000]">
+              <ul className="menu dropdown-content  rounded-box z-[1] w-52 p-2 grid grid-cols-1 gap-2 bg-[#fff]">
+                <li className="p-2 rounded-[5px] text-[#000000] ">
                   <div>
                     {" "}
                     <a>Item 1</a>
@@ -131,21 +194,71 @@ const Header = () => {
                   </div>
                 </li>
               </ul>
-            </details>
+            </details> */}
+            <button className="flex relative" onClick={() => setClick(!click)}>
+              <IoPersonOutline
+                size={"1.5em"}
+                className="mr-2"
+                
+              />
+              Account
+              {click ? (
+                <div>
+                  <ul className="absolute top-[150%] left-0 rounded-[10px]  rounded-box z-[1] w-52 p-2 grid grid-cols-1 gap-2 bg-[#fff]">
+                    <li className="p-2 rounded-[5px] text-[#000000] ">
+                      <div>
+                        {" "}
+                        <a>Item 1</a>
+                      </div>
+                    </li>
+                    <li className="p-2  rounded-[5px] text-[#000000]">
+                      <div>
+                        {" "}
+                        <a>Item 1</a>
+                      </div>
+                    </li>
+                    <li className="p-2  rounded-[5px] text-[#000000]">
+                      <div>
+                        {" "}
+                        <a>Item 1</a>
+                      </div>
+                    </li>
+                    <li className="p-2  rounded-[5px] text-[#000000]">
+                      <div>
+                        {" "}
+                        <a>Item 1</a>
+                      </div>
+                    </li>
+                    <li className="p-2  rounded-[5px] text-[#000000]">
+                      <div>
+                        {" "}
+                        <a>Item 1</a>
+                      </div>
+                    </li>
+                    <li className="p-2  rounded-[5px] text-[#000000]">
+                      <div>
+                        {" "}
+                        <a>Item 1</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                ""
+              )}
+            </button>
           </div>
           <div className="flex items-center text-[#000]">
             <div className="mr-2">
-                <CiShoppingCart size={'1.5em'}/>
+              <CiShoppingCart size={"1.5em"} />
             </div>
             <div>Cart</div>
           </div>
           <div className="flex items-center ml-2">
-          <div className="rounded-full bg-[#EEEEEE] h-12 w-12 ">
-            <img src={Profile} className="w-full rounded-full h-full"></img>
-
+            <div className="rounded-full bg-[#EEEEEE] lg:h-12 lg:w-12 w-8 w-8">
+              <img src={Profile} className="w-full rounded-full h-full"></img>
+            </div>
           </div>
-          </div>
-          
         </div>
       </div>
     </div>
