@@ -9,9 +9,7 @@ import { ToastContainer } from "react-toastify";
 import Advert from "./components/Advert";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import HomePage from "./Pages/HomePage";
 import '@splidejs/splide/dist/css/splide.min.css';
-
 import MainPage from "./Pages/MainPage";
 
 function App() {
@@ -24,8 +22,7 @@ function App() {
       <Routes>
         <Route path="/*" element={<MainPage/>}/>
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/login" element={<Login />} /> 
       </Routes>
      
     </>
