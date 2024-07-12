@@ -4,13 +4,13 @@ import axios from "axios";
 import { toast, Bounce } from "react-toastify";
 import SelectField from "../components/SelectField";
 import { RiEyeFill, RiEyeOffFill } from "react-icons/ri";
-import {signinValidate } from "../../Services";
+import { signinValidate } from "../../Services";
 import Spinner from "../components/Spinner";
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import countries from "../../Services/callcode.json";
 import Google from "../images/Google.png";
-import Crop from '../images/Crop.jpg'
+import Crop from "../images/Crop.jpg";
 
 const Login = () => {
   const [isLoading, setisLoading] = useState(false);
@@ -20,19 +20,15 @@ const Login = () => {
   const navigate = useNavigate();
 
   const formik = useFormik({
-    initialValues: {    
+    initialValues: {
       email: "",
       password: "",
-    
     },
     validationSchema: signinValidate,
     onSubmit: (values) => {
       setisLoading(true);
     },
   });
-
-
-
 
   const formatDigits = (value) => {
     return value
@@ -46,30 +42,29 @@ const Login = () => {
   };
   return (
     <div className="min-h-screen bg-[#F5F5F5] grid lg:grid-cols-2  p-4">
-    <div className="lg:flex   bg-[#D9D9D9]  bg-no-repeat bg-cover bg-center  bg-opacity-100  opacity-[.57]  rounded-[30px] hidden " style={{ backgroundImage: `url(${Crop})` }} >
-    
-    </div>
-    <div className="flex flex-col items-center py-10">
-      <div>
+      <div
+        className="lg:flex   bg-[#D9D9D9]  bg-no-repeat bg-cover bg-center  bg-opacity-100  opacity-[.75]  rounded-[30px] hidden "
+        style={{ backgroundImage: `url(${Crop})` }}
+      ></div>
+      <div className="flex flex-col items-center justify-center">
         <div>
-          <h1 className="font-bold text-[30px] text-[#000]">Login</h1>
-        </div>
-        <div className="text-[#8C8C8C] mb-4">
-        Enter your Email and Password to access your account.
-        </div>
-        <form>
-        
-        
-          <InputField
-            label={`Email address`}
-            name={`email`}
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            error={formik.touched.email && formik.errors.email}
-            errorText={formik.errors.email}
-            placeHolder={`Enter Your E-mail Address`}
-          />
-          {/* <SelectField
+          <div>
+            <h1 className="font-bold text-[30px] text-[#000]">Login</h1>
+          </div>
+          <div className="text-[#8C8C8C] mb-4">
+            Enter your Email and Password to access your account.
+          </div>
+          <form onSubmit={formik.handleSubmit}>
+            <InputField
+              label={`Email address`}
+              name={`email`}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && formik.errors.email}
+              errorText={formik.errors.email}
+              placeHolder={`Enter Your E-mail Address`}
+            />
+            {/* <SelectField
             label={`Country`}
             name="country"
             value={formik.values.country}
@@ -87,7 +82,7 @@ const Login = () => {
             placeHolder={"Nigeria"}
             options={country}
           /> */}
-          {/* <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div>
                 <label>Phone Number</label>
               </div>
@@ -123,41 +118,41 @@ const Login = () => {
                 </div>
               </div>
             </div> */}
-          <div className="relative">
-            <InputField
-              label={`Password`}
-              name={`password`}
-              type={toggle ? "text" : "Password"}
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && formik.errors.password}
-              errorText={formik.errors.password}
-              placeHolder={"••••••••"}
-              onBlur={formik.handleBlur}
-            />
-            <div className="absolute text-[#008A2F] inset-y-[2.2rem] right-3 text-lg ">
-              {" "}
-              {toggle ? (
-                <RiEyeFill
-                  onClick={() => {
-                    settoggle(!toggle);
-                  }}
-                />
-              ) : (
-                <RiEyeOffFill
-                  onClick={() => {
-                    settoggle(!toggle);
-                  }}
-                />
-              )}
-            </div>
-            <div className="flex justify-between">
-              <div></div>
-              <div>
-                <p className="text-[#008A2F]">Forgot Password?</p>
+            <div className="relative">
+              <InputField
+                label={`Password`}
+                name={`password`}
+                type={toggle ? "text" : "Password"}
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                error={formik.touched.password && formik.errors.password}
+                errorText={formik.errors.password}
+                placeHolder={"••••••••"}
+                onBlur={formik.handleBlur}
+              />
+              <div className="absolute text-[#008A2F] inset-y-[2.2rem] right-3 text-lg ">
+                {" "}
+                {toggle ? (
+                  <RiEyeFill
+                    onClick={() => {
+                      settoggle(!toggle);
+                    }}
+                  />
+                ) : (
+                  <RiEyeOffFill
+                    onClick={() => {
+                      settoggle(!toggle);
+                    }}
+                  />
+                )}
               </div>
-            </div>
-            {/* <div>
+              <div className="flex justify-between">
+                <div></div>
+                <div>
+                  <p className="text-[#008A2F]">Forgot Password?</p>
+                </div>
+              </div>
+              {/* <div>
               <p className="text-sm text-contentFade">Password must have</p>
 
               <div className="flex flex-wrap mt-4 gap-3 text-[13px]">
@@ -210,43 +205,33 @@ const Login = () => {
                 </p>
               </div>
             </div> */}
-          </div>
-          
-          <div>
-            <button
-              type="submit"
-              className="bg-[#008A2F]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 mt-4 text-white rounded-[5px]"
-            >
-              Login
-            </button>
-          </div>
-        </form>
-        <div className="mt-12">
-          <div className="relative border-t-2 border-[#E6E6E6]  w-full my-8 ">
-            <div></div>
-            <h1 className="text-center  absolute bg-[#F5F5F5] text-[#828282]  w-[1/2] mt-[-17px] left-[30%]">
-              or continue with
-            </h1>
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="bg-[#DBDBDB]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full  text-[#000000] rounded-[5px] flex justify-center p-4"
-            >
-              <img src={Google} className="mr-2"></img>
-              Google
-            </button>
-          </div>
+            </div>
+
+            <div>
+              <Link to={"/home"}>
+                {" "}
+                <button
+                  type="button"
+                  className="bg-[#008A2F] py-2 shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 mt-4 text-white rounded-[5px]"
+                >
+                  Login
+                </button>
+              </Link>
+            </div>
+          </form>
+
           <div className="mt-4 flex justify-center">
-            <p className="text-[12px] text-[#000]">
-              Don't have an account?<Link className="text-[#008A2F]">Create Account</Link>
+            <p className="text-[12px] text-[#000] gap-1 flex items-center">
+              Don't have an account?
+              <Link to={"/"} replace={true} className="text-[#008A2F]">
+                Create Account
+              </Link>
             </p>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

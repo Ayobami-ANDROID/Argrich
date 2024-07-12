@@ -55,7 +55,7 @@ const Signup = () => {
   };
   return (
     <div className="min-h-screen bg-[#F5F5F5] grid lg:grid-cols-2  p-4">
-      <div className="lg:flex   bg-[#D9D9D9]  rounded-[30px] hidden   bg-no-repeat bg-cover bg-center  bg-opacity-100  opacity-[.57] " style={{ backgroundImage: `url(${Crop})` }}></div>
+      <div className="lg:flex   bg-[#D9D9D9]  rounded-[30px] hidden   bg-no-repeat bg-cover bg-center  bg-opacity-100  opacity-[.75] " style={{ backgroundImage: `url(${Crop})` }}></div>
       <div className="flex flex-col items-center py-10">
         <div>
           <div>
@@ -288,7 +288,7 @@ const Signup = () => {
             </div>
             <div className="mt-4 flex justify-center">
               <p className="text-[12px] text-[#000] gap-1 flex items-center">
-                Have an account Already?<Link className="text-[#008A2F]">Click here to Login</Link>
+                Have an account Already?<Link to="/login" replace={true} className="text-[#008A2F]">Click here to Login</Link>
               </p>
             </div>
           </div>
