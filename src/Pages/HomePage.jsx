@@ -2,15 +2,17 @@ import React from "react";
 import Footer from "../components/Footer";
 import img1 from "../images/cauro1.png";
 import Carousel from "../components/Caurosel";
+import Advert from "../components/Advert";
+import Header from "../components/Header";
 
 const HomePage = () => {
   return (
     <div>
-      {/* <div className="w-full h-[20rem] bg-red-500">
-        <img src={img1} alt="" className="object-cover  "/>
-      </div> */}
+      <Advert />
+      <Header />
       <Carousel />
-      {/* <Footer /> */}
+      <div className="h-32"></div>
+      <Footer />
     </div>
   );
 };
