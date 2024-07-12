@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import HomePage from "./Pages/HomePage";
 import '@splidejs/splide/dist/css/splide.min.css';
 
+import MainPage from "./Pages/MainPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,7 +22,8 @@ function App() {
       <ToastContainer position="top-center" autoClose={2000} />
       
       <Routes>
-        <Route path="/" element={<Signup />} />
+        <Route path="/*" element={<MainPage/>}/>
+        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<HomePage />} />
       </Routes>
