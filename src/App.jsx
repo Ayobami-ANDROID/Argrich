@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import Advert from "./components/Advert";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import MainPage from "./Pages/MainPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,10 +19,11 @@ function App() {
       <ToastContainer position="top-center" autoClose={2000} />
       
       <Routes>
-        <Route path="/" element={<Signup />} />
+        <Route path="/*" element={<MainPage/>}/>
+        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-      <Footer/>
+     
     </>
   );
 }

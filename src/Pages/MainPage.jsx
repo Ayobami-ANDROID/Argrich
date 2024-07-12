@@ -1,0 +1,23 @@
+import React,{useState} from 'react'
+import { Navigate, Route, Routes } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import Advert from '../components/Advert';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+import HomePage from '../components/HomePage';
+
+const MainPage = () => {
+  return (
+    <div className='flex flex-col min-h-screen'>
+        <Advert/>
+        <Header/>
+        <Routes>
+             <Route path="/" element={<HomePage/>} ></Route>
+        </Routes>
+        <Footer/>
+
+    </div>
+  )
+}
+
+export default MainPage
