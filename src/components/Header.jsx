@@ -13,9 +13,9 @@ const Header = () => {
   const [click, setClick] = useState(false);
   return (
     <div className="bg-[rgb(255,255,255)] lg:px-12 px-4 py-4 w-full">
-      <div className="grid grid-cols-2 w-full">
+      <div className="flex items-center justify-between w-full">
         <div className="flex w-full">
-          <img src={Logo} className="lg:w-20 w-12 lg:mr-8 mr-2"></img>
+          <img src={Logo} className="lg:w-32 w-12 lg:mr-8 mr-2 object-contain"></img>
           {/* <details className="dropdown ">
             <summary
               className="btn bg-[#fff] border-none text-[#000000] hover:bg-white m-1  shadow-none outline-none"
@@ -83,7 +83,7 @@ const Header = () => {
                   <IoIosArrowDown className="text-[12px]" />
                 )}
                 {clicked ? (
-                  <div className="absolute top-[100%] left-[10%]">
+                  <div className="absolute top-[100%] left-[10%] z-[100]">
                     <ul className="  rounded-box z-[1] lg:w-[30rem] rounded-[5px] w-[16rem] p-2 grid lg:grid-cols-3 grid-cols-1 gap-4 bg-[#fff]">
                       <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
                         <div>
@@ -130,14 +130,14 @@ const Header = () => {
             </div>
           </button>
         </div>
-        <div className="flex border-none w-full">
-          <div className="flex bg-[#E4E4E4] rounded-[300px] border-2 border-solid border-[#E4E4E4] min-w-36 w-full lg:p-4 p-2">
+        <div className="flex items-center gap-x-4 justify-end border-none w-full">
+          <div className="flex relative ">
             <input
               placeholder="Search Product"
               type="text "
-              className="bg-[#E4E4E4] outline-none h-full border-none rounded-[300px] w-full"
+              className=" outline-none px-4 max-w-[409px]  w-full bg-[#F0F0F0] h-[40px] rounded-[300px]  border-[#E4E4E4] "
             ></input>
-            <div className="flex items-center">
+            <div className="flex items-center absolute inset-y-4 right-4">
               <BiSearch />
             </div>
           </div>
