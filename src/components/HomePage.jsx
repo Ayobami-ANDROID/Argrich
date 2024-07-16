@@ -1,6 +1,7 @@
 import React from "react";
 import Carousel from "./Caurosel";
 import Categories from "./Categories";
+import TopSelling from "./TopSelling";
 
 const HomePage = () => {
   return (
@@ -9,6 +10,7 @@ const HomePage = () => {
       <Carousel />
       <div className="px-10">
         <Categories/>
+        <TopSelling/>
       </div>
     </div>
   );

@@ -27,6 +27,8 @@ const Signup = () => {
       email: "",
       password: "",
       passwordConfirmation: "",
+      country:"NG",
+      callCode: "+234",
     },
     validationSchema: SignUpValidate,
     onSubmit: (values) => {
@@ -54,9 +56,9 @@ const Signup = () => {
       });
   };
   return (
-    <div className="min-h-screen bg-[#F5F5F5] grid lg:grid-cols-2  p-4">
+    <div className="min-h-screen bg-[#F5F5F5] grid lg:grid-cols-2  gap-4 p-4">
       <div className="lg:flex   bg-[#D9D9D9]  rounded-[30px] hidden   bg-no-repeat bg-cover bg-center  bg-opacity-100  opacity-[.75] " style={{ backgroundImage: `url(${Crop})` }}></div>
-      <div className="flex flex-col items-center py-10">
+      <div className="flex flex-col items-center py-10 px-10 ">
         <div>
           <div>
             <h1 className="font-bold text-[30px] text-[#000]">Create an Account</h1>
@@ -92,7 +94,7 @@ const Signup = () => {
               errorText={formik.errors.email}
               placeHolder={`Enter Your E-mail Address`}
             />
-            {/* <SelectField
+            <SelectField
               label={`Country`}
               name="country"
               value={formik.values.country}
@@ -109,8 +111,8 @@ const Signup = () => {
               errorText={formik.errors.country}
               placeHolder={"Nigeria"}
               options={country}
-            /> */}
-            {/* <div className="flex flex-col">
+            />
+            <div className="flex flex-col">
                 <div>
                   <label>Phone Number</label>
                 </div>
@@ -145,7 +147,7 @@ const Signup = () => {
                     />
                   </div>
                 </div>
-              </div> */}
+              </div>
             <div className="relative">
               <InputField
                 label={`Password`}
