@@ -1,5 +1,5 @@
-import React from "react";
-import Item from "./Item";
+import React from 'react'
+import TopSellingItems from './TopSellingItems'
 
 const TopSelling = () => {
   return (
@@ -12,15 +12,15 @@ const TopSelling = () => {
         </h3>
       </div>
 
-   <div className="grid lg:grid-cols-3 xl:grid-cols-4 gap-y-4">   {
-        [1,2,3,4,8,91,201,2].map((item, index) => {
+   <div className="flex overflow-x-scroll overflow-hidden no-scrollbar p-4 ">   {
+        [1,2,3,4,8,91,201,2,39,40,41,45,46].map((item, index) => {
           return (
-            <Item key={index}/>
+           <TopSellingItems/>
           )
         })
       }</div>
     </div>
-  );
-};
+  )
+}
 
-export default TopSelling;
+export default TopSelling
