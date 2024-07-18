@@ -12,7 +12,7 @@ const TodayDeals = () => {
         </h3>
       </div>
 
-   <div className="grid lg:grid-cols-3 xl:grid-cols-4 gap-y-4">   {
+   <div className="grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2   gap-4">   {
         [1,2,3,4,8,91,201,2].map((item, index) => {
           return (
             <Item key={index}/>
