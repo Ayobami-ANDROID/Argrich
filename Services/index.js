@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import axios from "axios";
-axios.defaults.baseURL = "http://10.0.33.117:8000";
+axios.defaults.baseURL = "https://agrich.onrender.com";
 const phoneRegExp = /^\d{3} \d{3} \d{4}$/;
 const passwordRegExp =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#;:])[A-Za-z\d@$!%*?&#;:]{8,}$/;
@@ -9,8 +9,9 @@ export const SignUpValidate = yup.object().shape({
   country: yup.string().required("required"),
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
-  email: yup.string().email("enter valid email"),
+  email: yup.string().required("enter valid email"),
   callCode: yup.string().required("required"),
+  Gender: yup.string().required("required"),
   phoneNumber: yup
     .string()
     .matches(phoneRegExp, "Invalid format")
