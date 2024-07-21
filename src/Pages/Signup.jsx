@@ -11,6 +11,7 @@ import { useFormik } from "formik";
 import countries from "../../Services/callcode.json";
 import Google from "../images/Google.png";
 import Crop from '../images/Crop.jpg'
+import secureLocalStorage from "react-secure-storage";
 
 
 const Signup = () => {
@@ -27,6 +28,7 @@ const Signup = () => {
       email: "",
       password: "",
       passwordConfirmation: "",
+      Gender:"",
       country:"NG",
       callCode: "+234",
     },
@@ -34,6 +36,32 @@ const Signup = () => {
     onSubmit: (values) => {
       formik.setFieldValue("country");
       setisLoading(true);
+      axios
+      .post(`/accounts/signup/`, {
+        country: values.country,
+        name: `${values.firstName} ${values.lastName}`,
+        gender: values.Gender,
+        email: values.email,
+        password: values.password, 
+        phone_number: values.callCode + values.phoneNumber,
+      })
+      .then((res) => {
+        console.log(res);
+        navigate("/login");
+        toast.success("User Created succesfully", {
+          transition: Bounce,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        // secureLocalStorage.removeItem("formField");
+        // toast.error(e.response.data.message, {
+        //   transition: Bounce,
+        // });
+      })
+      .finally(() => {
+        setisLoading(false);
+      });
     },
   });
 
@@ -44,6 +72,11 @@ const Signup = () => {
       code: item.dial_code,
     };
   });
+
+  const gender = [
+    {label:"Male", value:"M"},
+    {label:"Female", value:"F"}
+  ]
 
   const formatDigits = (value) => {
     return value
@@ -66,7 +99,7 @@ const Signup = () => {
           <div className="text-[#8C8C8C] mb-4">
             Enter your email and password to create an account
           </div>
-          <form className="space-y-3">
+          <form className="space-y-3" onSubmit={formik.handleSubmit}>
             <InputField
               label={`First Name`}
               name={`firstName`}
@@ -94,6 +127,16 @@ const Signup = () => {
               errorText={formik.errors.email}
               placeHolder={`Enter Your E-mail Address`}
             />
+             <SelectField
+              label={`Gender`}
+              name="Gender"
+              value={formik.values.Gender}
+              onChange={formik.handleChange}
+              error={formik.errors.Gender && formik.touched.Gender}
+              errorText={formik.errors.Gender}
+              placeHolder={"Gender"}
+              options={gender}
+            />
             <SelectField
               label={`Country`}
               name="country"
@@ -108,7 +151,7 @@ const Signup = () => {
                 formik.setFieldValue("callCode", selectedOptionAbout);
               }}
               error={formik.errors.country}
-              errorText={formik.errors.country}
+              errorText={formik.errors.country && formik.touched.country}
               placeHolder={"Nigeria"}
               options={country}
             />
