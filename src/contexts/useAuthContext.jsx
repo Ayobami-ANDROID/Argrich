@@ -43,7 +43,6 @@ export function AuthProvider({ children }) {
         saveSession,
         removeSession,
         setname,
-        baseURL,
         name,
      
       }}
