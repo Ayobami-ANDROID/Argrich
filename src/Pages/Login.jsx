@@ -32,9 +32,9 @@ const Login = () => {
       .post(`/accounts/login/`, values)
       .then((res) => {
         console.log(res);
-        toast.success(res.data.message, {
-          transition: Bounce,
-        });
+        // toast.success(res.data.message, {
+        //   transition: Bounce,
+        // });
         secureLocalStorage.setItem("values", values);
       })
       .catch((e) => {
@@ -230,7 +230,7 @@ const Login = () => {
               <Link to={"/home"}>
                 {" "}
                 <button
-                  type="button"
+                  type="submit"
                   className="bg-[#008A2F] py-2 shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 mt-4 text-white rounded-[5px]"
                 >
                   Login
