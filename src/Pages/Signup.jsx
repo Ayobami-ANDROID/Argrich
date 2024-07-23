@@ -324,7 +324,7 @@ const Signup = () => {
             </div>
             <div>
               <button
-                type="submit"
+                type="button"
                 className="bg-[#DBDBDB]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full items-center text-[#000000] rounded-[5px] flex justify-center p-4"
               >
                 <img src={Google} className="mr-2"></img>
