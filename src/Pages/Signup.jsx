@@ -178,10 +178,11 @@ const Signup = () => {
                       placeHolder={`802 123 4567`}
                       name={`phoneNumber`}
                       value={formik.values.phoneNumber}
-                      onChange={(e) => {
-                        const formattedValue = formatDigits(e.target.value);
-                        formik.setFieldValue("phoneNumber", formattedValue);
-                      }}
+                      // onChange={(e) => {
+                      //   const formattedValue = formatDigits(e.target.value);
+                      //   formik.setFieldValue("phoneNumber", formattedValue);
+                      // }}
+                      onChange={formik.handleChange}
                       error={
                         formik.touched.phoneNumber && formik.errors.phoneNumber
                       }
@@ -333,7 +334,7 @@ const Signup = () => {
             </div>
             <div className="mt-4 flex justify-center">
               <p className="text-[12px] text-[#000] gap-1 flex items-center">
-                Have an account Already?<Link to="/login" replace={true} className="text-[#008A2F]">Click here to Login</Link>
+                Have an account Already?<Link to="/auth/login" replace={true} className="text-[#008A2F]">Click here to Login</Link>
               </p>
             </div>
           </div>

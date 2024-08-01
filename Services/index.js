@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import axios from "axios";
-axios.defaults.baseURL = "https://agrich.onrender.com";
+axios.defaults.baseURL = "https://agrich.onrender.com/api/v1";
 const phoneRegExp = /^\d{3} \d{3} \d{4}$/;
 const passwordRegExp =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#;:])[A-Za-z\d@$!%*?&#;:]{8,}$/;
@@ -14,7 +14,7 @@ export const SignUpValidate = yup.object().shape({
   Gender: yup.string().required("required"),
   phoneNumber: yup
     .string()
-    .matches(phoneRegExp, "Invalid format")
+    .max(10,"can't contain more than 10 characters")
     .required("required"),
   password: yup
     .string()

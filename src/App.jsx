@@ -4,25 +4,29 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes,Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Advert from "./components/Advert";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import '@splidejs/splide/dist/css/splide.min.css';
 import MainPage from "./Pages/MainPage";
+import { useAuthContext } from "./context/useAuthContext";
 
 function App() {
   const [count, setCount] = useState(0);
+  const { isAuthenticated, name, removeSession } = useAuthContext();
 
   return (
     <>
       <ToastContainer position="top-center" autoClose={2000} />
       
       <Routes>
-        <Route path="/*" element={<MainPage/>}/>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} /> 
+        <Route path="/" element={isAuthenticated === false ? <Navigate to="/auth/login" replace/> : <Navigate to="/product/" replace/>} />
+        <Route path="/product/*" element={<MainPage/>}/>
+        <Route path="/auth/signup" element={<Signup />} />
+        <Route path="/auth/login" element={<Login />} /> 
+        <Route path="*" element={<Navigate to="/auth/login" replace/>} />
       </Routes>
      
     </>
