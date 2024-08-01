@@ -137,7 +137,7 @@ const Header = () => {
               type="text "
               className=" outline-none px-4 max-w-[409px]  w-full bg-[#F0F0F0] h-[40px] rounded-[300px]  border-[#E4E4E4] "
             ></input>
-            <div className="flex items-center absolute inset-y-4 right-4">
+            <div className="flex items-center absolute inset-y-4 right-4 cursor-pointer">
               <BiSearch />
             </div>
           </div>

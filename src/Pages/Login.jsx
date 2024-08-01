@@ -11,6 +11,7 @@ import { useFormik } from "formik";
 import countries from "../../Services/callcode.json";
 import Google from "../images/Google.png";
 import Crop from "../images/Crop.jpg";
+import secureLocalStorage from "react-secure-storage";
 
 const Login = () => {
   const [isLoading, setisLoading] = useState(false);
@@ -27,6 +28,24 @@ const Login = () => {
     validationSchema: signinValidate,
     onSubmit: (values) => {
       setisLoading(true);
+      axios
+      .post(`/accounts/login/`, values)
+      .then((res) => {
+        console.log(res);
+        // toast.success(res.data.message, {
+        //   transition: Bounce,
+        // });
+        secureLocalStorage.setItem("values", values);
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error(e.response.data.message, {
+          transition: Bounce,
+        });
+      })
+      .finally(() => {
+        setisLoading(false);
+      });
     },
   });
 
@@ -211,7 +230,7 @@ const Login = () => {
               <Link to={"/home"}>
                 {" "}
                 <button
-                  type="button"
+                  type="submit"
                   className="bg-[#008A2F] py-2 shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 mt-4 text-white rounded-[5px]"
                 >
                   Login
