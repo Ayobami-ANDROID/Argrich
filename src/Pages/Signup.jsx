@@ -47,10 +47,11 @@ const Signup = () => {
       })
       .then((res) => {
         console.log(res);
-        navigate("/login");
         toast.success("User Created succesfully", {
           transition: Bounce,
         });
+        navigate("/login");
+     
       })
       .catch((e) => {
         console.log(e);
