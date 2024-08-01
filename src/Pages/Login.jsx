@@ -32,14 +32,15 @@ const Login = () => {
       .post(`/accounts/login/`, values)
       .then((res) => {
         console.log(res);
-        // toast.success(res.data.message, {
-        //   transition: Bounce,
-        // });
+        toast.success("Successful", {
+          transition: Bounce,
+        });
+        navigate('/product/')
         secureLocalStorage.setItem("values", values);
       })
-      .catch((e) => {
-        console.log(e);
-        toast.error(e.response.data.message, {
+      .catch((error) => {
+        console.log('Error response:', error.response.data)
+        toast.error(error.response.data, {
           transition: Bounce,
         });
       })
