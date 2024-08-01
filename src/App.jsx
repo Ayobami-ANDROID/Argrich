@@ -6,6 +6,7 @@ import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
 import { Route, Routes,Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 import Advert from "./components/Advert";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -19,7 +20,18 @@ function App() {
 
   return (
     <>
-      <ToastContainer position="top-center" autoClose={2000} />
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       
       <Routes>
         <Route path="/" element={isAuthenticated === false ? <Navigate to="/auth/login" replace/> : <Navigate to="/product/" replace/>} />
