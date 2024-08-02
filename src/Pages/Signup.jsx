@@ -12,17 +12,18 @@ import countries from "../../Services/callcode.json";
 import Google from "../images/Google.png";
 import Crop from "../images/Crop.jpg";
 import secureLocalStorage from "react-secure-storage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../features/auth/authSlice";
+import { PulseLoader } from "react-spinners";
 
 const Signup = () => {
-  const [isLoading, setisLoading] = useState(false);
   const [toggle, settoggle] = useState(false);
   const [countrycheck, setcountrycheck] = useState("Nigeria");
   const [toggle2, settoggle2] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { isLoading } = useSelector((state) => state.auth);
+  console.log(register);
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -36,8 +37,6 @@ const Signup = () => {
     },
     validationSchema: SignUpValidate,
     onSubmit: async (values) => {
-      formik.setFieldValue("country");
-      setisLoading(true);
       const payload = {
         country: values.country,
         name: `${values.firstName} ${values.lastName}`,
@@ -47,7 +46,7 @@ const Signup = () => {
         phone_number: values.callCode + values.phoneNumber,
       };
       try {
-        await dispatch(register(payload)).unwrap()
+        await dispatch(register(payload)).unwrap();
         navigate("/login");
       } catch (error) {
         console.error("Registration failed:", error);
@@ -78,8 +77,15 @@ const Signup = () => {
         return parts.join("");
       });
   };
+  console.log("formik.errors", formik.errors);
   return (
     <div className="min-h-screen bg-[#F5F5F5] grid lg:grid-cols-2  gap-4 p-4">
+      {isLoading && (
+        <div className="fixed bg-black/[0.6] h-screen w-screen z-50 left-0 top-0 items-center flex justify-center">
+          {" "}
+          <PulseLoader speedMultiplier={0.9} color="#fff" size={20} />
+        </div>
+      )}
       <div
         className="lg:flex   bg-[#D9D9D9]  rounded-[30px] hidden   bg-no-repeat bg-cover bg-center  bg-opacity-100  opacity-[.75] "
         style={{ backgroundImage: `url(${Crop})` }}
@@ -304,9 +310,10 @@ const Signup = () => {
             <div>
               <button
                 type="submit"
-                className="bg-[#008A2F]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 mt-4 text-white rounded-[5px]"
+                // disabled={!isLoading}
+                className="bg-[#008A2F] disabled:bg-[#008A2F]/[0.7]  shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 mt-4 text-white rounded-[5px]"
               >
-                Create account
+                <span>Create account</span>
               </button>
             </div>
           </form>

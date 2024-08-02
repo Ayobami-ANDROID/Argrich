@@ -12,55 +12,42 @@ import countries from "../../Services/callcode.json";
 import Google from "../images/Google.png";
 import Crop from "../images/Crop.jpg";
 import secureLocalStorage from "react-secure-storage";
+import { login } from "../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { PulseLoader } from "react-spinners";
 
 const Login = () => {
-  const [isLoading, setisLoading] = useState(false);
   const [toggle, settoggle] = useState(false);
   const [countrycheck, setcountrycheck] = useState("Nigeria");
   const [toggle2, settoggle2] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.auth);
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "ola@gmail.com",
+      password: "Password@123",
     },
     validationSchema: signinValidate,
-    onSubmit: (values) => {
-      setisLoading(true);
-      axios
-      .post(`/accounts/login/`, values)
-      .then((res) => {
-        console.log(res);
-        // toast.success(res.data.message, {
-        //   transition: Bounce,
-        // });
-        secureLocalStorage.setItem("values", values);
-      })
-      .catch((e) => {
-        console.log(e);
-        toast.error(e.response.data.message, {
-          transition: Bounce,
-        });
-      })
-      .finally(() => {
-        setisLoading(false);
-      });
+    onSubmit: async (values) => {
+      try {
+        await dispatch(login(values)).unwrap();
+        navigate("/");
+      } catch (error) {
+        console.error("Registration failed:", error);
+      }
     },
   });
 
-  const formatDigits = (value) => {
-    return value
-      .replace(/\D/g, "") // Remove non-digit characters
-      .replace(/(\d{3})(\d{0,3})?(\d{0,4})?/, (_, p1, p2, p3) => {
-        let parts = [p1];
-        if (p2) parts.push(" " + p2);
-        if (p3) parts.push(" " + p3);
-        return parts.join("");
-      });
-  };
   return (
     <div className="min-h-screen bg-[#F5F5F5] grid lg:grid-cols-2  p-4">
+      {isLoading && (
+        <div className="fixed bg-black/[0.6] h-screen w-screen z-50 left-0 top-0 items-center flex justify-center">
+          {" "}
+          <PulseLoader speedMultiplier={0.9} color="#fff" size={20} />
+        </div>
+      )}
       <div
         className="lg:flex   bg-[#D9D9D9]  bg-no-repeat bg-cover bg-center  bg-opacity-100  opacity-[.75]  rounded-[30px] hidden "
         style={{ backgroundImage: `url(${Crop})` }}
@@ -83,60 +70,7 @@ const Login = () => {
               errorText={formik.errors.email}
               placeHolder={`Enter Your E-mail Address`}
             />
-            {/* <SelectField
-            label={`Country`}
-            name="country"
-            value={formik.values.country}
-            onChange={(e) => {
-              formik.handleChange(e);
-              const selectedOptionAbout =
-                e.target.options[e.target.selectedIndex].getAttribute(
-                  "about"
-                );
 
-              formik.setFieldValue("callCode", selectedOptionAbout);
-            }}
-            error={formik.errors.country}
-            errorText={formik.errors.country}
-            placeHolder={"Nigeria"}
-            options={country}
-          /> */}
-            {/* <div className="flex flex-col">
-              <div>
-                <label>Phone Number</label>
-              </div>
-              <div className="grid grid-cols-3 mb-2 gap-x-1">
-                <InputField
-                  label={``}
-                  name={`callCode`}
-                  value={formik.values.callCode}
-                  onChange={formik.handleChange}
-                  error={formik.touched.callCode && formik.errors.callCode}
-                  errorText={formik.errors.callCode}
-                  placeHolder={`+234`}
-                  className={"disabled:bg-white"}
-                  disabled={true}
-                  onBlur={formik.handleBlur}
-                />
-                <div className="col-span-2 flex flex-col">
-                  <InputField
-                    label={``}
-                    placeHolder={`802 123 4567`}
-                    name={`phoneNumber`}
-                    value={formik.values.phoneNumber}
-                    onChange={(e) => {
-                      const formattedValue = formatDigits(e.target.value);
-                      formik.setFieldValue("phoneNumber", formattedValue);
-                    }}
-                    error={
-                      formik.touched.phoneNumber && formik.errors.phoneNumber
-                    }
-                    errorText={formik.errors.phoneNumber}
-                    onBlur={formik.handleBlur}
-                  />
-                </div>
-              </div>
-            </div> */}
             <div className="relative">
               <InputField
                 label={`Password`}
@@ -171,71 +105,14 @@ const Login = () => {
                   <p className="text-[#008A2F]">Forgot Password?</p>
                 </div>
               </div>
-              {/* <div>
-              <p className="text-sm text-contentFade">Password must have</p>
-
-              <div className="flex flex-wrap mt-4 gap-3 text-[13px]">
-                <p
-                  className={`${
-                    /^(?=.*[a-z])/.test(formik.values.password)
-                      ? "text-[#FFFFFF] bg-[#008A2F]"
-                      : "text-fadedBlue bg-[#FFFFFF]"
-                  } py-1 px-2 rounded-[20px]`}
-                >
-                  1 Lowercase
-                </p>
-                <p
-                  className={`${
-                    /^(?=.*[A-Z])/.test(formik.values.password)
-                      ? "text-[#FFFFFF] bg-[#008A2F]"
-                      : "text-fadedBlue bg-[#FFFFFF]"
-                  } py-1 px-2 rounded-[20px]`}
-                >
-                  1 Uppercase
-                </p>
-                <p
-                  className={`${
-                    /^.{8,}$/.test(formik.values.password)
-                      ? "text-[#FFFFFF] bg-[#008A2F]"
-                      : "text-fadedBlue bg-[#FFFFFF]"
-                  } py-1 px-2 rounded-[20px]`}
-                >
-                  At least 8 Characters
-                </p>
-                <p
-                  className={`${
-                    /^(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\/-])/.test(
-                      formik.values.password
-                    )
-                      ? "text-[#FFFFFF] bg-[#008A2F]"
-                      : "text-fadedBlue bg-[#FFFFFF]"
-                  } py-1 px-2 rounded-[20px]`}
-                >
-                  1 Special Character
-                </p>
-                <p
-                  className={`${
-                    /^(?=.*\d)/.test(formik.values.password)
-                      ? "text-[#FFFFFF] bg-[#008A2F]"
-                      : "text-fadedBlue bg-[#FFFFFF]"
-                  } py-1 px-2 rounded-[20px]`}
-                >
-                  1 Number
-                </p>
-              </div>
-            </div> */}
             </div>
-
             <div>
-              <Link to={"/home"}>
-                {" "}
-                <button
-                  type="submit"
-                  className="bg-[#008A2F] py-2 shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 mt-4 text-white rounded-[5px]"
-                >
-                  Login
-                </button>
-              </Link>
+              <button
+                type="submit"
+                className="bg-[#008A2F] py-2 shadow-[0_1px_2px_0_rgba(16,_24,_40,_0.05)] w-full p-1 mt-4 text-white rounded-[5px]"
+              >
+                Login
+              </button>
             </div>
           </form>
 

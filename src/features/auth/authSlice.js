@@ -37,22 +37,18 @@ export const login = createAsyncThunk(
   }
 );
 
-const initialState = {
-  user: null,
-  token: secureLocalStorage.getItem("token") || "",
-  isLoading: false,
-  status: "",
-};
-
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: "auth",
-  initialState,
+  initialState: {
+    user: secureLocalStorage.getItem("user") || "",
+    token: secureLocalStorage.getItem("token") || "",
+    isLoading: false,
+  },
   reducers: {
     authReset: (state) => {
       state.user = null;
       state.token = "";
       state.isLoading = false;
-      state.status = "";
     },
   },
   extraReducers: (builder) => {
@@ -71,8 +67,11 @@ export const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.token = action.payload;
-        secureLocalStorage.setItem("token", action.payload);
+        console.log("action.payload", action.payload);
+        state.user=action.payload.user
+        state.token = action.payload.tokens;
+        console.log("action.payload.tokens", action.payload.tokens);
+        secureLocalStorage.setItem("token", action.payload.tokens);
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -80,7 +79,5 @@ export const authSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { authReset } = authSlice.actions;
-
 export default authSlice.reducer;

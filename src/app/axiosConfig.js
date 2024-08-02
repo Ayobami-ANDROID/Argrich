@@ -1,7 +1,13 @@
 import axios from "axios";
-import store from './store';
+
+
+let store
+
+export const injectStore = _store => {
+  store = _store
+}
 const apiClient = axios.create({
-  baseURL: "https://agrich.onrender.com/",
+  baseURL: "https://agrich.onrender.com/api/v1/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -11,7 +17,7 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use((config) => {
   const token = store.getState().auth.token;
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token.access}`;
   }
   return config;
 });

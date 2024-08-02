@@ -10,6 +10,7 @@ import Advert from "./components/Advert";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "@splidejs/splide/dist/css/splide.min.css";
+import 'react-toastify/dist/ReactToastify.css'; 
 import MainPage from "./Pages/MainPage";
 
 function App() {
