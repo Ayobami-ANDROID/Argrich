@@ -10,9 +10,10 @@ import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import countries from "../../Services/callcode.json";
 import Google from "../images/Google.png";
-import Crop from '../images/Crop.jpg'
+import Crop from "../images/Crop.jpg";
 import secureLocalStorage from "react-secure-storage";
-
+import { useDispatch } from "react-redux";
+import { register } from "../features/auth/authSlice";
 
 const Signup = () => {
   const [isLoading, setisLoading] = useState(false);
@@ -20,6 +21,7 @@ const Signup = () => {
   const [countrycheck, setcountrycheck] = useState("Nigeria");
   const [toggle2, settoggle2] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -28,40 +30,28 @@ const Signup = () => {
       email: "",
       password: "",
       passwordConfirmation: "",
-      Gender:"",
-      country:"NG",
+      Gender: "",
+      country: "NG",
       callCode: "+234",
     },
     validationSchema: SignUpValidate,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       formik.setFieldValue("country");
       setisLoading(true);
-      axios
-      .post(`/accounts/signup/`, {
+      const payload = {
         country: values.country,
         name: `${values.firstName} ${values.lastName}`,
         gender: values.Gender,
         email: values.email,
-        password: values.password, 
+        password: values.password,
         phone_number: values.callCode + values.phoneNumber,
-      })
-      .then((res) => {
-        console.log(res);
-        navigate("/login");
-        toast.success("User Created succesfully", {
-          transition: Bounce,
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-        // secureLocalStorage.removeItem("formField");
-        // toast.error(e.response.data.message, {
-        //   transition: Bounce,
-        // });
-      })
-      .finally(() => {
-        setisLoading(false);
-      });
+      };
+      try {
+        await dispatch(register(payload)).unwrap()
+        navigate("/submission-successful");
+      } catch (error) {
+        console.error("Registration failed:", error);
+      }
     },
   });
 
@@ -74,9 +64,9 @@ const Signup = () => {
   });
 
   const gender = [
-    {label:"Male", value:"M"},
-    {label:"Female", value:"F"}
-  ]
+    { label: "Male", value: "M" },
+    { label: "Female", value: "F" },
+  ];
 
   const formatDigits = (value) => {
     return value
@@ -90,11 +80,16 @@ const Signup = () => {
   };
   return (
     <div className="min-h-screen bg-[#F5F5F5] grid lg:grid-cols-2  gap-4 p-4">
-      <div className="lg:flex   bg-[#D9D9D9]  rounded-[30px] hidden   bg-no-repeat bg-cover bg-center  bg-opacity-100  opacity-[.75] " style={{ backgroundImage: `url(${Crop})` }}></div>
+      <div
+        className="lg:flex   bg-[#D9D9D9]  rounded-[30px] hidden   bg-no-repeat bg-cover bg-center  bg-opacity-100  opacity-[.75] "
+        style={{ backgroundImage: `url(${Crop})` }}
+      ></div>
       <div className="flex flex-col items-center py-10 px-10 ">
         <div>
           <div>
-            <h1 className="font-bold text-[30px] text-[#000]">Create an Account</h1>
+            <h1 className="font-bold text-[30px] text-[#000]">
+              Create an Account
+            </h1>
           </div>
           <div className="text-[#8C8C8C] mb-4">
             Enter your email and password to create an account
@@ -127,7 +122,7 @@ const Signup = () => {
               errorText={formik.errors.email}
               placeHolder={`Enter Your E-mail Address`}
             />
-             <SelectField
+            <SelectField
               label={`Gender`}
               name="Gender"
               value={formik.values.Gender}
@@ -156,41 +151,41 @@ const Signup = () => {
               options={country}
             />
             <div className="flex flex-col">
-                <div>
-                  <label>Phone Number</label>
-                </div>
-                <div className="grid grid-cols-3 mb-2 gap-x-1">
+              <div>
+                <label>Phone Number</label>
+              </div>
+              <div className="grid grid-cols-3 mb-2 gap-x-1">
+                <InputField
+                  label={``}
+                  name={`callCode`}
+                  value={formik.values.callCode}
+                  onChange={formik.handleChange}
+                  error={formik.touched.callCode && formik.errors.callCode}
+                  errorText={formik.errors.callCode}
+                  placeHolder={`+234`}
+                  className={"disabled:bg-white"}
+                  disabled={true}
+                  onBlur={formik.handleBlur}
+                />
+                <div className="col-span-2 flex flex-col">
                   <InputField
                     label={``}
-                    name={`callCode`}
-                    value={formik.values.callCode}
-                    onChange={formik.handleChange}
-                    error={formik.touched.callCode && formik.errors.callCode}
-                    errorText={formik.errors.callCode}
-                    placeHolder={`+234`}
-                    className={"disabled:bg-white"}
-                    disabled={true}
+                    placeHolder={`802 123 4567`}
+                    name={`phoneNumber`}
+                    value={formik.values.phoneNumber}
+                    onChange={(e) => {
+                      const formattedValue = formatDigits(e.target.value);
+                      formik.setFieldValue("phoneNumber", formattedValue);
+                    }}
+                    error={
+                      formik.touched.phoneNumber && formik.errors.phoneNumber
+                    }
+                    errorText={formik.errors.phoneNumber}
                     onBlur={formik.handleBlur}
                   />
-                  <div className="col-span-2 flex flex-col">
-                    <InputField
-                      label={``}
-                      placeHolder={`802 123 4567`}
-                      name={`phoneNumber`}
-                      value={formik.values.phoneNumber}
-                      onChange={(e) => {
-                        const formattedValue = formatDigits(e.target.value);
-                        formik.setFieldValue("phoneNumber", formattedValue);
-                      }}
-                      error={
-                        formik.touched.phoneNumber && formik.errors.phoneNumber
-                      }
-                      errorText={formik.errors.phoneNumber}
-                      onBlur={formik.handleBlur}
-                    />
-                  </div>
                 </div>
               </div>
+            </div>
             <div className="relative">
               <InputField
                 label={`Password`}
@@ -333,7 +328,10 @@ const Signup = () => {
             </div>
             <div className="mt-4 flex justify-center">
               <p className="text-[12px] text-[#000] gap-1 flex items-center">
-                Have an account Already?<Link to="/login" replace={true} className="text-[#008A2F]">Click here to Login</Link>
+                Have an account Already?
+                <Link to="/login" replace={true} className="text-[#008A2F]">
+                  Click here to Login
+                </Link>
               </p>
             </div>
           </div>
