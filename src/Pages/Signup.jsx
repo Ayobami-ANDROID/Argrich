@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../features/auth/authSlice";
 import { PulseLoader } from "react-spinners";
 
+
 const Signup = () => {
   const [toggle, settoggle] = useState(false);
   const [countrycheck, setcountrycheck] = useState("Nigeria");

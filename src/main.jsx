@@ -6,7 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./contexts/useAuthContext.jsx";
 import { Provider } from "react-redux";
 import store  from "./app/store.js";
-import { injectStore } from "./app/axiosConfig.js";
+import { injectStore } from "./app/storeInjector.js";
+
 
 
 injectStore(store);

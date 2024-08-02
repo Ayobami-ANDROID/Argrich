@@ -10,15 +10,7 @@ const login = async (userData) => {
   return response.data;
 };
 
-const getUser = async (userId) => {
-  const response = await apiClient.get(`users/${userId}`);
-
-  return response.data;
-};
-
 const authService = {
-  getUser,
-
   login,
   register,
 };

@@ -12,7 +12,7 @@ import countries from "../../Services/callcode.json";
 import Google from "../images/Google.png";
 import Crop from "../images/Crop.jpg";
 import secureLocalStorage from "react-secure-storage";
-import { login } from "../features/auth/authSlice";
+import { authReset, login } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { PulseLoader } from "react-spinners";
 
@@ -26,11 +26,12 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: "ola@gmail.com",
-      password: "Password@123",
+      email: "",
+      password: "",
     },
     validationSchema: signinValidate,
     onSubmit: async (values) => {
+      dispatch(authReset());
       try {
         await dispatch(login(values)).unwrap();
         navigate("/");

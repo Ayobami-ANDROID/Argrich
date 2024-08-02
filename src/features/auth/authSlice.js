@@ -23,10 +23,9 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk(
   "accounts/login/",
   async (userData, thunkAPI) => {
+    secureLocalStorage.clear()
     try {
-      console.log("working", userData);
       const response = await authService.login(userData);
-      toast.success("Registration successful!");
       return response;
     } catch (error) {
       toast.error(error.response?.data?.message || "An error occurred");
@@ -72,6 +71,7 @@ const authSlice = createSlice({
         state.token = action.payload.tokens;
         console.log("action.payload.tokens", action.payload.tokens);
         secureLocalStorage.setItem("token", action.payload.tokens);
+        secureLocalStorage.setItem("user", action.payload.user);
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;

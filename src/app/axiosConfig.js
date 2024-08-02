@@ -1,11 +1,7 @@
 import axios from "axios";
+import { store } from "./storeInjector";
 
 
-let store
-
-export const injectStore = _store => {
-  store = _store
-}
 const apiClient = axios.create({
   baseURL: "https://agrich.onrender.com/api/v1/",
   headers: {

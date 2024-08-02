@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import "@splidejs/splide/dist/css/splide.min.css";
 import 'react-toastify/dist/ReactToastify.css'; 
 import MainPage from "./Pages/MainPage";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 function App() {
   const [count, setCount] = useState(0);
