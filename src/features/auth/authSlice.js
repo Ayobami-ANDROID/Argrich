@@ -1,13 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authService from "./authService";
+import secureLocalStorage from "react-secure-storage";
 import { toast } from "react-toastify";
-
-const initialState = {
-  user: null,
-  token: "",
-  isLoading: false,
-  status: "",
-};
 
 export const register = createAsyncThunk(
   "accounts/signup",
@@ -26,8 +20,6 @@ export const register = createAsyncThunk(
   }
 );
 
-
-
 export const login = createAsyncThunk(
   "accounts/signin",
   async (userData, thunkAPI) => {
@@ -45,7 +37,12 @@ export const login = createAsyncThunk(
   }
 );
 
-
+const initialState = {
+  user: null,
+  token: secureLocalStorage.getItem("token") || "",
+  isLoading: false,
+  status: "",
+};
 
 export const authSlice = createSlice({
   name: "auth",
@@ -74,7 +71,8 @@ export const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.token=action.payload;
+        state.token = action.payload;
+        secureLocalStorage.setItem("token", action.payload);
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
