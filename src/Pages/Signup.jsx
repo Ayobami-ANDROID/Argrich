@@ -48,7 +48,7 @@ const Signup = () => {
       };
       try {
         await dispatch(register(payload)).unwrap()
-        navigate("/submission-successful");
+        navigate("/login");
       } catch (error) {
         console.error("Registration failed:", error);
       }
