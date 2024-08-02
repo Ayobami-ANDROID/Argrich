@@ -6,7 +6,7 @@ const register = async (userData) => {
 };
 
 const login = async (userData) => {
-  const response = await apiClient.post("accounts/login", userData);
+  const response = await apiClient.post("accounts/login/", userData);
   return response.data;
 };
 

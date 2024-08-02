@@ -4,7 +4,7 @@ import secureLocalStorage from "react-secure-storage";
 import { toast } from "react-toastify";
 
 export const register = createAsyncThunk(
-  "accounts/signup",
+  "accounts/signup/",
   async (userData, thunkAPI) => {
     try {
       console.log("working", userData);
@@ -21,7 +21,7 @@ export const register = createAsyncThunk(
 );
 
 export const login = createAsyncThunk(
-  "accounts/signin",
+  "accounts/login/",
   async (userData, thunkAPI) => {
     try {
       console.log("working", userData);
