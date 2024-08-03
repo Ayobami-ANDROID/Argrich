@@ -17,7 +17,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 function App() {
   const [count, setCount] = useState(0);
-  const { isAuthenticated, name, removeSession } = useAuthContext();
+
 
   return (
     <>
