@@ -30,7 +30,8 @@ const TopSelling = () => {
       <div className="flex overflow-x-scroll overflow-hidden no-scrollbar p-4  w-full gap-2 ">
         {" "}
         {isLoading &&
-          Array(10).map((item, index) => {
+          Array(10)
+          .fill(0).map((item, index) => {
             return (
               <div
                 key={index}
@@ -40,6 +41,7 @@ const TopSelling = () => {
                 <Skeleton count={1} className="h-10" />
               </div>
             );
+            
           })}
         {products.map((item, index) => {
           <TopSellingItems key={index} />;
