@@ -4,8 +4,9 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes,Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 import Advert from "./components/Advert";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -16,6 +17,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 function App() {
   const [count, setCount] = useState(0);
+  const { isAuthenticated, name, removeSession } = useAuthContext();
 
   return (
     <>

@@ -120,7 +120,7 @@ const Login = () => {
           <div className="mt-4 flex justify-center">
             <p className="text-[12px] text-[#000] gap-1 flex items-center">
               Don't have an account?
-              <Link to={"/"} replace={true} className="text-[#008A2F]">
+              <Link to={"/auth/signup"} replace={true} className="text-[#008A2F]">
                 Create Account
               </Link>
             </p>
@@ -132,3 +132,4 @@ const Login = () => {
 };
 
 export default Login;
+ 
