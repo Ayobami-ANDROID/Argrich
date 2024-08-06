@@ -7,12 +7,12 @@ export const register = createAsyncThunk(
   "accounts/signup/",
   async (userData, thunkAPI) => {
     try {
-      console.log("working", userData);
       const response = await authService.register(userData);
       toast.success("Registration successful!");
       return response;
     } catch (error) {
       toast.error(error.response?.data?.message || "An error occurred");
+      console.log(error)
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
       );

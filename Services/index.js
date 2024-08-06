@@ -14,7 +14,7 @@ export const SignUpValidate = yup.object().shape({
   Gender: yup.string().required("required"),
   phoneNumber: yup
     .string()
-    .max(10,"can't contain more than 10 characters")
+    .max(12,"can't contain more than 10 characters")
     .required("required"),
   password: yup
     .string()

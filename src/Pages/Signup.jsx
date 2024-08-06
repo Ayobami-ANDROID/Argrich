@@ -24,7 +24,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
-  console.log(register);
+
   const formik = useFormik({
     initialValues: {
       firstName: "",

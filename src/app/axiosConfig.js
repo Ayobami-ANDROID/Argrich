@@ -48,7 +48,7 @@ apiClient.interceptors.response.use(
         if (refreshToken) {
           // Make a request to refresh the token
           const { data } = await axios.post(
-            "https://agrich.onrender.com/api/v1/auth/refresh/",
+            "https://agrich.onrender.com/api/v1/accounts/refresh/",
             { refresh: refreshToken }
           );
 
