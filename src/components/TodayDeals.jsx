@@ -1,7 +1,8 @@
-import React from "react";
+import React,{useEffect} from "react";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
+import { getProducts,productReset } from "../features/product/productSlice";
 
 const TodayDeals = () => {
   const dispatch = useDispatch();
