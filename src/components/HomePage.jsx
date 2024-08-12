@@ -11,7 +11,7 @@ const HomePage = () => {
       <Carousel />
       <div className="px-10">
         <Categories/>
-        <TopSelling/>
+        {/* <TopSelling/> */}
         <TodayDeals/>
       </div>
     </div>
