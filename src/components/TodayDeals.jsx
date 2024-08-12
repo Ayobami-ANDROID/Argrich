@@ -7,6 +7,14 @@ import { getProducts,productReset } from "../features/product/productSlice";
 const TodayDeals = () => {
   const dispatch = useDispatch();
   const { isLoading, products } = useSelector((state) => state.product);
+
+  useEffect(() =>{
+    const fetchProduct = async() =>{
+       dispatch(getProducts())
+    }
+
+    fetchProduct()
+  },[])
   return (
     <div className="my-8">
       <div className="flex items-center justify-between">
