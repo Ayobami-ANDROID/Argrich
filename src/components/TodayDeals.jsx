@@ -24,10 +24,10 @@ const TodayDeals = () => {
     <div className="my-8">
       <div className="flex items-center justify-between">
         {" "}
-        <h1 className="my-4 font-[600] text-[28px]">Today's Deal</h1>
-        <h3 className="text-[#318000] text-[20px] font-medium cursor-pointer hover:underline  ">
+        <h1 className="my-4 font-[600] text-[28px]">OUR PRODUCTS</h1>
+        {/* <h3 className="text-[#318000] text-[20px] font-medium cursor-pointer hover:underline  ">
           See All
-        </h3>
+        </h3> */}
       </div>
 
       <div className="grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2   gap-4">
