@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Logo from "../images/Argrich Logo Full 00.png";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
@@ -9,8 +9,23 @@ import Profile from "../images/Ellipse 1.png";
 import { TfiAlignJustify } from "react-icons/tfi";
 
 const Header = () => {
-  const [clicked, setClicked] = useState(false);
-  const [click, setClick] = useState(false);
+  // const [clicked, setClicked] = useState(false);
+  // const [click, setClick] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
   return (
     <div className="bg-[rgb(255,255,255)] lg:px-12 px-4 py-4 w-full">
       <div className="flex items-center justify-between w-full">
@@ -73,62 +88,63 @@ const Header = () => {
               </li>
             </ul>
           </details> */}
-          <button onClick={() => setClicked(!clicked)} className="relative">
-            <div className="flex">
-              <div className="mr-2"> Categories </div>
-              <div className="flex items-center">
-                {clicked ? (
-                  <IoIosArrowUp className="text-[12px]" />
-                ) : (
-                  <IoIosArrowDown className="text-[12px]" />
-                )}
-                {clicked ? (
-                  <div className="absolute top-[100%] left-[10%] z-[100]">
-                    <ul className="  rounded-box z-[1] lg:w-[30rem] rounded-[5px] w-[16rem] p-2 grid lg:grid-cols-3 grid-cols-1 gap-4 bg-[#fff]">
-                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
-                        <div>
-                          {" "}
-                          <a>Item 1</a>
-                        </div>
-                      </li>
-                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
-                        <div>
-                          {" "}
-                          <a>Item 1</a>
-                        </div>
-                      </li>
-                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
-                        <div>
-                          {" "}
-                          <a>Item 1</a>
-                        </div>
-                      </li>
-                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
-                        <div>
-                          {" "}
-                          <a>Item 1</a>
-                        </div>
-                      </li>
-                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
-                        <div>
-                          {" "}
-                          <a>Item 1</a>
-                        </div>
-                      </li>
-                      <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
-                        <div>
-                          {" "}
-                          <a>Item 1</a>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                ) : (
-                  ""
-                )}
+          <div className="relative" ref={dropdownRef}>
+            <button className="group" onClick={toggleDropdown}>
+              <div className="flex">
+                <div className="mr-2"> Categories </div>
+                <div className="flex items-center"><IoIosArrowDown /></div>
               </div>
+            </button>
+
+
+            {isOpen && (
+              <div className="absolute top-[100%] left-[10%] z-[100] group-focus:block">
+              <ul className="  rounded-box z-[1] lg:w-[30rem] rounded-[5px] w-[16rem] p-2 grid lg:grid-cols-3 grid-cols-1 gap-4 bg-[#fff]">
+                <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                  <div>
+                    {" "}
+                    <a>Item 1</a>
+                  </div>
+                </li>
+                <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                  <div>
+                    {" "}
+                    <a>Item 1</a>
+                  </div>
+                </li>
+                <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                  <div>
+                    {" "}
+                    <a>Item 1</a>
+                  </div>
+                </li>
+                <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                  <div>
+                    {" "}
+                    <a>Item 1</a>
+                  </div>
+                </li>
+                <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                  <div>
+                    {" "}
+                    <a>Item 1</a>
+                  </div>
+                </li>
+                <li className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000]">
+                  <div>
+                    {" "}
+                    <a>Item 1</a>
+                  </div>
+                </li>
+              </ul>
             </div>
-          </button>
+            )}
+
+            
+
+
+          </div>
+
         </div>
         <div className="flex items-center gap-x-4 justify-end border-none w-full">
           <div className="flex relative ">
@@ -141,84 +157,29 @@ const Header = () => {
               <BiSearch />
             </div>
           </div>
-          <div className="lg:flex  hidden items-center text-[#000] mx-2">
-            {/* <details className="dropdown open w-full">
-              <summary
-                className="btn bg-[#fff] border-none text-[#000000] hover:bg-white m-1 shadow-none outline-none  "
-                onClick={() => setClicked(!clicked)}
-              >
-                <div className="flex justify-between">
-                <div className="mr-2">
-                  {" "}
-                  <IoPersonOutline size={'1.5em'} />
-                </div>
 
-                <div className="flex items-center">Account</div>
-                </div>
-              
-              </summary>
-              <ul className="menu dropdown-content  rounded-box z-[1] w-52 p-2 grid grid-cols-1 gap-2 bg-[#fff]">
-                <li className="p-2 rounded-[5px] text-[#000000] ">
-                  <div>
-                    {" "}
-                    <a>Item 1</a>
-                  </div>
-                </li>
-                <li className="p-2  rounded-[5px] text-[#000000]">
-                  <div>
-                    {" "}
-                    <a>Item 1</a>
-                  </div>
-                </li>
-                <li className="p-2  rounded-[5px] text-[#000000]">
-                  <div>
-                    {" "}
-                    <a>Item 1</a>
-                  </div>
-                </li>
-                <li className="p-2  rounded-[5px] text-[#000000]">
-                  <div>
-                    {" "}
-                    <a>Item 1</a>
-                  </div>
-                </li>
-                <li className="p-2  rounded-[5px] text-[#000000]">
-                  <div>
-                    {" "}
-                    <a>Item 1</a>
-                  </div>
-                </li>
-                <li className="p-2  rounded-[5px] text-[#000000]">
-                  <div>
-                    {" "}
-                    <a>Item 1</a>
-                  </div>
-                </li>
-              </ul>
-            </details> */}
-            <button className="flex relative " onClick={() => setClick(!click)}>
-              <IoPersonOutline
-                size={"1.5em"}
-                className="mr-2"
-                
-              />
-              Account
-              
-            </button>
-          </div>
           <div className="lg:flex items-center text-[#000] hidden mx-2">
             <div className="mr-2">
               <CiShoppingCart size={"1.5em"} />
             </div>
             <div>Cart</div>
           </div>
-          <div className="lg:flex items-center ml-2 hidden">
-            <div className="rounded-full bg-[#EEEEEE] lg:h-12 lg:w-12  w-8">
-              <img src={Profile} className="w-full rounded-full h-full"></img>
-            </div>
+          <div className="lg:flex items-center ml-2 hidden relative ">
+            <button className="rounded-full bg-[#EEEEEE] lg:h-12 lg:w-12  w-8 group">
+              <div>
+                <img src={Profile} className="w-full rounded-full h-full"></img>
+                <div className="z-10 bg-[#fff] shadow-[8px_8px_12px_8px_rgba(0,_0,_0,_0.25)]  hidden absolute rounded-lg  w-32 group-focus:block top-full right-0 p-4">
+                  <ul className="text-[#000]">
+                    <li className="font-[500] mb-2 text-[15px]">Welcome!</li>
+                    <li>Logout</li>
+                  </ul>
+                </div>
+              </div>
+
+            </button>
           </div>
           <div className="flex items-center ml-2 lg:hidden">
-          <TfiAlignJustify size={'1.2em'} className="cursor-pointer" />
+            <TfiAlignJustify size={'1.2em'} className="cursor-pointer" />
           </div>
         </div>
       </div>
