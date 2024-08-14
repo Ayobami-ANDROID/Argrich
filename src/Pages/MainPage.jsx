@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 const MainPage = () => {
   const { token } = useSelector((state) => state.auth);
 
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
+  // if (!token) {
+  //   return <Navigate to="/login" replace />;
+  // }
   return (
     <div className="flex flex-col min-h-screen">
       <Advert />
