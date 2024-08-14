@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "./Caurosel";
 import Categories from "./Categories";
 import TodayDeals from "./TodayDeals";
-import TopSelling from "./TopSelling";
+
 
 const HomePage = () => {
   return (
