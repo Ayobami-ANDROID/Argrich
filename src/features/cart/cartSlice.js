@@ -24,7 +24,9 @@ export const getCart  = createAsyncThunk(
 
 export const  postCart = createAsyncThunk(
     "post/products/cart/",
-    async(userData,thunkAPI)
+    async(userData,thunkAPI) => {
+        
+    }
 )
 
 
