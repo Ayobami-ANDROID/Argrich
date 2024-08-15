@@ -38,7 +38,7 @@ const productSlice = createSlice({
   name: "product",
   initialState: {
     products: [],
-    product: null,
+    product: {},
     isLoading: false,
   },
   reducers: {
@@ -63,6 +63,7 @@ const productSlice = createSlice({
       })
       .addCase(getSingleProduct.fulfilled, (state, action) => {
         state.isLoading = true;
+        state.product = action.payload
       })
       .addCase(getSingleProduct.rejected, (state, action) => {
         state.isLoading = true;
