@@ -5,8 +5,8 @@ const GetProduct = () => {
     const [count,setCount] = useState(1)
     return (
         <div className='px-20 py-10 bg-[#F5F5F5] '>
-            <div className='flex  grid-cols-2 gap-4 justify-center '>
-                <div className='flex flex-col w-[50%]'>
+            <div className='lg:flex   gap-4 justify-center '>
+                <div className='flex flex-col lg:w-[50%] w-full'>
                     <div className='w-full bg-[#D9D9D9] h-[50vh] rounded-[10px] overflow-hidden '>
                         <img src={img1} className='h-full w-full' />
                     </div>
@@ -26,8 +26,8 @@ const GetProduct = () => {
                     </div>
                 </div>
                 <div className='flex flex-col flex-1 w-full'>
-                    <div className='mb-16'>
-                    <h1 className='text-[30px] mb-3 font-[500]'>Eggs Crate</h1>
+                    <div className='lg:mb-16 mb-8'>
+                    <h1 className='text-[30px] mb-3 font-[500] mt-3 lg:mt-0'>Eggs Crate</h1>
                     <p className='text-[15px] mb-4'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
                     <h1 className='text-[25px] mb-4 foont-[500]'> $19.20</h1>
                     </div>
