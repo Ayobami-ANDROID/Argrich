@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const initialState = {
     carts:[],
     cart:{},
-    isLoading:fasle
+    isLoading:false
 }
 
 export const getCart  = createAsyncThunk(
