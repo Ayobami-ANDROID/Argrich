@@ -10,7 +10,7 @@ const HomePage = () => {
       {" "}
       <Carousel />
       <div className="px-10">
-        <Categories/>
+        {/* <Categories/> */}
         {/* <TopSelling/> */}
         <TodayDeals/>
       </div>
