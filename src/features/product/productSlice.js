@@ -62,7 +62,7 @@ const productSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getSingleProduct.fulfilled, (state, action) => {
-        state.isLoading = true;
+        state.isLoading = false;
         state.product = action.payload
       })
       .addCase(getSingleProduct.rejected, (state, action) => {
