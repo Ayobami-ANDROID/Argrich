@@ -1,7 +1,28 @@
 import React,{useEffect,useState} from 'react'
 import img1 from "../images/egg.png";
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import Skeleton from "react-loading-skeleton";
+import { getSingleProduct,productReset } from "../features/product/productSlice";
 
 const GetProduct = () => {
+    const dispatch = useDispatch();
+    const { isLoading, product } = useSelector((state) => state.product);
+    let { id } = useParams()
+
+
+    useEffect(() => {
+        const fetchProduct = async() =>{
+            try {
+              await dispatch(getSingleProduct(id)).unwrap();
+            } catch (error) {
+              
+            }
+            
+          }
+
+          fetchProduct()
+    },[])
     const [count,setCount] = useState(1)
     return (
         <div className='px-20 py-10 bg-[#F5F5F5] '>
@@ -27,9 +48,9 @@ const GetProduct = () => {
                 </div>
                 <div className='flex flex-col flex-1 w-full'>
                     <div className='lg:mb-16 mb-8'>
-                    <h1 className='text-[30px] mb-3 font-[500] mt-3 lg:mt-0'>Eggs Crate</h1>
+                    <h1 className='text-[30px] mb-3 font-[500] mt-3 lg:mt-0'>{product.name}</h1>
                     <p className='text-[15px] mb-4'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                    <h1 className='text-[25px] mb-4 foont-[500]'> $19.20</h1>
+                    <h1 className='text-[25px] mb-4 foont-[500]'> ₦{product.price}</h1>
                     </div>
                     
 

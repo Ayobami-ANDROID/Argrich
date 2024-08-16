@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import img1 from "../images/egg.png";
 import cart from "../images/cart.svg";
 import cart2 from "../images/cart2.svg";
-const Item = ({name,price,image}) => {
+import { Link } from "react-router-dom";
+const Item = ({name,price,image,id}) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <div className="bg-white hover:scale-105 hover:duration-500 hover:ease-in-out cursor-pointer p-2 min-h-[391px] w-fit rounded-xl shadow-[0px_1px_7.2px_-2px_rgba(0,_0,_0,_0.25)]">
-      <img src={image} alt="" className="h-[70%]" />
+    <Link to={`/view/${id}`} className="bg-white hover:scale-105 hover:duration-500 hover:ease-in-out cursor-pointer p-2 min-h-[391px] w-fit rounded-xl shadow-[0px_1px_7.2px_-2px_rgba(0,_0,_0,_0.25)]">
+      <img src={img1} alt="" className="h-[70%]" />
       <div className="space-y-3 py-2">
         {" "}
         <div className="flex items-center justify-between">
@@ -23,7 +24,7 @@ const Item = ({name,price,image}) => {
           <p className=" font-semibold text-[14px]">Add to Cart</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
