@@ -5,6 +5,7 @@ import Advert from "../components/Advert";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import HomePage from "../components/HomePage";
+import GetProduct from "../components/GetProduct";
 import { useDispatch, useSelector } from "react-redux";
 
 const MainPage = () => {
@@ -19,6 +20,7 @@ const MainPage = () => {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
+        <Route path="/:id" element={<GetProduct/>}></Route>
       </Routes>
       <Footer />
     </div>
