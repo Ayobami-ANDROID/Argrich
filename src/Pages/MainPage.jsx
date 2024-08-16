@@ -20,7 +20,7 @@ const MainPage = () => {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
-        <Route path="/:id" element={<GetProduct/>}></Route>
+        <Route path="/view/:id" element={<GetProduct/>}></Route>
       </Routes>
       <Footer />
     </div>

@@ -47,7 +47,7 @@ const TodayDeals = () => {
             })}
 
         {products.map((item, index) => {
-          return <Item key={index} name={item.name} price={item.price} image={item.image} />;
+          return <Item key={index} name={item.name} price={item.price} image={item.image} id={item.id} />;
         })}
       </div>
     </div>
