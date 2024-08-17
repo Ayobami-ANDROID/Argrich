@@ -180,10 +180,11 @@ const Signup = () => {
                     placeHolder={`802 123 4567`}
                     name={`phoneNumber`}
                     value={formik.values.phoneNumber}
-                    onChange={(e) => {
-                      const formattedValue = formatDigits(e.target.value);
-                      formik.setFieldValue("phoneNumber", formattedValue);
-                    }}
+                    // onChange={(e) => {
+                    //   const formattedValue = formatDigits(e.target.value);
+                    //   formik.setFieldValue("phoneNumber", formattedValue);
+                    // }}
+                    onChange={formik.handleChange}
                     error={
                       formik.touched.phoneNumber && formik.errors.phoneNumber
                     }

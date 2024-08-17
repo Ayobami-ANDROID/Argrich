@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "./Caurosel";
 import Categories from "./Categories";
 import TodayDeals from "./TodayDeals";
-import TopSelling from "./TopSelling";
+
 
 const HomePage = () => {
   return (
@@ -10,7 +10,7 @@ const HomePage = () => {
       {" "}
       <Carousel />
       <div className="px-10">
-        <Categories/>
+        {/* <Categories/> */}
         {/* <TopSelling/> */}
         <TodayDeals/>
       </div>

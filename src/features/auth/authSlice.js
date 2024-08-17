@@ -18,7 +18,7 @@ export const register = createAsyncThunk(
       );
     }
   }
-);
+)
 
 export const login = createAsyncThunk(
   "accounts/login/",
@@ -28,9 +28,10 @@ export const login = createAsyncThunk(
       const response = await authService.login(userData);
       return response;
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred");
+      console.log(error.response.data)
+      toast.error(error.response?.data || "An error occurred");
       return thunkAPI.rejectWithValue(
-        error.response?.data?.message || "An error occurred"
+        error.response?.data || "An error occurred"
       );
     }
   }

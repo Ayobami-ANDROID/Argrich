@@ -14,6 +14,7 @@ import "@splidejs/splide/dist/css/splide.min.css";
 import 'react-toastify/dist/ReactToastify.css'; 
 import MainPage from "./Pages/MainPage";
 import 'react-loading-skeleton/dist/skeleton.css'
+import NotFound from "./Pages/NotFound";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,6 +26,7 @@ function App() {
 
       <Routes>
         <Route path="/*" element={<MainPage />} />
+        <Route path ="*" element ={<NotFound pathname={'/'} />}/>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
       </Routes>

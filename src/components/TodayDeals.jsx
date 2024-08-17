@@ -1,32 +1,33 @@
-import React, { useEffect } from "react";
+import React,{useEffect} from "react";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
-import { getProducts } from "../features/product/productSlice";
+import { getProducts,productReset } from "../features/product/productSlice";
 
 const TodayDeals = () => {
   const dispatch = useDispatch();
   const { isLoading, products } = useSelector((state) => state.product);
-  const getProductsItems = async () => {
-    try {
-      await dispatch(getProducts()).unwrap();
-    } catch (error) {
-      console.log("error", error);
+
+  useEffect(() =>{
+    const fetchProduct = async() =>{
+      try {
+        await dispatch(getProducts()).unwrap();
+      } catch (error) {
+        
+      }
+      
     }
-  };
 
-  useEffect(() => {
-    getProductsItems();
-  }, []);
-
+    fetchProduct()
+  },[])
   return (
     <div className="my-8">
       <div className="flex items-center justify-between">
         {" "}
-        <h1 className="my-4 font-[600] text-[28px]">Today's Deal</h1>
-        <h3 className="text-[#318000] text-[20px] font-medium cursor-pointer hover:underline  ">
+        <h1 className="my-4 font-[600] text-[28px]">OUR PRODUCTS</h1>
+        {/* <h3 className="text-[#318000] text-[20px] font-medium cursor-pointer hover:underline  ">
           See All
-        </h3>
+        </h3> */}
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4    gap-2 gap-y-10" >
@@ -46,7 +47,7 @@ const TodayDeals = () => {
             })}
 
         {products.map((item, index) => {
-          return <Item key={index} />;
+          return <Item key={index} name={item.name} price={item.price} image={item.image} id={item.id} />;
         })}
       </div>
     </div>
