@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
 import { getSingleProduct, productReset } from "../features/product/productSlice";
+import { postCart } from '../features/cart/cartSlice';
 
 const GetProduct = () => {
     const dispatch = useDispatch();
@@ -65,21 +66,21 @@ const GetProduct = () => {
 
 
                 <div className='flex flex-col lg:w-[50%] w-full'>
-                    <div className='w-full bg-[#D9D9D9] h-[50vh] rounded-[10px] overflow-hidden '>
-                        <img src={img1} className='h-full w-full' />
+                    <div className='w-full bg-[#D9D9D9] lg:h-[50vh] rounded-[10px] overflow-hidden '>
+                        <img src={product.image} className='h-full w-full' />
                     </div>
                     <div className='grid grid-cols-4 gap-2 mt-4'>
                         <div className='rounded-[10px] overflow-hidden' >
-                            <img src={img1} className='h-full' />
+                            <img src={product.image} className='h-full' />
                         </div>
                         <div className='rounded-[10px] overflow-hidden' >
-                            <img src={img1} className='h-full' />
+                            <img src={product.image} className='h-full' />
                         </div>
                         <div className='rounded-[10px] overflow-hidden' >
-                            <img src={img1} className='h-full' />
+                            <img src={product.image} className='h-full' />
                         </div>
                         <div className='rounded-[10px] overflow-hidden' >
-                            <img src={img1} className='h-full' />
+                            <img src={product.image} className='h-full' />
                         </div>
                     </div>
                 </div>

@@ -8,20 +8,26 @@ import { CiShoppingCart } from "react-icons/ci";
 import Profile from "../images/Ellipse 1.png";
 import { TfiAlignJustify } from "react-icons/tfi";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCategory } from "../features/category/categorySlice";
+import { authReset } from "../features/auth/authSlice";
 import Skeleton from "react-loading-skeleton";
+import { Navigate } from "react-router-dom";
+
 
 
 const Header = () => {
   // const [clicked, setClicked] = useState(false);
   // const [click, setClick] = useState(false);
-  const { token } = useSelector((state) => state.auth);
+  const { token, user } = useSelector((state) => state.auth);
   const { category } = useSelector((state) => state.category);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate()
 
   const dispatch = useDispatch();
+
+  console.log(user)
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -46,6 +52,11 @@ const Header = () => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const logout  = async () => {
+       dispatch(authReset())
+       navigate('/login')
+  }
   return (
     <div className="bg-[rgb(255,255,255)] lg:px-12 px-2 py-4 w-full">
       <div className="flex items-center   w-full">
@@ -55,10 +66,10 @@ const Header = () => {
           </Link>
 
           <div className="relative flex flex-col items-center" ref={dropdownRef}>
-            <button className="group" onClick={toggleDropdown}>
+            <button className="group flex flex-col items-center" onClick={toggleDropdown}>
               <div className="flex items-center">
                 <div className="mr-2"> Categories </div>
-                <div className="flex items-center"><IoIosArrowDown /></div>
+                <div className="flex items-center " size={'3em'}><IoIosArrowDown /></div>
               </div>
             </button>
 
@@ -113,12 +124,25 @@ const Header = () => {
 
           {token ? (<div className="lg:flex items-center ml-2 hidden relative ">
             <button className="rounded-full bg-[#EEEEEE] lg:h-12 lg:w-12  w-8 group">
-              <div>
-                <img src={Profile} className="w-full rounded-full h-full"></img>
+              <div className="">
+                {user.profilePicture ? (<img src={Profile} className="w-full rounded-full h-full"></img>) :
+                
+                   (
+                    <div className="w-full rounded-full h-full flex items-center justify-center">
+                      <div>
+                      <IoPersonOutline className="text-center"/>
+                      </div>
+                      
+                    </div>
+                   )
+                }
+                
                 <div className="z-10 bg-[#fff] shadow-[8px_8px_12px_8px_rgba(0,_0,_0,_0.25)]  hidden absolute rounded-lg  w-32 group-focus:block top-full right-0 p-4">
                   <ul className="text-[#000]">
                     <li className="font-[500] mb-2 text-[15px]">Welcome!</li>
-                    <li>Logout</li>
+                    <li className="hover:text-[#008A2F]">My Accounts</li>
+                    <li className="hover:text-[#008A2F]">My Orders</li>
+                    <li className="hover:text-[#008A2F]" onClick={() => logout()}>Logout</li>
                   </ul>
                 </div>
               </div>

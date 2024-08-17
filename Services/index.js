@@ -9,7 +9,7 @@ export const SignUpValidate = yup.object().shape({
   country: yup.string().required("required"),
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
-  email: yup.string().required("enter valid email"),
+  email: yup.string().email("enter valid email").required("enter email"),
   callCode: yup.string().required("required"),
   Gender: yup.string().required("required"),
   phoneNumber: yup
