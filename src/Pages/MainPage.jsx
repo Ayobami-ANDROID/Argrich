@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import HomePage from "../components/HomePage";
 import GetProduct from "../components/GetProduct";
 import { useDispatch, useSelector } from "react-redux";
+import NotFound from "./NotFound";
 
 const MainPage = () => {
   const { token } = useSelector((state) => state.auth);
@@ -21,6 +22,7 @@ const MainPage = () => {
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/view/:id" element={<GetProduct/>}></Route>
+        <Route path="*" element={<NotFound pathname={'/'}/>}></Route>
       </Routes>
       <Footer />
     </div>
