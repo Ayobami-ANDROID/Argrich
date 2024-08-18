@@ -1,25 +1,23 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import Item from "./Item";
 import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
-import { getProducts,productReset } from "../features/product/productSlice";
+import { getProducts, productReset } from "../features/product/productSlice";
 
 const TodayDeals = () => {
   const dispatch = useDispatch();
   const { isLoading, products } = useSelector((state) => state.product);
+  console.log("products", products);
 
-  useEffect(() =>{
-    const fetchProduct = async() =>{
+  useEffect(() => {
+    const fetchProduct = async () => {
       try {
         await dispatch(getProducts()).unwrap();
-      } catch (error) {
-        
-      }
-      
-    }
+      } catch (error) {}
+    };
 
-    fetchProduct()
-  },[])
+    fetchProduct();
+  }, []);
   return (
     <div className="my-8">
       <div className="flex items-center justify-between">
@@ -30,7 +28,7 @@ const TodayDeals = () => {
         </h3> */}
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4    gap-2 gap-y-10" >
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4    gap-2 gap-y-10">
         {isLoading &&
           Array(52)
             .fill(0)
@@ -47,7 +45,15 @@ const TodayDeals = () => {
             })}
 
         {products.map((item, index) => {
-          return <Item key={index} name={item.name} price={item.price} image={item.image} id={item.id} />;
+          return (
+            <Item
+              key={index}
+              name={item.name}
+              price={item.price}
+              image={item.image}
+              id={item.id}
+            />
+          );
         })}
       </div>
     </div>

@@ -8,10 +8,12 @@ const initialState = {
 };
 
 export const getCart = createAsyncThunk(
-  "/products/cart/",
+  "products/cart/",
   async (_, thunkAPI) => {
     try {
       const response = await cartService.getCart();
+      console.log("respons", response);
+      
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(

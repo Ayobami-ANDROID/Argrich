@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import categoryServise from "./categoryService";
 
 export const getCategory = createAsyncThunk(
-  "/products/cart/",
+  "/products/category/",
   async (_, thunkAPI) => {
     try {
       const response = await categoryServise.getCategory();

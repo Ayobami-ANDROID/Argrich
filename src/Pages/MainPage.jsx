@@ -8,6 +8,7 @@ import HomePage from "../components/HomePage";
 import GetProduct from "../components/GetProduct";
 import { useDispatch, useSelector } from "react-redux";
 import NotFound from "./NotFound";
+import Cart from "./Cart";
 
 const MainPage = () => {
   const { token } = useSelector((state) => state.auth);
@@ -19,11 +20,15 @@ const MainPage = () => {
     <div className="flex flex-col min-h-screen">
       <Advert />
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route path="/view/:id" element={<GetProduct/>}></Route>
-        <Route path="*" element={<NotFound pathname={'/'}/>}></Route>
-      </Routes>
+   
+        {" "}
+        <Routes>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/view/:id" element={<GetProduct />}></Route>
+          <Route path="/cart" element={<Cart />}></Route>
+          <Route path="*" element={<NotFound pathname={"/"} />}></Route>
+        </Routes>
+      
       <Footer />
     </div>
   );
