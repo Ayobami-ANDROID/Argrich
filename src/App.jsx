@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Signup from "./Pages/Signup";
+import Landing from "./Pages/Landing";
 import Login from "./Pages/Login";
 import { Route, Routes,Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -25,6 +26,7 @@ function App() {
       <ToastContainer position="top-center" autoClose={2000} />
 
       <Routes>
+        <Route path="/landing" element={<Landing/>}/>
         <Route path="/*" element={<MainPage />} />
         <Route path ="*" element ={<NotFound pathname={'/'} />}/>
         <Route path="/signup" element={<Signup />} />
