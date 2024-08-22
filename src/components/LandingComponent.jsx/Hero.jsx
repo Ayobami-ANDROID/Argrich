@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useRef} from "react";
 import Header from "../../components/LandingComponent.jsx/Header";
 import herobg from "../../images/bgheros.png";
 import bag from "../../images/bag.svg";
@@ -7,7 +7,45 @@ import heroimg from "../../images/heroimg.png";
 import onion from "../../images/onion.png";
 import corn from "../../images/corn.png";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger)
 const Hero = () => {
+
+  const scrollRef = useRef()
+
+  useGSAP(() =>{
+    gsap.to('#text',{
+      opacity:1,
+      duration:2,
+      stagger:1
+    })
+
+    gsap.fromTo('#onion',{
+      x: -100,
+      opacity:0,
+    },
+    {
+      x:0,
+      opacity:1,
+      duration:2
+    }
+
+   )
+
+   gsap.fromTo('#corn',{
+     x:-100,
+     opacity:0
+   },
+   {
+    x:0,
+    opacity:1,
+    duration:2
+   }
+  ) 
+    
+  },[])
   return (
     <div>
       <div className="px-4">
@@ -16,8 +54,9 @@ const Hero = () => {
             src={corn}
             alt=""
             className="absolute -right-[1rem] top-[21rem] "
+            id='corn'
           />
-          <img src={onion} alt="" className="absolute top-[23.7rem] left-[4rem] " />
+          <img src={onion} alt="" className="absolute top-[23.7rem] left-[4rem] " id='onion' />
           <div className="  bg-[#FFE6AE]   w-full   mt-2 rounded-[15px] ">
             <img
               src={texture}
@@ -29,11 +68,11 @@ const Hero = () => {
             <div className="flex items-center justify-center  w-full ">
               <Header />
             </div>
-            <div className="text-center max-w-[596px] mx-auto flex flex-col gap-y-4 mt-6">
-              <p className="text-[#0F4400] font-semibold text-[64px] font-rubik  ">
+            <div className="text-center max-w-[596px] mx-auto flex flex-col gap-y-4 mt-6" >
+              <p className="text-[#0F4400] font-semibold text-[64px] font-rubik  opacity-0  " id="text">
                 Farm to Table <br /> Freshness.
               </p>
-              <p className="text-[#4F584C] font-manrope font-medium text-[18px]">
+              <p className="text-[#4F584C] font-manrope font-medium text-[18px] opacity-0" id="text">
                 From farm-fresh eggs to tender meats and wholesome vegetables,
                 we're committed to delivering the highest quality products to
                 your table.
