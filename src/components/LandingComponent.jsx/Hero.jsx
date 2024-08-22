@@ -13,7 +13,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger)
 const Hero = () => {
 
-  const scrollRef = useRef()
+  
 
   useGSAP(() =>{
     gsap.to('#text',{
@@ -23,8 +23,9 @@ const Hero = () => {
     })
 
     gsap.fromTo('#onion',{
-      x: -100,
+      x: '-100%',
       opacity:0,
+      duration:2
     },
     {
       x:0,
@@ -35,11 +36,12 @@ const Hero = () => {
    )
 
    gsap.fromTo('#corn',{
-     x:-100,
-     opacity:0
+     y:'-100%',
+     opacity:0,
+     duration:2
    },
    {
-    x:0,
+    y:0,
     opacity:1,
     duration:2
    }
