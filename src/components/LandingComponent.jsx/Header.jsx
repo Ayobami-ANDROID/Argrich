@@ -14,7 +14,7 @@ const Header = () => {
         <Link className=""> Online Store</Link>
       </div>
 
-      <Link className="rounded-[40px] max-w-[121px] flex items-center justify-center px-8 h-full bg-[#0F4400] text-[#FFF4DB] shadow-[0px_2px_12.8px_0px_rgba(0,0,0,0.25)]">
+      <Link to="/login" className="rounded-[40px] max-w-[121px] flex items-center justify-center px-8 h-full bg-[#0F4400] text-[#FFF4DB] shadow-[0px_2px_12.8px_0px_rgba(0,0,0,0.25)]">
         Login
       </Link>
     </div>
