@@ -113,7 +113,10 @@ const Header = () => {
             </div>
           </div>
 
-          <Link to={"/cart"} className="flex items-center text-[#000]  mx-2 cursor-pointer">
+          <Link
+            to={"/cart"}
+            className="flex items-center text-[#000]  mx-2 cursor-pointer"
+          >
             <div className="mr-2">
               <CiShoppingCart size={"1.5em"} />
             </div>
