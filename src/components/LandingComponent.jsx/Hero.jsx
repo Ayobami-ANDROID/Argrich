@@ -49,6 +49,7 @@ const Hero = () => {
 
   gsap.from('#heroimg',{
     y:'100%',
+    opacity:0,
     duration:3,
     ease:'power1.in'
   })
