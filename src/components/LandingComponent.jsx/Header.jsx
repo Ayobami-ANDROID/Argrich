@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className="rounded-[200px] max-w-[714px]  h-[62px] pl-4 w-full flex items-center overflow-hidden p-2 mt-4 bg-[#fff] shadow-[2px_2px_19.2px_0px_rgba(0,0,0,0.25)] justify-between">
       <div>
-        <img src={Logo} className="w-28 object-contain"/>
+        <Link to="/landing"><img src={Logo} className="w-28 object-contain"/></Link>
       </div>
       <div className="gap-x-4 flex items-center font-manrope text-[#0F4400] font-medium ">
         <Link className=""> About</Link>
