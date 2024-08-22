@@ -15,9 +15,9 @@ const Hero = () => {
           <img
             src={corn}
             alt=""
-            className="absolute -right-[1rem] top-[20rem] "
+            className="absolute -right-[1rem] top-[21rem] "
           />
-          <img src={onion} alt="" className="absolute top-[24rem] left-12 " />
+          <img src={onion} alt="" className="absolute top-[23.7rem] left-[4rem] " />
           <div className="  bg-[#FFE6AE]   w-full   mt-2 rounded-[15px] ">
             <img
               src={texture}
