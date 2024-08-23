@@ -12,23 +12,23 @@ export const register = createAsyncThunk(
       return response;
     } catch (error) {
       toast.error(error.response?.data?.message || "An error occurred");
-      console.log(error)
+      console.log(error);
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
       );
     }
   }
-)
+);
 
 export const login = createAsyncThunk(
   "accounts/login/",
   async (userData, thunkAPI) => {
-    secureLocalStorage.clear()
+    secureLocalStorage.clear();
     try {
       const response = await authService.login(userData);
       return response;
     } catch (error) {
-      console.log(error.response.data)
+      console.log(error.response.data);
       toast.error(error.response?.data || "An error occurred");
       return thunkAPI.rejectWithValue(
         error.response?.data || "An error occurred"
@@ -50,9 +50,10 @@ const authSlice = createSlice({
       state.token = "";
       state.isLoading = false;
     },
-    setToken:(state, action)=>{
-      state.token=action.payload
-    }
+    setToken: (state, action) => {
+      state.token = action.payload;
+      secureLocalStorage.setItem("token", action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -71,7 +72,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         console.log("action.payload", action.payload);
-        state.user=action.payload.user
+        state.user = action.payload.user;
         state.token = action.payload.tokens;
         console.log("action.payload.tokens", action.payload.tokens);
         secureLocalStorage.setItem("token", action.payload.tokens);

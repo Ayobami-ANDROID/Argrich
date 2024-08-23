@@ -3,7 +3,7 @@ import Logo from "../images/Mask group.png";
 
 const Footer = () => {
   return (
-    <div className="bg-[#005C2D] p-8 text-[#FFEEDC]">
+    <div className="bg-[#005C2D] p-8 text-[#FFEEDC] mt-[20rem]">
       <div className="grid lg:grid-cols-2 gap-16 p-8">
         <div className="flex flex-col">
           <img src={Logo} className="w-32 mb-4"></img>

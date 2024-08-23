@@ -142,11 +142,11 @@ const Header = () => {
 
                   <div className="z-10 bg-[#fff] shadow-[8px_8px_12px_8px_rgba(0,_0,_0,_0.25)]  hidden absolute rounded-lg  w-32 group-focus:block top-full right-0 p-4">
                     <ul className="text-[#000]">
-                      <li className="font-[500] mb-2 text-[15px]">Welcome!</li>
-                      <li className="hover:text-[#008A2F]">My Accounts</li>
-                      <li className="hover:text-[#008A2F]">My Orders</li>
+                      <li className="font-[500] mb-2 text-[15px] whitespace-nowrap">Welcome!</li>
+                      <li className="hover:text-[#008A2F] whitespace-nowrap">My Accounts</li>
+                      <li className="hover:text-[#008A2F]  whitespace-nowrap mt-1">My Orders</li>
                       <li
-                        className="hover:text-[#008A2F]"
+                        className="hover:text-[#008A2F] mt-1 whitespace-nowrap"
                         onClick={() => logout()}
                       >
                         Logout
