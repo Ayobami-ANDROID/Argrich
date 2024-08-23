@@ -35,21 +35,28 @@ const Hero = () => {
 
    )
 
-   gsap.fromTo('#corn',{
-     y:'-100%',
+   gsap.from('#corn',{
+     x:'100%',
      opacity:0,
      duration:2
    },
-   {
-    y:0,
-    opacity:1,
-    duration:2
-   }
+  //  {
+  //   y:0,
+  //   opacity:1,
+  //   duration:2
+  //  }
   ) 
+
+  gsap.from('#heroimg',{
+    y:'100%',
+    opacity:0,
+    duration:3,
+    ease:'power1.in'
+  })
     
   },[])
   return (
-    <div>
+    <div className="overflow-hidden">
       <div className="px-4">
         <div className="relative">
           <img
@@ -87,7 +94,7 @@ const Hero = () => {
           </div>
           <div className=" sticky -mt-[13rem]   mx-auto  px-[8rem] w-full">
             {" "}
-            <img src={heroimg} alt="" className=" mx-auto w-full" />
+            <img src={heroimg} alt="" className=" mx-auto w-full" id="heroimg"/>
           </div>
         </div>
       </div>
