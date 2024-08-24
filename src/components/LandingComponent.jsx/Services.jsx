@@ -16,10 +16,10 @@ const Services = () => {
   gsap.from("#left",{
     x:'-100%',
     opacity:0,
-    stagger:0.1,
+    
       scrollTrigger: {
         trigger: "#content",
-        start: "top 30%",
+        start: "top 50%",
       end: "bottom 80%",
         // markers: true,
         toggleActions: "play pause reverse pause",
@@ -29,10 +29,9 @@ const Services = () => {
   gsap.from("#right",{
     x:'100%',
     opacity:0,
-    stagger:0.01,
       scrollTrigger: {
         trigger: "#content",
-        start: "top 30%",
+        start: "top 50%",
       end: "bottom 80%",
         // markers: true,
         toggleActions: "play pause reverse pause",
