@@ -56,7 +56,7 @@ const Header = () => {
     <div className="bg-[rgb(255,255,255)] lg:px-12 px-2 py-4 w-full">
       <div className="flex items-center   w-full">
         <div className="flex w-full">
-          <Link to="/">
+          <Link to="/landing">
             <img
               src={Logo}
               className="lg:w-32 w-12 lg:mr-8 mr-2 object-contain"
