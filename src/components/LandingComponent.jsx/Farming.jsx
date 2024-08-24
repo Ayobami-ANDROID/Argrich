@@ -9,7 +9,7 @@ const Farming = () => {
 useGSAP(() => {
   gsap.from('#farming2',{
     opacity:0,
-    y:-100,
+    y:100,
     stagger:0.1,
     scrollTrigger:{
       trigger:'#farming-container',
@@ -28,7 +28,7 @@ useGSAP(() => {
         <div className="bg-[#E9FFD5] rounded-full h-16 w-16 flex items-center justify-center">
           <img src={img} alt="" />
         </div>
-        <p className="font-manrope font-bold text-[32px] text-[#1A420E] mt-2 " id="farming2">
+        <p className="font-manrope font-bold text-[32px] text-[#1A420E] mt-2 " >
           We're committed to sustainable farming.{" "}
         </p>
         <p className="text-[#6C6C6C] text-center font-medium text-[20px]" id="farming2">
