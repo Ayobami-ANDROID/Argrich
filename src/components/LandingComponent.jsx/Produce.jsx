@@ -1,4 +1,7 @@
 import React from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import img1 from "../../images/veg/image 1.png";
 import img2 from "../../images/veg/image 3.png";
 import img3 from "../../images/veg/image 5.png";
@@ -10,7 +13,32 @@ import img8 from "../../images/veg/image 19.png";
 import img9 from "../../images/veg/image 9.png";
 import img10 from "../../images/veg/image 2.png";
 
+gsap.registerPlugin(ScrollTrigger);
+
+
 const Produce = () => {
+
+  useGSAP(() => {
+    gsap.from('#fruit1', {
+      y: "-100%",
+      opacity: 0,
+
+      stagger: {
+       
+        grid: [2, 1]
+      },
+      scrollTrigger: {
+        trigger: "#fruit1",
+        start: "top center",
+        end: "bottom center",
+        // markers: true,
+        toggleActions: "play pause reverse pause",
+      },
+    })
+
+
+
+  }, [])
   return (
     <div className="min-h-[800px] relative  mt-10 w-full ">
       <div className=" px-20  w-full"><div className="border-[1.6px] border-[#C5C5C5] -20 mx-auto "></div></div>
@@ -20,16 +48,16 @@ const Produce = () => {
           beans, ginger, and other fresh vegetables.
         </p>
       </div>
-      <img src={img1} alt="" className="absolute right-0 mt-10" />
-      <img src={img2} alt="" className="absolute right-32 mt-14 mr-20 " />
-      <img src={img3} alt="" className="absolute right-[40rem] mt-32" />
-      <img src={img4} alt="" className="absolute left-[20rem] mt-32" />
-      <img src={img5} alt="" className="absolute left-0 mt-36" />
-      <img src={img6} alt="" className="absolute left-[2rem] mt-[30rem]" />
-      <img src={img7} alt="" className="absolute left-[20rem] mt-[32rem]" />
-      <img src={img8} alt="" className="absolute left-[38rem] mt-[35rem]" />
-      <img src={img9} alt="" className="absolute left-[61rem] mt-[34rem]" />
-      <img src={img10} alt="" className="absolute right-0 mt-[24rem]" />
+      <img src={img1} alt="" className="absolute right-0 mt-10 maize" id="fruit1" />
+      <img src={img2} alt="" className="absolute right-32 mt-14 mr-20 white" id="fruit1" />
+      <img src={img3} alt="" className="absolute right-[40rem] mt-32" id="fruit1" />
+      <img src={img4} alt="" className="absolute left-[20rem] mt-32" id="fruit1" />
+      <img src={img5} alt="" className="absolute left-0 mt-36" id="fruit1" />
+      <img src={img6} alt="" className="absolute left-[2rem] mt-[30rem]" id="fruit1" />
+      <img src={img7} alt="" className="absolute left-[20rem] mt-[32rem]" id="fruit1" />
+      <img src={img8} alt="" className="absolute left-[38rem] mt-[35rem]" id="fruit1" />
+      <img src={img9} alt="" className="absolute left-[61rem] mt-[34rem]" id="fruit1" />
+      <img src={img10} alt="" className="absolute right-0 mt-[24rem]" id="fruit1" />
     </div>
   );
 };

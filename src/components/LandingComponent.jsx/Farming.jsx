@@ -1,5 +1,9 @@
 import React from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import img from "../../images/potted_plant.svg";
+gsap.registerPlugin(ScrollTrigger);
 const Farming = () => {
   return (
     <div>
