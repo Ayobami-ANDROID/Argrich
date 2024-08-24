@@ -15,7 +15,7 @@ useGSAP(() => {
       trigger:'#farming-container',
       start:'top 75%',
       end:'bottom 75%',
-      markers:true,
+      // markers:true,
       toggleActions: "play pause reverse pause",
 
     },
