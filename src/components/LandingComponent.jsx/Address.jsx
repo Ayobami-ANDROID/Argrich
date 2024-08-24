@@ -10,12 +10,12 @@ const Address = () => {
         gsap.from("#test", {
           y: "100%",
           opacity: 0,
-          duration: 2,
+        
           scrollTrigger: {
             trigger: "#test",
-            start: "top bottom",
-            end: "bottom",
-            // markers: true,
+            start: "top 90%",
+            end: "bottom 70%",
+            markers: true,
             toggleActions: "play pause reverse pause",
           },
           ease: "sine.in",
