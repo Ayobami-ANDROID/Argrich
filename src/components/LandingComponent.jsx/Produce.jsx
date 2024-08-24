@@ -19,22 +19,22 @@ gsap.registerPlugin(ScrollTrigger);
 const Produce = () => {
 
   useGSAP(() => {
-    gsap.from('#fruit1', {
-      y: "-100%",
-      opacity: 0,
+    // gsap.from('#fruit1', {
+    //   y: "-100%",
+    //   opacity: 0,
 
-      stagger: {
+    //   stagger: {
        
-        grid: [2, 1]
-      },
-      scrollTrigger: {
-        trigger: "#fruit1",
-        start: "top center",
-        end: "bottom center",
-        // markers: true,
-        toggleActions: "play pause reverse pause",
-      },
-    })
+    //     grid: [2, 1]
+    //   },
+    //   scrollTrigger: {
+    //     trigger: "#fruit1",
+    //     start: "top center",
+    //     end: "bottom center",
+    //     // markers: true,
+    //     toggleActions: "play pause reverse pause",
+    //   },
+    // })
 
 
 
