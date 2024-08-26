@@ -19,9 +19,12 @@ const Header = () => {
   // const [click, setClick] = useState(false);
   const { token, user } = useSelector((state) => state.auth);
   const { category } = useSelector((state) => state.category);
+  const {cart} = useSelector((state) => state.cart);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+
+  console.log(cart,'cart')
 
   const dispatch = useDispatch();
 
@@ -115,12 +118,16 @@ const Header = () => {
 
           <Link
             to={"/cart"}
-            className="flex items-center text-[#000]  mx-2 cursor-pointer"
+            className="flex items-center text-[#000]  mx-2 cursor-pointer relative"
           >
             <div className="mr-2">
               <CiShoppingCart size={"1.5em"} />
             </div>
             <div>Cart</div>
+            {cart.length <=0 ? '': (
+              <div className="w-6 h-6 bg-[#008A2F] rounded-full absolute top-[-45%] right-[-15%] text-center  text-white"> {cart.length}</div>
+            )}
+            
           </Link>
 
           {token ? (

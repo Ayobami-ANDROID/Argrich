@@ -101,7 +101,7 @@ const cartSlice = createSlice({
       })
       .addCase(postCart.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.cart = action.payload;
+        state.cart.push(action.payload)
         console.log("add cart", action.payload);
       })
       .addCase(putCart.fulfilled, (state, action) => {
