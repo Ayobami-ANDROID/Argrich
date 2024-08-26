@@ -9,21 +9,36 @@ import {
 } from "../features/product/productSlice";
 import { postCart } from "../features/cart/cartSlice";
 
+
 const GetProduct = () => {
   const dispatch = useDispatch();
   const { isLoading, product } = useSelector((state) => state.product);
-  const cartSelector = useSelector((state) => state.cart);
+  const {cart} = useSelector((state) => state.cart);
   let { id } = useParams();
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         await dispatch(getSingleProduct(id)).unwrap();
-      } catch (error) {}
+      } catch (error) { }
     };
 
     fetchProduct();
   }, []);
+
+
+  const addToCart = async () => {
+
+    const body = {
+      product: id,
+      quantity: count,
+    }
+    try {
+      await dispatch(postCart(body)).unwrap()
+    } catch (error) {
+
+    }
+  }
   const [count, setCount] = useState(1);
 
   if (isLoading) {
@@ -96,11 +111,10 @@ const GetProduct = () => {
             <div className="mb-4">
               <div className="flex justify-between w-[30%] p-2 bg-[#fff] rounded-[30px] text-[20px]">
                 <button
-                  className={`${
-                    count === 1
+                  className={`${count === 1
                       ? "opacity-50 cursor-not-allowed"
                       : "cursor-pointer"
-                  } text-[20px] text-[#006C0B]`}
+                    } text-[20px] text-[#006C0B]`}
                   disabled={count === 1}
                   onClick={() => setCount(count - 1)}
                 >
@@ -119,7 +133,7 @@ const GetProduct = () => {
               <button className="bg-[#005C2D] text-white py-2 px-8 mr-2  rounded-[20px]">
                 BUY NOW
               </button>
-              <button className="border-2 border-[#2A4F1A] rounded-[20px] py-2 px-8 text-[#2A4F1A]">
+              <button className="border-2 border-[#2A4F1A] rounded-[20px] py-2 px-8 text-[#2A4F1A]" onClick={() => addToCart()}>
                 {" "}
                 ADD TO CART
               </button>
