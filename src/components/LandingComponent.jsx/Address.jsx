@@ -13,9 +13,9 @@ const Address = () => {
        
         
           scrollTrigger: {
-            trigger: "#test",
+            trigger: "#box-text",
             start: "top 90%",
-            end: "bottom 70%",
+            end: "bottom 50%",
             // markers: true,
             toggleActions: "play pause reverse pause",
           },
@@ -27,7 +27,7 @@ const Address = () => {
       <div
         className="flex flex-col mt-10 mb-10 gap-y-7 
   "
-        id="box"
+        id="box-text"
       >
         {" "}
         <p
