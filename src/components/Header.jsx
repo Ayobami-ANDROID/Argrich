@@ -59,10 +59,10 @@ const Header = () => {
     <div className="bg-[rgb(255,255,255)] lg:px-12 px-2 py-4 w-full">
       <div className="flex items-center   w-full">
         <div className="flex w-full">
-          <Link to="/landing">
+          <Link to="/landing" className="flex items-center mr-4">
             <img
               src={Logo}
-              className="lg:w-32 w-12 lg:mr-8 mr-2 object-contain"
+              className="lg:w-32 w-32 lg:mr-8  object-contain"
             ></img>
           </Link>
 
@@ -123,7 +123,7 @@ const Header = () => {
             <div className="mr-2">
               <CiShoppingCart size={"1.5em"} />
             </div>
-            <div>Cart</div>
+            <div className="sm:block xs:hidden">Cart</div>
             {cart.length <=0 ? '': (
               <div className="w-6 h-6 bg-[#008A2F] rounded-full absolute top-[-45%] right-[-15%] text-center  text-white"> {cart.length}</div>
             )}

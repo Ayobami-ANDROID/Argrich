@@ -3,7 +3,7 @@ import { BiSearch } from "react-icons/bi";
 
 const Sidebar = () => {
     return (
-        <div className='w-64 border-t-2 border-r-2  p-4 h-full min-h-screen'>
+        <div className='md:w-64 xs:w-32 border-t-2 border-r-2  p-4  h-full min-h-screen'>
             <div className='flex flex-col items-center justify-center '>
                 <div className='flex flex-col items-center '>
                     <h1 className='mb-4'> Account Management</h1>
