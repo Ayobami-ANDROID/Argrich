@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import img1 from "../images/egg.png";
-import { useParams } from "react-router-dom";
+import icon1 from "../images/chevron-right.svg";
+import { useParams,useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
 import {
@@ -12,8 +13,9 @@ import { postCart } from "../features/cart/cartSlice";
 
 const GetProduct = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate() 
   const { isLoading, product } = useSelector((state) => state.product);
-  const {cart} = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
   let { id } = useParams();
 
   useEffect(() => {
@@ -73,6 +75,23 @@ const GetProduct = () => {
   }
   return (
     <div className="px-20 py-10 bg-[#F5F5F5] ">
+
+      <div className="flex gap-x-4 mb-5">
+        <button
+          onClick={() => navigate("/")}
+          className="text-[#101928] font-medium text-xs "
+        >
+          Home
+        </button>
+        <img src={icon1} alt="" className="object-contain" />
+        <p className="text-[#005C2D] font-semibold text-xs cursor-pointer">
+          Product
+        </p>
+        <img src={icon1} alt="" className="object-contain" />
+        <p className="text-[#005C2D] font-semibold text-xs cursor-pointer">
+          {product.name}
+        </p>
+      </div>
       <div className="lg:flex   gap-4 justify-center ">
         <div className="flex flex-col lg:w-[50%] w-full">
           <div className="w-full bg-[#D9D9D9] lg:h-[50vh] rounded-[10px] overflow-hidden ">
@@ -112,8 +131,8 @@ const GetProduct = () => {
               <div className="flex justify-between w-[30%] p-2 bg-[#fff] rounded-[30px] text-[20px]">
                 <button
                   className={`${count === 1
-                      ? "opacity-50 cursor-not-allowed"
-                      : "cursor-pointer"
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer"
                     } text-[20px] text-[#006C0B]`}
                   disabled={count === 1}
                   onClick={() => setCount(count - 1)}

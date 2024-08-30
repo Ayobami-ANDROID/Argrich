@@ -25,6 +25,10 @@ const Cart = () => {
     cartProduct();
   }, []);
 
+  const totalPrice = cart.reduce((acc, item) => {
+    return acc + item.product.price * item.quantity;
+  }, 0);
+
   return (
     <div className="px-10 bg-[#F5F5F5]  pt-10 pb-20 flex-1">
       <div className="flex gap-x-4">
@@ -60,7 +64,7 @@ const Cart = () => {
           <div className="flex items-center justify-between ">
             {" "}
             <p className="text-[24px] font-semibold">Subtotal:</p>
-            <p className="text-[#2A4F1A] text-[24px] font-semibold"> ₦524.00</p>
+            <p className="text-[#2A4F1A] text-[24px] font-semibold"> ₦{totalPrice}</p>
           </div>
           <div className="bg-[#C6C6C6] w-full h-[0.8px] "></div>
 
