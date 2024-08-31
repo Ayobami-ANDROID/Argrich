@@ -64,7 +64,7 @@ const Services = () => {
             <p className="animate-text text-white font-bold font-manrope text-[24px] lg:text-[28px]">
               Farm-to-Fork Freshness
             </p>
-            <p className="animate-text text-[12px] font-medium text-white leading-[16.39px] font-manrope md:text-[16px] md:leading-[21.86px] text-center lg:text-start mt-1">
+            <p className="animate-text text-[12px] font-medium text-white leading-[16.39px] font-manrope md:text-[16px] md:leading-[21.86px] text-center lg:text-start lg:mt-1">
               Savor the pure taste of nature with our handpicked, seasonal
               produce. Cultivated with care on our farm, our vegetables are
               bursting with flavor and essential nutrients.
@@ -73,7 +73,7 @@ const Services = () => {
           <img
             src={img1}
             alt=""
-            className="absolute md:-bottom-[2.1rem]  md:translate-x-1/2 md:right-1/2 mt-6 left-[0.2px] w-[125px]"
+            className="absolute md:-bottom-[2.1rem]  md:translate-x-1/2 md:right-1/2 mt-6 left-[0.2px] lg:w-[125px]"
           />
           <img
             src={img2}
