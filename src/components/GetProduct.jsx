@@ -89,40 +89,40 @@ const GetProduct = () => {
         </p>
         <img src={icon1} alt="" className="object-contain" />
         <p className="text-[#005C2D] font-semibold text-xs cursor-pointer">
-          {product.name}
+          {product?.name}
         </p>
       </div>
       <div className="lg:flex   gap-4 justify-center ">
         <div className="flex flex-col lg:w-[50%] w-full">
           <div className="w-full bg-[#D9D9D9] lg:h-[50vh] rounded-[10px] overflow-hidden ">
-            <img src={product.image} className="h-full w-full" />
+            <img src={product?.image} className="h-full w-full" />
           </div>
           <div className="grid grid-cols-4 gap-2 mt-4">
             <div className="rounded-[10px] overflow-hidden">
-              <img src={product.image} className="h-full" />
+              <img src={product?.image} className="h-full" />
             </div>
             <div className="rounded-[10px] overflow-hidden">
-              <img src={product.image} className="h-full" />
+              <img src={product?.image} className="h-full" />
             </div>
             <div className="rounded-[10px] overflow-hidden">
-              <img src={product.image} className="h-full" />
+              <img src={product?.image} className="h-full" />
             </div>
             <div className="rounded-[10px] overflow-hidden">
-              <img src={product.image} className="h-full" />
+              <img src={product?.image} className="h-full" />
             </div>
           </div>
         </div>
         <div className="flex flex-col flex-1 w-full">
           <div className="lg:mb-16 mb-8">
             <h1 className="text-[30px] mb-3 font-[500] mt-3 lg:mt-0">
-              {product.name}
+              {product?.name}
             </h1>
             <p className="text-[15px] mb-4">
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout.
               {/* {product.des} */}
             </p>
-            <h1 className="text-[25px] mb-4 foont-[500]"> ₦{product.price}</h1>
+            <h1 className="text-[25px] mb-4 foont-[500]"> ₦{product?.price}</h1>
           </div>
 
           <div>
