@@ -53,7 +53,7 @@ const productSlice = createSlice({
   initialState: {
     products: [],
     product: {},
-    isLoading: false,
+    isLoading: true,
   },
   reducers: {
     productReset: () => initialState,
