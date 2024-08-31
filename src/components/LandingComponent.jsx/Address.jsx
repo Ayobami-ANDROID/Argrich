@@ -43,11 +43,11 @@ const Address = () => {
   return (
     <div>
       <div
-        className="flex flex-col mt-10 mb-10 gap-y-7"
+        className="flex flex-col mt-10 mb-10 gap-y-6  md:gap-y-7"
         id="box-text"
       >
         <p
-          className="text-center text-[#0F4400] font-semibold font-manrope text-[34px]"
+          className="text-center text-[#0F4400] font-semibold font-manrope text-[20px] leading-[27.32px] md:leading-[46.44px] md:text-[34px]"
           id="test"
         >
           <span className="line">Our farm is a thriving five-hectare oasis</span><br />

@@ -66,7 +66,7 @@ const Produce = () => {
 
   return (
     <div id="produce-container" className="min-h-[800px] relative mt-10 w-full overflow-hidden">
-      <div className="px-20 w-full">
+      <div className="px-20 w-full md:block hidden">
         <div className="border-[1.6px] border-[#C5C5C5] mx-auto"></div>
       </div>
       <div className="top-1/2 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
