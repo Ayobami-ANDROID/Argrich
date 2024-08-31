@@ -9,6 +9,8 @@ import GetProduct from "../components/GetProduct";
 import { useDispatch, useSelector } from "react-redux";
 import NotFound from "./NotFound";
 import Cart from "./Cart";
+import GetProductBySearch from "./GetProductBySearch";
+import GetProductByCategory from "./GetProductByCategory"
 
 const MainPage = () => {
   const { token } = useSelector((state) => state.auth);
@@ -17,13 +19,15 @@ const MainPage = () => {
   //   return <Navigate to="/login" replace />;
   // }
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#F5F5F5]">
       <Advert />
       <Header />
    
         {" "}
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
+          <Route path="/product/:searchQuery" element={<GetProductBySearch/>}></Route>
+          <Route path="/category/:Category" element={<GetProductByCategory/>} ></Route>
           <Route path="/view/:id" element={<GetProduct />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="*" element={<NotFound pathname={"/"} />}></Route>

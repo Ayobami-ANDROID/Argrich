@@ -1,11 +1,28 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { getProducts, productReset } from "../../features/product/productSlice";
+import { useDispatch, useSelector } from "react-redux";
 import LandingPageItem from "./LandingPageItem";
 
-
 const Shop = () => {
-  
+  const dispatch = useDispatch();
+  const { isLoading, products } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      dispatch(productReset());
+      try {
+        await dispatch(getProducts()).unwrap();
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProduct();
+  }, [dispatch]);
+
+  // Slice the products array to get only the first 4 items
+  const displayedProducts = products.slice(0, 4);
 
   return (
     <div className="my-32 ">
@@ -21,18 +38,22 @@ const Shop = () => {
             Visit Store
           </Link>
         </div>
-        <div className="mt-10  w-full  " >
-          <div className="lg:flex gap-4 grid grid-cols-2 justify-items-center">
-            {Array(4)
-              .fill(4)
-              .map((_, i) => (
+        <div className="mt-10 w-full">
+          <div className="lg:flex gap-4 p-4 grid grid-cols-2 justify-items-center overflow-hidden no-scrollbar">
+            {isLoading ? (
+              <p>Loading products...</p>
+            ) : displayedProducts.length > 0 ? (
+              displayedProducts.map((product, index) => (
                 <LandingPageItem
-                  key={i}
-                  image="https://res.cloudinary.com/dpoxdw78e/image/upload/v1/media/products/Egg_jfbp3t"
-                  name={"Eggs (1 Crate)"}
-                  price={"96"}
+                  key={product.id || index}
+                  image={product.image || "https://res.cloudinary.com/dpoxdw78e/image/upload/v1/media/products/Egg_jfbp3t"}
+                  name={product.name || "Product Name"}
+                  price={product.price || "0"}
                 />
-              ))}
+              ))
+            ) : (
+              <p>No products available.</p>
+            )}
           </div>
         </div>
       </div>

@@ -16,6 +16,8 @@ import Skeleton from "react-loading-skeleton";
 import { Navigate } from "react-router-dom";
 import { IoPersonSharp } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
+import { getCart } from "../features/cart/cartSlice";
+import { toast, Bounce } from "react-toastify";
 
 
 
@@ -42,6 +44,7 @@ const Header = () => {
     const fetchProduct = async () => {
       try {
         await dispatch(getCategory()).unwrap();
+        await dispatch(getCart()).unwrap()
       } catch (error) { }
     };
 
@@ -68,13 +71,20 @@ const Header = () => {
     navigate(path);
   };
 
-  const search = async () => {
-  
-    await dispatch(getSearchProduct({name:value, search:''})).unwrap()
+
+  const search = () =>{
+    if (!value.trim()){
+      navigate('/')
+    }
+    else{
+      navigate(`/product/${value}`)
+    }
+    
   }
 
+
   const CartSearch = async (cart) => {
-    await dispatch(getSearchProduct({name:'', search:cart })).unwrap()
+   
   }
   return (
     <div className="bg-[rgb(255,255,255)] lg:px-12 px-2 py-4 w-full">
@@ -107,7 +117,7 @@ const Header = () => {
               <div className="absolute top-[100%] left-[10%] z-[100] group-focus:block">
                 <ul className="  rounded-box z-[1] lg:w-[30rem] rounded-[5px] w-[16rem] p-2 grid lg:grid-cols-3 grid-cols-1 gap-4 bg-[#fff]">
                   {category.map((item, index) => (
-                    <li
+                    <Link to={`/category/${item.category}`}
                       key={index}
                       className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000] cursor-pointer"
                       onClick={() => CartSearch(item.category) }
@@ -116,7 +126,7 @@ const Header = () => {
                         {" "}
                         <a>{item.category}</a>
                       </div>
-                    </li>
+                    </Link>
                   ))}
                 </ul>
               </div>
