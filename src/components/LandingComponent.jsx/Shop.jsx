@@ -21,8 +21,8 @@ const Shop = () => {
             Visit Store
           </Link>
         </div>
-        <div className="mt-10  w-full " >
-          <div className="gap-4 grid grid-cols-2">
+        <div className="mt-10  w-full  " >
+          <div className="lg:flex gap-4 grid grid-cols-2">
             {Array(4)
               .fill(4)
               .map((_, i) => (
