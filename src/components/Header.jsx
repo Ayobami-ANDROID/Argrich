@@ -149,7 +149,7 @@ const Header = () => {
             </div>
             <div className="sm:block xs:hidden">Cart</div>
             {cart.length <= 0 ? '' : (
-              <div className="w-6 h-6 bg-[#008A2F] rounded-full absolute top-[-45%] right-[-15%] text-center  text-white"> {cart.length}</div>
+              <div className="w-6 h-6 bg-[#008A2F] rounded-full absolute top-[-55%] right-[-15%] text-center  text-white"> {cart.length}</div>
             )}
 
           </Link>

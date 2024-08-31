@@ -15,49 +15,76 @@ import img10 from "../../images/veg/image 2.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
 const Produce = () => {
-
   useGSAP(() => {
-    // gsap.from('#fruit1', {
-    //   y: "-100%",
-    //   opacity: 0,
+    // Animate the text
+    gsap.from("#produce-text", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: "#produce-container",
+        start: "top 80%",
+        end: "top 20%",
+        scrub: 1,
+        toggleActions: "play none none reverse",
+      },
+    });
 
-    //   stagger: {
-       
-    //     grid: [2, 1]
-    //   },
-    //   scrollTrigger: {
-    //     trigger: "#fruit1",
-    //     start: "top center",
-    //     end: "bottom center",
-    //     // markers: true,
-    //     toggleActions: "play pause reverse pause",
-    //   },
-    // })
+    // Animate the images
+    const images = gsap.utils.toArray('#produce-container img');
+    images.forEach((img, index) => {
+      gsap.from(img, {
+        y: 100,
+        x: index % 2 === 0 ? -50 : 50,
+        opacity: 0,
+        rotation: Math.random() * 20 - 10,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#produce-container",
+          start: "top 80%",
+          end: "bottom 20%",
+          scrub: 1,
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
 
+    // Parallax effect for images
+    gsap.to(images, {
+      y: (i) => -50 - i * 20,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#produce-container",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }, []);
 
-
-  }, [])
   return (
-    <div className="min-h-[800px] relative  mt-10 w-full ">
-      <div className=" px-20  w-full"><div className="border-[1.6px] border-[#C5C5C5] -20 mx-auto "></div></div>
+    <div id="produce-container" className="min-h-[800px] relative mt-10 w-full overflow-hidden">
+      <div className="px-20 w-full">
+        <div className="border-[1.6px] border-[#C5C5C5] mx-auto"></div>
+      </div>
       <div className="top-1/2 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
-        <p className="font-manrope font-semibold text-center text-xl xl:text-[34px] text-[#004802] w-full max-w-[992px] mx-auto">
+        <p id="produce-text" className="font-manrope font-semibold text-center text-xl xl:text-[34px] text-[#004802] w-full max-w-[992px] mx-auto">
           Our farm also produces an abundance of crops such as maize, yams,
           beans, ginger, and other fresh vegetables.
         </p>
       </div>
-      <img src={img1} alt="" className="absolute right-0 mt-10 maize" id="fruit1" />
-      <img src={img2} alt="" className="absolute right-32 mt-14 mr-20 white" id="fruit1" />
-      <img src={img3} alt="" className="absolute right-[40rem] mt-32" id="fruit1" />
-      <img src={img4} alt="" className="absolute left-[20rem] mt-32" id="fruit1" />
-      <img src={img5} alt="" className="absolute left-0 mt-36" id="fruit1" />
-      <img src={img6} alt="" className="absolute left-[2rem] mt-[30rem]" id="fruit1" />
-      <img src={img7} alt="" className="absolute left-[20rem] mt-[32rem]" id="fruit1" />
-      <img src={img8} alt="" className="absolute left-[38rem] mt-[35rem]" id="fruit1" />
-      <img src={img9} alt="" className="absolute left-[61rem] mt-[34rem]" id="fruit1" />
-      <img src={img10} alt="" className="absolute right-0 mt-[24rem]" id="fruit1" />
+      <img src={img1} alt="Maize" className="absolute right-0 mt-10 maize" />
+      <img src={img2} alt="White vegetable" className="absolute right-32 mt-14 mr-20 white" />
+      <img src={img3} alt="Vegetable" className="absolute right-[40rem] mt-32" />
+      <img src={img4} alt="Vegetable" className="absolute left-[20rem] mt-32" />
+      <img src={img5} alt="Vegetable" className="absolute left-0 mt-36" />
+      <img src={img6} alt="Vegetable" className="absolute left-[2rem] mt-[30rem]" />
+      <img src={img7} alt="Vegetable" className="absolute left-[20rem] mt-[32rem]" />
+      <img src={img8} alt="Vegetable" className="absolute left-[38rem] mt-[35rem]" />
+      <img src={img9} alt="Vegetable" className="absolute left-[61rem] mt-[34rem]" />
+      <img src={img10} alt="Vegetable" className="absolute right-0 mt-[24rem]" />
     </div>
   );
 };
