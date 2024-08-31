@@ -17,53 +17,53 @@ import bger from "../../images/img.png";
 gsap.registerPlugin(ScrollTrigger);
 
 const Produce = () => {
-  // useGSAP(() => {
-  //   // Animate the text
-  //   gsap.from("#produce-text", {
-  //     y: 50,
-  //     opacity: 0,
-  //     duration: 1,
-  //     scrollTrigger: {
-  //       trigger: "#produce-container",
-  //       start: "top 80%",
-  //       end: "top 20%",
-  //       scrub: 1,
-  //       toggleActions: "play none none reverse",
-  //     },
-  //   });
+  useGSAP(() => {
+    // Animate the text
+    gsap.from("#produce-text", {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: "#produce-container",
+        start: "top 80%",
+        end: "top 20%",
+        scrub: 1,
+        toggleActions: "play none none reverse",
+      },
+    });
 
-  //   // Animate the images  
-  //   const images = gsap.utils.toArray('#produce-container img');
-  //   images.forEach((img, index) => {
-  //     gsap.from(img, {
-  //       y: 100,
-  //       x: index % 2 === 0 ? -50 : 50,
-  //       opacity: 0,
-  //       rotation: Math.random() * 20 - 10,
-  //       duration: 1,
-  //       ease: "power2.out",
-  //       scrollTrigger: {
-  //         trigger: "#produce-container",
-  //         start: "top 80%",
-  //         end: "bottom 20%",
-  //         scrub: 1,
-  //         toggleActions: "play none none reverse",
-  //       },
-  //     });
-  //   });
+    // Animate the images  
+    const images = gsap.utils.toArray('#produce-container img');
+    images.forEach((img, index) => {
+      gsap.from(img, {
+        y: 100,
+        x: index % 2 === 0 ? -50 : 50,
+        opacity: 0,
+        rotation: Math.random() * 20 - 10,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#produce-container",
+          start: "top 80%",
+          end: "bottom 20%",
+          scrub: 1,
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
 
-  //   // Parallax effect for images
-  //   gsap.to(images, {
-  //     y: (i) => -50 - i * 20,
-  //     ease: "none",
-  //     scrollTrigger: {
-  //       trigger: "#produce-container",
-  //       start: "top bottom",
-  //       end: "bottom top",
-  //       scrub: true,
-  //     },
-  //   });
-  // }, []);
+    // Parallax effect for images
+    gsap.to(images, {
+      y: (i) => -50 - i * 20,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#produce-container",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }, []);
 
   return (
     <div className="s">
