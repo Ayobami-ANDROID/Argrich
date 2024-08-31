@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import LandingPageItem from "./LandingPageItem";
 
@@ -16,9 +17,9 @@ const Shop = () => {
           <p className="font-manrope font-medium text-[20px] max-w-[574px] leading-[27.32px]">
             From farm-fresh eggs to tender meats and wholesome vegetables, we're committed to delivering the highest quality products to your table.
           </p>
-          <button className="text-white font-manrope font-semibold text-base rounded-lg bg-[#0F4400] px-[20px] py-[12px]">
+          <Link to="/" className="text-white font-manrope font-semibold text-base rounded-lg bg-[#0F4400] px-[20px] py-[12px]">
             Visit Store
-          </button>
+          </Link>
         </div>
         <div className="mt-10 flex overflow-x-scroll no-scrollbar w-full p-4" >
           <div className="flex gap-4">
