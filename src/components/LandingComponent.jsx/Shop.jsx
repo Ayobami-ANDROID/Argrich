@@ -7,7 +7,7 @@ const Shop = () => {
   
 
   return (
-    <div className="mt-32">
+    <div className="my-32 ">
       <div className="mx-auto px-20">
         <div className="text-start flex flex-col items-start gap-10">
           <p className="font-manrope font-semibold text-[38px] text-[#1A420E]">
