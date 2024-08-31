@@ -10,8 +10,11 @@ const TodayDeals = () => {
   console.log("products", products);
 
   useEffect(() => {
+   
     const fetchProduct = async () => {
+       dispatch(productReset())
       try {
+        
         await dispatch(getProducts()).unwrap();
       } catch (error) {}
     };
