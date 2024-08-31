@@ -10,8 +10,14 @@ const getSingleProduct = async (id) => {
   return response.data;
 };
 
+const getSearchProduct = async (name,category) => {
+  const response = await apiClient.get(`products?name=${name}&category=${category}`)
+  return response.data
+}
+
 const productService = {
   getProducts,
   getSingleProduct,
+  getSearchProduct
 };
 export default productService;

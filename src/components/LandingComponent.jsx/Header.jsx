@@ -10,8 +10,8 @@ const Header = () => {
       </div>
       <div className="gap-x-4 flex items-center font-manrope text-[#0F4400] font-medium ">
         <Link className=""> About</Link>
-        <Link className="">Product Categories</Link>
-        <Link className=""> Online Store</Link>
+        <Link  className="">Product Categories</Link>
+        <Link to="/" className=""> Online Store</Link>
       </div>
 
       <Link to="/login" className="rounded-[40px] max-w-[121px] flex items-center justify-center px-8 h-full bg-[#0F4400] text-[#FFF4DB] shadow-[0px_2px_12.8px_0px_rgba(0,0,0,0.25)]">

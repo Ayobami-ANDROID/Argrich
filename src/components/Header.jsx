@@ -11,20 +11,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getCategory } from "../features/category/categorySlice";
 import { authReset } from "../features/auth/authSlice";
+import { getSearchProduct } from "../features/product/productSlice";
 import Skeleton from "react-loading-skeleton";
 import { Navigate } from "react-router-dom";
+import { IoPersonSharp } from "react-icons/io5";
+import { IoIosLogOut } from "react-icons/io";
+
+
 
 const Header = () => {
   // const [clicked, setClicked] = useState(false);
   // const [click, setClick] = useState(false);
+  const [value,setValue] = useState('')
   const { token, user } = useSelector((state) => state.auth);
   const { category } = useSelector((state) => state.category);
-  const {cart} = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
-  console.log(cart,'cart')
+  console.log(cart, 'cart')
 
   const dispatch = useDispatch();
 
@@ -36,7 +42,7 @@ const Header = () => {
     const fetchProduct = async () => {
       try {
         await dispatch(getCategory()).unwrap();
-      } catch (error) {}
+      } catch (error) { }
     };
 
     fetchProduct();
@@ -55,6 +61,21 @@ const Header = () => {
     dispatch(authReset());
     navigate("/login");
   };
+
+  const handleLinkClick = (e, path) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(path);
+  };
+
+  const search = async () => {
+  
+    await dispatch(getSearchProduct({name:value, search:''})).unwrap()
+  }
+
+  const CartSearch = async (cart) => {
+    await dispatch(getSearchProduct({name:'', search:cart })).unwrap()
+  }
   return (
     <div className="bg-[rgb(255,255,255)] lg:px-12 px-2 py-4 w-full">
       <div className="flex items-center   w-full">
@@ -89,6 +110,7 @@ const Header = () => {
                     <li
                       key={index}
                       className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000] cursor-pointer"
+                      onClick={() => CartSearch(item.category) }
                     >
                       <div>
                         {" "}
@@ -107,32 +129,34 @@ const Header = () => {
               <input
                 placeholder="Search Product"
                 type="text "
+                value={value}
+                onChange={(e) => setValue(e.target.value) }
                 className=" outline-none px-4 max-w-[409px]  w-full  h-[40px] bg-inherit   "
               ></input>
             </div>
 
-            <div className="flex items-center    cursor-pointer">
+            <div className="flex items-center    cursor-pointer" onClick={() => search()}>
               <BiSearch />
             </div>
           </div>
 
           <Link
             to={"/cart"}
-            className="flex items-center text-[#000]  mx-2 cursor-pointer relative"
+            className="lg:flex hidden items-center text-[#000]  mx-2 cursor-pointer relative "
           >
             <div className="mr-2">
               <CiShoppingCart size={"1.5em"} />
             </div>
             <div className="sm:block xs:hidden">Cart</div>
-            {cart.length <=0 ? '': (
+            {cart.length <= 0 ? '' : (
               <div className="w-6 h-6 bg-[#008A2F] rounded-full absolute top-[-45%] right-[-15%] text-center  text-white"> {cart.length}</div>
             )}
-            
+
           </Link>
 
           {token ? (
-            <div className="lg:flex items-center ml-2 hidden relative ">
-              <button className="rounded-full bg-[#EEEEEE] lg:h-12 lg:w-12  w-8 group">
+            <div className=" flex items-center ml-2  relative ">
+              <button className="rounded-full bg-[#EEEEEE] lg:h-12 lg:w-12 w-8 h-8  group">
                 <div className="">
                   {user.profilePicture ? (
                     <img
@@ -147,18 +171,40 @@ const Header = () => {
                     </div>
                   )}
 
-                  <div className="z-10 bg-[#fff] shadow-[8px_8px_12px_8px_rgba(0,_0,_0,_0.25)]  hidden absolute rounded-lg  w-32 group-focus:block top-full right-0 p-4">
-                    <ul className="text-[#000]">
-                      <li className="font-[500] mb-2 text-[15px] whitespace-nowrap">Welcome!</li>
-                      <li className="hover:text-[#008A2F] whitespace-nowrap">My Accounts</li>
-                      <li className="hover:text-[#008A2F]  whitespace-nowrap mt-1">My Orders</li>
-                      <li
-                        className="hover:text-[#008A2F] mt-1 whitespace-nowrap"
-                        onClick={() => logout()}
+                  <div className="z-10 bg-[#fff] shadow-[8px_8px_12px_8px_rgba(0,_0,_0,_0.25)]  hidden absolute rounded-lg  w-40 group-focus:block top-full right-0 p-4">
+                    <div className="text-[#000] flex flex-col  gap-4">
+                      <h4 className="font-[500] mb-2 text-[15px] whitespace-nowrap ">Welcome!</h4>
+                      <a onClick={(e) => handleLinkClick(e, '/account')}  className="hover:text-[#008A2F] transition whitespace-nowrap flex items-center justify-between">
+                        <IoPersonSharp size={"2.5em"} className="mr-4"  />
+                        my Accounts
+                      </a>
+                      <a
+                       
+                        onClick={(e) => handleLinkClick(e, '/cart')}
+                        className=" lg:hidden sm:flex items-center text-[#000]  hover:text-[#008A2F] transition cursor-pointer relative "
                       >
+                        
+                          <CiShoppingCart size={"1.5em"}  className="mr-4"/>
+                       
+                        <div className="sm:block xs:hidden">Cart</div>
+                        {cart.length <= 0 ? '' : (
+                          <div className="w-6 h-6 bg-[#008A2F] rounded-full absolute top-[-45%] right-[30%] text-center  text-white"> {cart.length}</div>
+                        )}
+
+                      </a>
+
+                      <li
+                        className="hover:text-[#008A2F] flex items-center transition"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          logout();
+                        }}
+    
+                      >
+                        <IoIosLogOut className="mr-4" size={"1.5em"}/>
                         Logout
                       </li>
-                    </ul>
+                    </div>
                   </div>
                 </div>
               </button>
