@@ -31,7 +31,7 @@ export const postCart = createAsyncThunk(
       toast.success("Added to Cart!");
       return response;
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred");
+      toast.error(error.response?.data?.detail  || "An error occurred");
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
       );
@@ -47,7 +47,7 @@ export const putCart = createAsyncThunk(
       toast.success("updated Successfully!");
       return response;
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred");
+      toast.error(error.response?.data?.detail  || "An error occurred");
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
       );
@@ -63,7 +63,8 @@ export const deleteCart = createAsyncThunk(
       toast.success("Deleted From Cart!");
       return response;
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred");
+    
+      toast.error(error.response?.data?.detail  || "An error occurred");
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
       );

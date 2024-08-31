@@ -28,8 +28,8 @@ export const login = createAsyncThunk(
       const response = await authService.login(userData);
       return response;
     } catch (error) {
-      console.log(error.response.data);
-      toast.error(error.response?.data || "An error occurred");
+      console.log(error.response.data.error);
+      toast.error(error.response?.data.error || "An error occurred");
       return thunkAPI.rejectWithValue(
         error.response?.data || "An error occurred"
       );
