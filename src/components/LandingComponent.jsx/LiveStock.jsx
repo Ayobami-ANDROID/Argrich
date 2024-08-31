@@ -51,7 +51,7 @@ const LiveStock = () => {
       >
         {images.map(({ src, alt, label }, index) => (
           <SplideSlide key={index} className="flex flex-col w-full gap-4 mx-4 ">
-            <img src={src} alt={alt} className="lg:object-contain  md:w-[20rem]  object-cover" />
+            <img src={src} alt={alt} className="lg:object-contain  md:w-[15rem]  object-cover" />
             <div className="font-manrope w-full text-center  md:text-start text-[14px] md:text-[28px] font-semibold text-[#0F4400]">
               {label}
             </div>
