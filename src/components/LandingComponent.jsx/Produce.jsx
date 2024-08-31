@@ -12,6 +12,7 @@ import img7 from "../../images/veg/image 11.png";
 import img8 from "../../images/veg/image 19.png";
 import img9 from "../../images/veg/image 9.png";
 import img10 from "../../images/veg/image 2.png";
+import bger from "../../images/img.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,7 +32,7 @@ const Produce = () => {
       },
     });
 
-    // Animate the images
+    // Animate the images  
     const images = gsap.utils.toArray('#produce-container img');
     images.forEach((img, index) => {
       gsap.from(img, {
@@ -65,26 +66,68 @@ const Produce = () => {
   }, []);
 
   return (
-    <div id="produce-container" className="min-h-[800px] relative mt-10 w-full overflow-hidden">
-      <div className="px-20 w-full">
-        <div className="border-[1.6px] border-[#C5C5C5] mx-auto"></div>
+    <div className="s">
+      <img src={bger} alt="" className="mx-auto mt-14 mb-2 lg:hidden block w-full object-contain" />
+
+      <div
+        id="produce-container"
+        className="hidden lg:block  min-h-[800px] relative mt-10 w-full overflow-hidden"
+      >
+        <div className="px-20 w-full md:block hidden">
+          <div className="border-[1.6px] border-[#C5C5C5] mx-auto"></div>
+        </div>
+        <div className="top-1/2 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
+          <p
+            id="produce-text"
+            className="font-manrope font-semibold leading-[21.86px]  md:leading-[46.44px] text-center text-[16px] md:text-xl xl:text-[34px] text-[#004802] w-full max-w-[992px] mx-auto"
+          >
+            Our farm also produces an abundance of crops such as maize, yams,
+            beans, ginger, and other fresh vegetables.
+          </p>
+        </div>
+        <img src={img1} alt="Maize" className="absolute right-0 mt-10 maize" />
+        <img
+          src={img2}
+          alt="White vegetable"
+          className="absolute right-32 mt-14 mr-20 white"
+        />
+        <img
+          src={img3}
+          alt="Vegetable"
+          className="absolute right-[40rem] mt-32"
+        />
+        <img
+          src={img4}
+          alt="Vegetable"
+          className="absolute left-[20rem] mt-32"
+        />
+        <img src={img5} alt="Vegetable" className="absolute left-0 mt-36" />
+        <img
+          src={img6}
+          alt="Vegetable"
+          className="absolute left-[2rem] mt-[30rem]"
+        />
+        <img
+          src={img7}
+          alt="Vegetable"
+          className="absolute left-[20rem] mt-[32rem]"
+        />
+        <img
+          src={img8}
+          alt="Vegetable"
+          className="absolute left-[38rem] mt-[35rem]"
+        />
+        <img
+          src={img9}
+          alt="Vegetable"
+          className="absolute left-[61rem] mt-[34rem]"
+        />
+        <img
+          src={img10}
+          alt="Vegetable"
+          className="absolute right-0 mt-[24rem]"
+        />
       </div>
-      <div className="top-1/2 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
-        <p id="produce-text" className="font-manrope font-semibold text-center text-xl xl:text-[34px] text-[#004802] w-full max-w-[992px] mx-auto">
-          Our farm also produces an abundance of crops such as maize, yams,
-          beans, ginger, and other fresh vegetables.
-        </p>
-      </div>
-      <img src={img1} alt="Maize" className="absolute right-0 mt-10 maize" />
-      <img src={img2} alt="White vegetable" className="absolute right-32 mt-14 mr-20 white" />
-      <img src={img3} alt="Vegetable" className="absolute right-[40rem] mt-32" />
-      <img src={img4} alt="Vegetable" className="absolute left-[20rem] mt-32" />
-      <img src={img5} alt="Vegetable" className="absolute left-0 mt-36" />
-      <img src={img6} alt="Vegetable" className="absolute left-[2rem] mt-[30rem]" />
-      <img src={img7} alt="Vegetable" className="absolute left-[20rem] mt-[32rem]" />
-      <img src={img8} alt="Vegetable" className="absolute left-[38rem] mt-[35rem]" />
-      <img src={img9} alt="Vegetable" className="absolute left-[61rem] mt-[34rem]" />
-      <img src={img10} alt="Vegetable" className="absolute right-0 mt-[24rem]" />
     </div>
   );
 };
