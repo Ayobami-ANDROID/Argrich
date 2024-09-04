@@ -3,7 +3,7 @@ import profileImg from "../../images/Ellipse 3.png";
 import icon1 from "../../images/icons/icon1.svg";
 import icon2 from "../../images/icons/icon2.svg";
 import { useDispatch } from "react-redux";
-import { setIsOpen } from "../../features/deleteaccountmodal/deleteaccountslice";
+import { setIsOpen, setIsOpen1 } from "../../features/deleteaccountmodal/deleteaccountslice";
 const RightSide = () => {
   const dispatch = useDispatch();
   return (
@@ -22,7 +22,13 @@ const RightSide = () => {
               Profile Picture
             </p>
 
-            <div className="w-full max-w-[391px] ">
+            <div
+              onClick={() => {
+                dispatch(setIsOpen(true));
+                window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
+              }}
+              className="w-full max-w-[391px] cursor-pointer "
+            >
               <div className=" relative rounded-full  h-[100px] w-[100px]">
                 <img
                   src={profileImg}
@@ -191,7 +197,8 @@ const RightSide = () => {
               <textarea
                 name=""
                 id=""
-                className="max-w-[422px] w-full bg-[#F2F2F2] border border-[#D0D5DD] rounded-[5px] min-h-[177px]"
+                placeholder="Have anything to tell us?"
+                className="max-w-[422px] placeholder:text-[#ACACAC] font-medium placeholder:font-medium font-manrope text-[16px] focus:outline-none p-4  w-full bg-[#F2F2F2] border border-[#D0D5DD] rounded-[5px] min-h-[177px]"
               ></textarea>
             </div>
           </div>
@@ -215,8 +222,8 @@ const RightSide = () => {
             <div className="flex flex-col  max-w-[422px] gap-4 w-full">
               <button
                 onClick={() => {
-                  dispatch(setIsOpen(true));
-                  window.scrollTo({left:0,top:0,behavior:"smooth"})
+                  dispatch(setIsOpen1(true));
+                  window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
                 }}
                 className="px-[16px] py-[12px] bg-[#DF2E07] text-white w-fit self-end  rounded-[5px]  text-[16px]"
               >
