@@ -46,7 +46,7 @@ const Proceed = () => {
             </div>
             <div className="flex items-center mt-2 gap-x-2 font-medium text-[#950202] text-[16px]">
               <img src={bullet} alt="" />
-              <p className=" font-manrope">Log you out on all devices</p>
+              <p className=" font-manrope">Delete all of your account Information</p>
             </div>
             <div className="flex flex-col text-center mt-20 items-center">
               <p className="font-medium text-[16px] font-manrope">
