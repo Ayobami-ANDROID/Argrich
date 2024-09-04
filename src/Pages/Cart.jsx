@@ -64,7 +64,7 @@ const Cart = () => {
           <div className="flex items-center justify-between ">
             {" "}
             <p className="text-[24px] font-semibold">Subtotal:</p>
-            <p className="text-[#2A4F1A] text-[24px] font-semibold"> ₦{totalPrice}</p>
+            <p className="text-[#2A4F1A] text-[24px] font-semibold"> ₦{totalPrice.toLocaleString()}</p>
           </div>
           <div className="bg-[#C6C6C6] w-full h-[0.8px] "></div>
 

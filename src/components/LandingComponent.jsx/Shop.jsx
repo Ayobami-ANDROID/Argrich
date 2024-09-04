@@ -32,9 +32,13 @@ const Shop = () => {
             Shop our Online Store
           </p>
           <p className="font-manrope font-medium text-[14px] leading-[19.12px] md:text-[20px] max-w-[574px] md:leading-[27.32px]">
-            From farm-fresh eggs to tender meats and wholesome vegetables, we're committed to delivering the highest quality products to your table.
+            From farm-fresh eggs to tender meats and wholesome vegetables, we're
+            committed to delivering the highest quality products to your table.
           </p>
-          <Link to="/" className="text-white font-manrope font-semibold text-base rounded-lg bg-[#0F4400] px-[20px] py-[12px]">
+          <Link
+            to="/"
+            className="text-white font-manrope font-semibold text-base rounded-lg bg-[#0F4400] px-[20px] py-[12px]"
+          >
             Visit Store
           </Link>
         </div>
@@ -46,7 +50,10 @@ const Shop = () => {
               displayedProducts.map((product, index) => (
                 <LandingPageItem
                   key={product.id || index}
-                  image={product.image || "https://res.cloudinary.com/dpoxdw78e/image/upload/v1/media/products/Egg_jfbp3t"}
+                  image={
+                    product.image ||
+                    "https://res.cloudinary.com/dpoxdw78e/image/upload/v1/media/products/Egg_jfbp3t"
+                  }
                   name={product.name || "Product Name"}
                   price={product.price || "0"}
                 />
