@@ -3,10 +3,12 @@ import img1 from "../images/egg.png";
 import icon1 from "../images/chevron-right.svg";
 import { useParams,useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Item from "./Item";
 import Skeleton from "react-loading-skeleton";
 import {
   getSingleProduct,
   productReset,
+  getSearchProduct
 } from "../features/product/productSlice";
 import { postCart } from "../features/cart/cartSlice";
 
@@ -14,19 +16,29 @@ import { postCart } from "../features/cart/cartSlice";
 const GetProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate() 
-  const { isLoading, product } = useSelector((state) => state.product);
+  const { isLoading, product,products } = useSelector((state) => state.product);
+  const [cat,setCat]  = useState('')
   const { cart } = useSelector((state) => state.cart);
   let { id } = useParams();
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        await dispatch(getSingleProduct(id)).unwrap();
-      } catch (error) { }
+        const fetchedProduct = await dispatch(getSingleProduct(id)).unwrap();
+        
+        if (fetchedProduct?.category) {
+          // Dispatch the getSearchProduct action to search by category
+          await dispatch(getSearchProduct({ name: '', search: fetchedProduct.category })).unwrap();
+        }
+      } catch (error) {
+        // Handle error
+      }
     };
 
     fetchProduct();
-  }, []);
+  }, [dispatch,id]);
+
+  
 
 
   const addToCart = async () => {
@@ -73,6 +85,9 @@ const GetProduct = () => {
       </div>
     );
   }
+
+
+  const relatedProducts = products?.filter((item) => item.id !== product?.id);
   return (
     <div className="px-20 py-10 bg-[#F5F5F5] ">
 
@@ -160,6 +175,25 @@ const GetProduct = () => {
           </div>
         </div>
       </div>
+      {relatedProducts.length === 0 ? '' :(
+         <div className="mt-24">
+         <h1 className="font-[600] font-manrope text-[28px] mb-5">Similar Items You Might Like</h1>
+         <div className="">
+           <div className="flex overflow-x-scroll  gap-4 no-scrollbar justify-between py-4">
+             {relatedProducts.map((relate,index) => (
+               <Item
+               key={index}
+                 name={relate.name}
+                 price={relate.price}
+                 image={relate.image}
+                 id={relate.id}
+               />
+             ))}
+           </div>
+         </div>
+       </div>
+      )}
+   
     </div>
   );
 };
