@@ -133,8 +133,9 @@ const GetProduct = () => {
               {product?.name}
             </h1>
             <p className="text-[15px] mb-4">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout.
+              {product?.description}
+              {/* It is a long established fact that a reader will be distracted by
+              the readable content of a page when looking at its layout. */}
               {/* {product.des} */}
             </p>
             <h1 className="text-[25px] mb-4 foont-[500]"> ₦{product?.price}</h1>
