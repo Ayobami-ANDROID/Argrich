@@ -4,10 +4,9 @@ import searchicon from "../../images/search.svg";
 
 const Sidebar = () => {
   return (
-    <div className="md:w-64 xs:w-32 border-t border-r    pt-2 h-auto min-h-screen">
+    <div className="md:w-64 xs:w-32 border-t border-r hidden lg:block   pt-2 h-auto min-h-screen">
       <div className="flex flex-col items-center justify-center ">
         <h1 className="mb-4 font-manrope font-semibold text-[20px] leading-[27.32px] text-center">
-          {" "}
           Account Management
         </h1>
 
@@ -20,12 +19,12 @@ const Sidebar = () => {
               placeholder="Search"
               type="text "
               className=" outline-none placeholder:text-[#888888] placeholder:font-medium placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
-            ></input>
+            />
           </div>
         </div>
 
         <div className="flex flex-col gap-6 mt-16">
-          <div className="flex items-center">
+          <a href="#account" className="flex items-center">
             <svg
               className="mr-4"
               width="24"
@@ -49,8 +48,8 @@ const Sidebar = () => {
             <p className="font-semibold font-manrope text-[16px] leading-[21.86px]">
               Account Information
             </p>
-          </div>
-          <div className="flex items-center">
+          </a>
+          <a href="#help-center" className="flex items-center">
             <svg
               className="mr-4"
               width="24"
@@ -71,8 +70,8 @@ const Sidebar = () => {
             <p className="font-semibold font-manrope text-[16px] leading-[21.86px]">
               Help Center
             </p>
-          </div>
-          <div className="flex items-center">
+          </a>
+          <a href="#other" className="flex items-center">
             <svg
               className="mr-4 other"
               width="24"
@@ -91,9 +90,9 @@ const Sidebar = () => {
             </svg>
 
             <p className="font-semibold font-manrope text-[16px] leading-[21.86px]">
-            Other
+              Other
             </p>
-          </div>
+          </a>
         </div>
       </div>
     </div>
