@@ -33,7 +33,7 @@ const Cart = () => {
     <div className="px-10 bg-[#F5F5F5]  pt-10 pb-20 flex-1">
       <div className="flex gap-x-4">
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/homepage/")}
           className="text-[#101928] font-medium text-xs "
         >
           Home

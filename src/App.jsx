@@ -26,9 +26,9 @@ function App() {
       <ToastContainer position="top-center" autoClose={2000} />
 
       <Routes>
-        <Route path="/landing" element={<Landing />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/account" element={<Account/>} />
-        <Route path="/*" element={<MainPage />} />
+        <Route path="/homepage/*" element={<MainPage />} />
         <Route path="*" element={<NotFound pathname={"/"} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />

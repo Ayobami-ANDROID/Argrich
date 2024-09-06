@@ -30,7 +30,7 @@ const GetProductByCategory = () => {
 
             <div className="flex gap-x-4">
                 <button
-                    onClick={() => navigate("/")}
+                    onClick={() => navigate("/homepage/")}
                     className="text-[#101928] font-medium text-xs "
                 >
                     Home

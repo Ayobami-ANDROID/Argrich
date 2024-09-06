@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,64 +14,70 @@ import img9 from "../../images/veg/image 9.png";
 import img10 from "../../images/veg/image 2.png";
 import bger from "../../images/img.png";
 
-gsap.registerPlugin(ScrollTrigger);
-
 const Produce = () => {
-  useGSAP(() => {
-    // Animate the text
-    gsap.from("#produce-text", {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: "#produce-container",
-        start: "top 80%",
-        end: "top 20%",
-        scrub: 1,
-        toggleActions: "play none none reverse",
-      },
-    });
+  const containerRef = useRef(null);
 
-    // Animate the images  
-    const images = gsap.utils.toArray('#produce-container img');
-    images.forEach((img, index) => {
-      gsap.from(img, {
-        y: 100,
-        x: index % 2 === 0 ? -50 : 50,
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+  }, []);
+
+  useGSAP(() => {
+    if (typeof window !== "undefined") {
+      // Animate the text
+      gsap.from("#produce-text", {
+        y: 50,
         opacity: 0,
-        rotation: Math.random() * 20 - 10,
         duration: 1,
-        ease: "power2.out",
         scrollTrigger: {
           trigger: "#produce-container",
           start: "top 80%",
-          end: "bottom 20%",
+          end: "top 20%",
           scrub: 1,
           toggleActions: "play none none reverse",
         },
       });
-    });
 
-    // Parallax effect for images
-    gsap.to(images, {
-      y: (i) => -50 - i * 20,
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#produce-container",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-  }, []);
+      // Animate the images  
+      const images = gsap.utils.toArray('#produce-container img');
+      images.forEach((img, index) => {
+        gsap.from(img, {
+          y: 100,
+          x: index % 2 === 0 ? -50 : 50,
+          opacity: 0,
+          rotation: Math.random() * 20 - 10,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: "#produce-container",
+            start: "top 80%",
+            end: "bottom 20%",
+            scrub: 1,
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+
+      // Parallax effect for images
+      gsap.to(images, {
+        y: (i) => -50 - i * 20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#produce-container",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }
+  }, { scope: containerRef });
 
   return (
-    <div className="s">
+    <div className="s" ref={containerRef}>
       <img src={bger} alt="" className="mx-auto mt-14 mb-2 lg:hidden block w-full object-contain" />
 
       <div
         id="produce-container"
-        className="hidden lg:block  min-h-[800px] relative mt-10 w-full overflow-hidden"
+        className="hidden lg:block min-h-[800px] relative mt-10 w-full overflow-hidden"
       >
         <div className="px-20 w-full md:block hidden">
           <div className="border-[1.6px] border-[#C5C5C5] mx-auto"></div>
@@ -79,7 +85,7 @@ const Produce = () => {
         <div className="top-1/2 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
           <p
             id="produce-text"
-            className="font-manrope font-semibold leading-[21.86px]  md:leading-[46.44px] text-center text-[16px] md:text-xl xl:text-[34px] text-[#004802] w-full max-w-[992px] mx-auto"
+            className="font-manrope font-semibold leading-[21.86px] md:leading-[46.44px] text-center text-[16px] md:text-xl xl:text-[34px] text-[#004802] w-full max-w-[992px] mx-auto"
           >
             Our farm also produces an abundance of crops such as maize, yams,
             beans, ginger, and other fresh vegetables.
