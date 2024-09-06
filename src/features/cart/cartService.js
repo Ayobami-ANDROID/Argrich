@@ -13,12 +13,12 @@ const postCart = async (userData) =>{
 }
 
 const putCart = async (id,userData) => {
-    const response = await apiClient.put(`/products/cart/${id}/`,userData)
+    const response = await apiClient.patch(`/products/cart/${id}/`,userData)
     return response.data
 }
 
 const deleteCart = async(id) => {
-    const response = await apiClient.delete(`/products/cart/${id}`)
+    const response = await apiClient.delete(`/products/cart/${id}/`)
     return response.data
 }
 
