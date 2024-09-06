@@ -1,10 +1,13 @@
 import React from "react";
 import { HiArrowLongLeft } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import notfound from "../images/404 Error Page not Found with people connecting a plug-amico.png";
 // import obj from "../Images/landing-page/Vector 36.png";
 
 const NotFound = ({ pathname }) => {
+  const navigate = useNavigate()
+
+
   return (
     <section className="bg-[#fbf8f2] w-full h-screen flex flex-col justify-center items-cente text-center z-20">
       <div className="flex flex-col justify-center items-center md:relative">
@@ -29,13 +32,13 @@ const NotFound = ({ pathname }) => {
       {/* <h2 className="font-mono text-[2rem] md:text-[4rem] tracking-wider font-semibold">
         404!
       </h2> */}
-      <Link
-        to={pathname}
-        className="text-[#030940] text-[1.125rem] font-mono tracking-wider my-2 flex justify-center items-center gap-x-3"
+      <p
+        onClick={() => navigate(-1)}
+        className="text-[#030940] text-[1.125rem] font-mono cursor-pointer tracking-wider my-2 flex justify-center items-center gap-x-3"
       >
         <HiArrowLongLeft size={26} />
         Head Back
-      </Link>
+      </p>
     </section>
   );
 };

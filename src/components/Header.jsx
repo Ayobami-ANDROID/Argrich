@@ -77,7 +77,7 @@ const Header = () => {
       navigate('/')
     }
     else{
-      navigate(`/product/${value}`)
+      navigate(`/homepage/product/${value}`)
     }
     
   }
@@ -90,7 +90,7 @@ const Header = () => {
     <div className="bg-[rgb(255,255,255)] lg:px-12 px-2 py-4 w-full">
       <div className="flex items-center   w-full">
         <div className="flex w-full">
-          <Link to="/landing" className="flex items-center mr-4">
+          <Link to="/" className="flex items-center mr-4">
             <img
               src={Logo}
               className="lg:w-32 w-32 lg:mr-8  object-contain"
@@ -117,7 +117,7 @@ const Header = () => {
               <div className="absolute top-[100%] left-[10%] z-[100] group-focus:block">
                 <ul className="  rounded-box z-[1] lg:w-[30rem] rounded-[5px] w-[16rem] p-2 grid lg:grid-cols-3 grid-cols-1 gap-4 bg-[#fff]">
                   {category.map((item, index) => (
-                    <Link to={`/category/${item.category}`}
+                    <Link to={`/homepage/category/${item.category}`}
                       key={index}
                       className="p-2 bg-[#D9D9D9] rounded-[5px] text-[#000000] cursor-pointer"
                       onClick={() => CartSearch(item.category) }
@@ -151,7 +151,7 @@ const Header = () => {
           </div>
 
           <Link
-            to={"/cart"}
+            to={"/homepage/cart"}
             className="lg:flex hidden items-center text-[#000]  mx-2 cursor-pointer relative "
           >
             <div className="mr-2">

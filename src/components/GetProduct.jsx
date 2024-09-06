@@ -93,7 +93,7 @@ const GetProduct = () => {
 
       <div className="flex gap-x-4 mb-5">
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/homepage/")}
           className="text-[#101928] font-medium text-xs "
         >
           Home

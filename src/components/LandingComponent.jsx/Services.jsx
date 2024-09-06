@@ -1,4 +1,4 @@
-import React from "react";
+import {useRef,useLayoutEffect} from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,55 +8,64 @@ import img3 from "../../images/services/img3.png";
 import img4 from "../../images/services/img4.png";
 import img5 from "../../images/services/img5.png";
 
-gsap.registerPlugin(ScrollTrigger);
+
 
 const Services = () => {
-  useGSAP(() => {
-    const sections = gsap.utils.toArray('.service-section');
+  const containerRef = useRef(null);
 
-    sections.forEach((section, index) => {
-      const direction = index % 2 === 0 ? -1 : 1;
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          end: "top 20%",
-          scrub: 1,
-          toggleActions: "play none none reverse",
-        }
-      });
-
-      tl.from(section, {
-        x: `${100 * direction}%`,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out"
-      });
-
-      // Animate the text separately
-      tl.from(section.querySelectorAll('.animate-text'), {
-        y: 30,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 0.5,
-        ease: "power2.out"
-      }, "-=0.5");
-
-      // Animate the images
-      tl.from(section.querySelectorAll('img'), {
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.5,
-        ease: "back.out(1.7)",
-        stagger: 0.2
-      }, "-=0.5");
-    });
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
   }, []);
+  useGSAP(() => {
+    if (typeof window !== "undefined") {
+      const sections = gsap.utils.toArray('.service-section');
+
+      sections.forEach((section, index) => {
+        const direction = index % 2 === 0 ? -1 : 1;
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            end: "top 20%",
+            scrub: 1,
+            toggleActions: "play none none reverse",
+          }
+        });
+
+        tl.from(section, {
+          x: `${100 * direction}%`,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.out"
+        });
+
+        // Animate the text separately
+        tl.from(section.querySelectorAll('.animate-text'), {
+          y: 30,
+          opacity: 0,
+          stagger: 0.2,
+          duration: 0.5,
+          ease: "power2.out"
+        }, "-=0.5");
+
+        // Animate the images
+        tl.from(section.querySelectorAll('img'), {
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.5,
+          ease: "back.out(1.7)",
+          stagger: 0.2
+        }, "-=0.5");
+      });
+    }
+  }, { scope: containerRef });
 
   return (
     <div
       className="w-full flex flex-col justify-center items-center mt-20 overflow-hidden  px-4 "
       id="content"
+      ref={containerRef}
+
     >
       <div className="flex lg:flex-row flex-col lg:px-0 gap-4 items-center w-full justify-center">
         <div className="service-section bg-[#FF951F] min-h-[300px] py-[12px] px-[20px] rounded-lg relative w-full lg:max-w-[679px]">

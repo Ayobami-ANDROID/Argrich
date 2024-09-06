@@ -136,7 +136,7 @@ const Hero = () => {
                 your table.
               </p>
               <Link
-                to="/"
+                to="/homepage/"
                 className="bg-[#0F4400]  px-[20px] gap-x-4  py-[12px]  mx-auto  text-white rounded-lg shadow-[0px_2px_12.8px_0px_rgba(0,0,0,0.25)] font-manrope text-[14px] md:text-[18px] font-semibold flex item items-center"
               >
                 <img src={bag} alt="" /> Visit our Store
