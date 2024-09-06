@@ -3,27 +3,41 @@ import { useSelector, useDispatch } from "react-redux";
 import minus from "../images/minus.svg";
 import plus from "../images/plus.svg";
 import deleteimg from "../images/delete.svg";
-import { deleteCart } from "../features/cart/cartSlice";
+import { deleteCart, getCart, putCart } from "../features/cart/cartSlice";
 
 const CartProduct = ({ product }) => {
-  const dispatch = useDispatch(); // Correct usage of useDispatch
+  const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
   const [count, setCount] = useState(product?.quantity);
 
   const deleteItem = async (id) => {
     try {
       await dispatch(deleteCart(id)).unwrap();
+      await dispatch(getCart()).unwrap();
     } catch (error) {
       console.error("Error deleting item:", error);
     }
   };
 
+  const updateCartItem = async (newQuantity) => {
+    try {
+      await dispatch(putCart({id: product.product.id, quantity: newQuantity })).unwrap();
+      await dispatch(getCart()).unwrap();
+    } catch (error) {
+      console.error("Error updating item quantity:", error);
+    }
+  };
+
   const handleIncrement = () => {
-    setCount(prevCount => prevCount + 1);
+    const newCount = count + 1;
+    setCount(newCount);
+    updateCartItem(newCount);
   };
 
   const handleDecrement = () => {
-    setCount(prevCount => Math.max(prevCount - 1, 1));
+    const newCount = Math.max(count - 1, 1);
+    setCount(newCount);
+    updateCartItem(newCount);
   };
 
   return (
@@ -59,7 +73,7 @@ const CartProduct = ({ product }) => {
           </div>
         </div>
         <div className="flex lg:w-fit justify-between lg:flex-col lg:items-end lg:h-[136px] flex-1">
-          <p className="text-2xl font-semibold">₦{product?.product?.price.toLocaleString()}</p>
+          <p className="text-2xl font-semibold">₦{product?.product?.price}</p>
           <button className="lg:self-end" onClick={() => deleteItem(product?.product?.id)}>
             <img src={deleteimg} alt="Delete" />
           </button>
