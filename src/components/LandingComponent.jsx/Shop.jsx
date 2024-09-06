@@ -36,7 +36,7 @@ const Shop = () => {
             committed to delivering the highest quality products to your table.
           </p>
           <Link
-            to="/"
+            to="/homepage/"
             className="text-white font-manrope font-semibold text-base rounded-lg bg-[#0F4400] px-[20px] py-[12px]"
           >
             Visit Store
