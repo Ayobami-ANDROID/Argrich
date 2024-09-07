@@ -7,49 +7,49 @@ import img from "../../images/potted_plant.svg";
 gsap.registerPlugin(ScrollTrigger);
 
 const Farming = () => {
-  // useGSAP(() => {
-  //   const tl = gsap.timeline({
-  //     scrollTrigger: {
-  //       trigger: "#farming-container",
-  //       start: "top 80%",
-  //       end: "bottom 20%",
-  //       scrub: 1,
-  //       toggleActions: "play none none reverse",
-  //       // markers: true, // Uncomment for debugging
-  //     },
-  //   });
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#farming-container",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: 1,
+        toggleActions: "play none none reverse",
+        // markers: true, // Uncomment for debugging
+      },
+    });
 
-  //   tl.from("#icon-container", {
-  //     scale: 0.5,
-  //     opacity: 0,
-  //     duration: 0.5,
-  //     ease: "back.out(1.7)",
-  //   })
-  //     .from("#title", {
-  //       y: 50,
-  //       opacity: 0,
-  //       duration: 0.5,
-  //       ease: "power2.out",
-  //     })
-  //     .from("#description", {
-  //       y: 30,
-  //       opacity: 0,
-  //       duration: 0.5,
-  //       ease: "power2.out",
-  //     });
+    tl.from("#icon-container", {
+      scale: 0.5,
+      opacity: 0,
+      duration: 0.5,
+      ease: "back.out(1.7)",
+    })
+      .from("#title", {
+        y: 50,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      })
+      .from("#description", {
+        y: 30,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      });
 
-  //   // Subtle parallax effect
-  //   gsap.to("#icon-container", {
-  //     y: -30,
-  //     ease: "none",
-  //     scrollTrigger: {
-  //       trigger: "#farming-container",
-  //       start: "top bottom",
-  //       end: "bottom top",
-  //       scrub: true,
-  //     },
-  //   });
-  // }, []);
+    // Subtle parallax effect
+    gsap.to("#icon-container", {
+      y: -30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#farming-container",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }, []);
 
   return (
     <div>
