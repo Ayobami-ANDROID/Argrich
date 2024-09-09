@@ -40,16 +40,16 @@ export const postCart = createAsyncThunk(
 );
 
 export const putCart = createAsyncThunk(
-  "put/products/cart/",
-  async ({ id, userData }, thunkAPI) => {
+  "put/products/cart",
+  async ({ id, quantity }, thunkAPI) => {
     try {
-      const response = await cartService.putCart(id, userData);
-      toast.success("updated Successfully!");
+      const response = await cartService.putCart(id, { quantity });
+      toast.success("Cart updated successfully!");
       return response;
     } catch (error) {
-      toast.error(error.response?.data?.detail  || "An error occurred");
+      toast.error(error.response?.data?.detail || "An error occurred while updating the cart");
       return thunkAPI.rejectWithValue(
-        error.response?.data?.message || "An error occurred"
+        error.response?.data?.message || "An error occurred while updating the cart"
       );
     }
   }
@@ -107,12 +107,11 @@ const cartSlice = createSlice({
       })
       .addCase(putCart.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.cart = action.payload;
         console.log("updated cart", action.payload);
       })
       .addCase(deleteCart.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.cart = action.payload;
+      
         console.log("deleted Carts", action.payload);
       });
   },

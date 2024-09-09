@@ -34,7 +34,7 @@ const Login = () => {
       dispatch(authReset());
       try {
         await dispatch(login(values)).unwrap();
-        navigate("/");
+        navigate("/homepage/");
       } catch (error) {
         console.error("Registration failed:", error);
       }

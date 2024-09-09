@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/splide/dist/css/splide.min.css";
@@ -24,6 +25,8 @@ const images = [
 ];
 
 const LiveStock = () => {
+
+  const navigate = useNavigate()
   return (
     <div className=" mt-20 md:mt-10">
       <div className=" lg:pl-20 text-center lg:text-start font-manrope font-semibold text-[#004802] leading-[27.32px] md:leading-[46.44px] text-[20px] md:text-[34px] w-full">
@@ -60,7 +63,7 @@ const LiveStock = () => {
       </Splide>
 
       <div className="w-full mx-auto px-20 mt-20 lg:block hidden">
-        <button className="shadow-[9px_0px_12.8px_rgba(0,_0,_0,_0.25)] text-white rounded-lg bg-[#0F4400] px-[20px] py-[12px]">
+        <button onClick={() => navigate('/homepage/')} className="shadow-[9px_0px_12.8px_rgba(0,_0,_0,_0.25)] text-white rounded-lg bg-[#0F4400] px-[20px] py-[12px]">
           Argrich Store
         </button>
       </div>

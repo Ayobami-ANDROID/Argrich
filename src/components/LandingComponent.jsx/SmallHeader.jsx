@@ -8,7 +8,7 @@ const SmallHeader = () => {
     <div className="px-4 mt-8 mb-5 md:hidden">
       {" "}
       <div className="flex w-full justify-between items-center ">
-        <Link to="/landing" className="">
+        <Link to="/" className="">
           <img src={Logo} className="w-32 object-contain" />
         </Link>
         <div className="flex gap-4 items-center">

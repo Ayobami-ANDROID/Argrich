@@ -15,11 +15,21 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SmallHeader from "./SmallHeader";
 gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
+  const containerRef = useRef(null);
+
   useGSAP(() => {
+    const container = containerRef.current;
+
     gsap.to("#text", {
       opacity: 1,
       duration: 2,
       stagger: 1,
+      scrollTrigger: {
+        trigger: container,
+        start: "top 80%",
+        end: "top 20%",
+        toggleActions: "play none none reverse"
+      }
     });
 
     gsap.fromTo(
@@ -27,60 +37,78 @@ const Hero = () => {
       {
         x: "-100%",
         opacity: 0,
-        duration: 2,
       },
       {
         x: 0,
         opacity: 1,
         duration: 2,
+        scrollTrigger: {
+          trigger: container,
+          start: "top 70%",
+          end: "top 20%",
+          toggleActions: "play none none reverse"
+        }
       }
     );
+
     gsap.fromTo(
       "#pepper",
       {
         y: "100%",
         opacity: 0,
-        duration: 2,
       },
       {
         y: 0,
         opacity: 1,
         duration: 2,
+        scrollTrigger: {
+          trigger: container,
+          start: "top 70%",
+          end: "top 20%",
+          toggleActions: "play none none reverse"
+        }
       }
-    );
-    gsap.from(
-      "#corn2",
-      {
-        y: "100%",
-        opacity: 0,
-        duration: 2,
-      },
-     
     );
 
-    gsap.from(
-      "#corn",
-      {
-        x: "100%",
-        opacity: 0,
-        duration: 2,
+    gsap.from("#corn2", {
+      y: "100%",
+      opacity: 0,
+      duration: 2,
+      scrollTrigger: {
+        trigger: container,
+        start: "top 70%",
+        end: "top 20%",
+        toggleActions: "play none none reverse"
       }
-      //  {
-      //   y:0,
-      //   opacity:1,
-      //   duration:2
-      //  }
-    );
+    });
+
+    gsap.from("#corn", {
+      x: "100%",
+      opacity: 0,
+      duration: 2,
+      scrollTrigger: {
+        trigger: container,
+        start: "top 70%",
+        end: "top 20%",
+        toggleActions: "play none none reverse"
+      }
+    });
 
     gsap.from("#heroimg", {
       y: "100%",
       opacity: 0,
       duration: 3,
       ease: "power1.in",
+      scrollTrigger: {
+        trigger: container,
+        start: "top 50%",
+        end: "top 20%",
+        toggleActions: "play none none reverse"
+      }
     });
   }, []);
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden" ref={containerRef}>
       <SmallHeader />
       <div className="px-4">
         <div className="relative">
@@ -136,7 +164,7 @@ const Hero = () => {
                 your table.
               </p>
               <Link
-                to="/"
+                to="/homepage/"
                 className="bg-[#0F4400]  px-[20px] gap-x-4  py-[12px]  mx-auto  text-white rounded-lg shadow-[0px_2px_12.8px_0px_rgba(0,0,0,0.25)] font-manrope text-[14px] md:text-[18px] font-semibold flex item items-center"
               >
                 <img src={bag} alt="" /> Visit our Store
