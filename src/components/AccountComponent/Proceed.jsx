@@ -1,9 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setIsOpen1, setIsOpen2 } from "../../features/deleteaccountmodal/deleteaccountslice";
 import close from "../../images/icons/close.svg";
 import bullet from "../../images/icons/bullet.svg";
 import proceed from "../../images/icons/proceed.svg";
+import defaultdp from "../../images/defaultdp.jpg";
 
 const Proceed = () => {
   const dispatch = useDispatch();

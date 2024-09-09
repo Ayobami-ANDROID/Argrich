@@ -11,7 +11,9 @@ import ActualDelete from "../components/AccountComponent/ActualDelete";
 import DeleteSuccess from "../components/AccountComponent/DeleteSuccess";
 
 const Account = () => {
-  const { isOpen,isOpen1,isOpen2, isOpen3 } = useSelector((state) => state.deleteAccount);
+  const { isOpen, isOpen1, isOpen2, isOpen3 } = useSelector(
+    (state) => state.deleteAccount
+  );
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -19,11 +21,9 @@ const Account = () => {
       {isOpen1 && <Proceed />}
       {isOpen2 && <ActualDelete />}
       {isOpen3 && <DeleteSuccess />}
-      {/* {isOpen && <DeleteAccountModal />} */}
+
       <Advert />
       <Header />
-
-      <div className=""> {isOpen}</div>
 
       <div className="flex flex-grow">
         <Sidebar />

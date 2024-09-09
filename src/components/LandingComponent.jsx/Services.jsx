@@ -98,7 +98,7 @@ const Services = () => {
         </div>
       </div>
       <div className="flex lg:flex-row flex-col  gap-4 items-center w-full justify-center mt-6">
-        <div className="service-section bg-[#6CDE40] min-h-[300px] py-[12px] px-[20px] rounded-lg relative w-full lg:max-w-[300px]">
+        <div className=" bg-[#6CDE40] min-h-[300px] py-[12px] px-[20px] rounded-lg relative w-full lg:max-w-[300px]">
           <p className="animate-text font-manrope font-bold text-[28px] text-white">
             Fast Delivery, Fresh Flavor
           </p>

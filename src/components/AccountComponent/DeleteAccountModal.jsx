@@ -3,11 +3,13 @@ import icondelete from "../../images/icons/icon3.svg";
 import iconupload from "../../images/icons/icon4.svg";
 import close from "../../images/icons/close.svg";
 import dp from "../../images/dp.jpeg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setIsOpen, setIsOpen1 } from "../../features/deleteaccountmodal/deleteaccountslice";
+import defaultdp from "../../images/defaultdp.jpg";
 
 const DeleteAccountModal = () => {
   const dispatch = useDispatch();
+  const { user, isLoading } = useSelector((state) => state.account);
   return (
     <div>
       <div
@@ -36,7 +38,7 @@ const DeleteAccountModal = () => {
             </button>
           </div>{" "}
           <img
-            src={dp}
+                   src={user?.profilePicture ?? defaultdp}
             alt=""
             className="rounded-full h-[170px] w-[170px] object-cover mx-auto mt-4"
           />

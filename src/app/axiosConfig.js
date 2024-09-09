@@ -2,28 +2,23 @@ import axios from "axios";
 import { store } from "./storeInjector";
 import { setToken } from "../features/auth/authSlice";
 
-
 const apiClient = axios.create({
   baseURL: "https://agrich.onrender.com/api/v1/",
   headers: {
     "Content-Type": "application/json",
-    
   },
 });
-
-
 
 // Request interceptor to add authorization header
 apiClient.interceptors.request.use((config) => {
   const token = store.getState().auth.token;
+  console.log("intereqiuest", store.getState().auth.token);
+
   if (token) {
     config.headers.Authorization = `Bearer ${token.access}`;
   }
   return config;
 });
-
-
-
 
 // Response interceptor to handle expired token
 apiClient.interceptors.response.use(
@@ -37,6 +32,7 @@ apiClient.interceptors.response.use(
 
       try {
         const refreshToken = store.getState().auth.token.refresh;
+        console.log("interesponse", refreshToken);
         if (refreshToken) {
           // Make a request to refresh the token
           const { data } = await axios.post(
