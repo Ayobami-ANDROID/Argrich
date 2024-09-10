@@ -22,9 +22,25 @@ export const getUserProfile = createAsyncThunk(
 export const editUserProfile = createAsyncThunk(
   "accounts/editUserProfile/",
   async (userData, thunkAPI) => {
-    secureLocalStorage.clear();
     try {
       const response = await accountService.editProfile(userData);
+      // toast.success("Success");
+      return response;
+    } catch (error) {
+      console.log(error.response.data.error);
+      // toast.error(error.response?.data.error || "An error occurred");
+      return thunkAPI.rejectWithValue(
+        error.response?.data || "An error occurred"
+      );
+    }
+  }
+);
+
+export const deleteUserProfile = createAsyncThunk(
+  "accounts/deleteUserProfile/",
+  async (_, thunkAPI) => {
+    try {
+      const response = await accountService.deleteProfile();
       // toast.success("Success");
       return response;
     } catch (error) {
@@ -64,6 +80,15 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(editUserProfile.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteUserProfile.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteUserProfile.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(deleteUserProfile.rejected, (state, action) => {
         state.isLoading = false;
       });
   },
