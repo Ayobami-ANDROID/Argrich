@@ -9,7 +9,7 @@ const NotFound = ({ pathname }) => {
 
 
   return (
-    <section className="bg-[#fbf8f2] w-full h-screen flex flex-col justify-center items-cente text-center z-20">
+    <section className="bg-white w-full h-screen flex flex-col justify-center items-cente text-center z-20">
       <div className="flex flex-col justify-center items-center md:relative">
         <img
           width={550}

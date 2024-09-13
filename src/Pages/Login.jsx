@@ -103,7 +103,7 @@ const Login = () => {
               <div className="flex justify-between">
                 <div></div>
                 <div>
-                  <p className="text-[#008A2F]">Forgot Password?</p>
+                  <Link to={"/changepassword/reset-password"} className="text-[#008A2F]">Forgot Password?</Link>
                 </div>
               </div>
             </div>
@@ -132,4 +132,3 @@ const Login = () => {
 };
 
 export default Login;
- 
