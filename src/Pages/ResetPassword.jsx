@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 const ResetPassword = () => {
   const navigate = useNavigate();
   return (
-    <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full mt-16">
+    <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full ">
       <Link to={"/login"} className="flex items-center gap-2">
         <img src={backicon} alt="" className="object-contain" />
         <p className="font-manrope font-semibold text-[16px] text-[#008A2F]">

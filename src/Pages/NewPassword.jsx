@@ -7,7 +7,7 @@ import password1 from "../images/icons/password1.svg";
 const NewPassword = () => {
   const navigate = useNavigate();
   return (
-    <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full mt-16">
+    <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full ">
       <div className="bg-white  rounded-[12px] w-full p-5 mt-2 shadow-[4px_4px_13.4px_0px_rgba(152,_152,_152,_0.25)]">
         <div className="p-[10px] bg-[#E0FFE5] flex items-center justify-center w-fit">
           <img src={password1} alt="" />

@@ -93,7 +93,7 @@ const ConfirmOtp = () => {
   };
 
   return (
-    <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full mt-16">
+    <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full ">
       <Link
         to={"/changepassword/reset-password"}
         className="flex items-center gap-2"
