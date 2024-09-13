@@ -11,9 +11,17 @@ const editProfile = async (userData) => {
   return response.data;
 };
 
+const deleteProfile = async () => {
+  const response = await apiClient.delete("accounts/edit/");
+  return response.data;
+};
+
+
+
 const accountService = {
   getProfile,
   editProfile,
+  deleteProfile
 };
 
 export default accountService;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import profileImg from "../../images/Ellipse 3.png";
 import defaultdp from "../../images/defaultdp.jpg";
 import icon1 from "../../images/icons/icon1.svg";
@@ -24,9 +24,12 @@ const RightSide = () => {
         Account & settings
       </h1>
 
-      <div className=" w-full max-w-[788px] lg:pr-4 px-4 lg:pl-10 ">
+      <div className=" w-full max-w-[788px] md:mx-auto lg:mx-0 lg:pr-4 px-4 md:px-10 lg:pl-10 ">
         <div className="flex flex-col col-span-2 p-8 px-0 gap-4 lg:pr-4">
-          <h1 id="account" className="text-[#000000] leading-[27.32px] font-manrope font-semibold text-[20px]">
+          <h1
+            id="account"
+            className="text-[#000000] leading-[27.32px] font-manrope font-semibold text-[20px]"
+          >
             Profile Information
           </h1>
           <div className="flex  flex-col justify-center  gap-4 items-center lg:items-start lg:flex-row   lg:justify-between mt-8">
@@ -42,6 +45,7 @@ const RightSide = () => {
               className="w-full max-w-[391px] cursor-pointer self-center mx-auto lg:mx-0   flex items-center justify-center lg:justify-start"
             >
               <div className=" relative rounded-full  h-[100px] w-[100px]">
+                
                 <img
                   src={user?.profilePicture ?? defaultdp}
                   className=" object-contain h-[100px] w-[100px] rounded-full "
@@ -73,8 +77,8 @@ const RightSide = () => {
               Name and Email
             </p>
 
-            <div className="w-full max-w-[400px]  flex flex-col gap-4">
-              <div className="w-full">
+            <div className="w-full lg:max-w-[400px]   flex flex-col gap-4">
+              <div className="w-full flex flex-col md:gap-1">
                 {" "}
                 <label
                   htmlFor=""
@@ -86,10 +90,10 @@ const RightSide = () => {
                   type="text"
                   value={user?.name}
                   placeholder="James  Etta"
-                  className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                  className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
                 />
               </div>
-              <div className="w-full">
+              <div className="w-full  flex flex-col  md:gap-1 ">
                 {" "}
                 <label
                   htmlFor=""
@@ -101,17 +105,19 @@ const RightSide = () => {
                   type="email"
                   value={user?.email}
                   placeholder="jamesetta@example.com"
-                  className=" font-medium p-4 rounded-[5px] placeholder:font-medium placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
-                />
+                  className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                  />
               </div>
             </div>
           </div>
           <div className="flex flex-col justify-center items-start  lg:flex-row lg:justify-between mt-4 lg:mt-8">
-            <p className="text-[16px] font-[500] font-manrope mb-4 lg:mb-0">Password</p>
+            <p className="text-[16px] font-[500] font-manrope mb-4 lg:mb-0">
+              Password
+            </p>
 
-            <div className="w-full max-w-[400px]  flex flex-col gap-4">
-              <div className="flex flex-col">
-                <div className="w-full">
+            <div className="w-full lg:max-w-[400px]  flex flex-col gap-4">
+              <div className="flex flex-col w-full">
+                <div className="w-full ">
                   {" "}
                   <label
                     htmlFor=""
@@ -122,7 +128,7 @@ const RightSide = () => {
                   <input
                     type="text"
                     placeholder="••••••••••••"
-                    className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                    className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
                   />
                 </div>
 
@@ -132,13 +138,13 @@ const RightSide = () => {
               </div>
             </div>
           </div>
-          <div  className="flex flex-col justify-center items-start  lg:flex-row lg:justify-between mt-4 lg:mt-8">
+          <div className="flex flex-col justify-center items-start  lg:flex-row lg:justify-between mt-4 lg:mt-8">
             <p className="text-[16px] font-[500] font-manrope mb-4 lg:mb-0">
               Delivery Information
             </p>
 
-            <div className="w-full max-w-[400px]  flex flex-col gap-4">
-              <div className="w-full">
+            <div className="w-full lg:max-w-[400px]  flex flex-col gap-4">
+              <div className="w-full ">
                 {" "}
                 <label
                   htmlFor=""
@@ -149,7 +155,7 @@ const RightSide = () => {
                 <input
                   type="text"
                   value={user?.address}
-                  className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none  border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                  className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none  border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
                 />
               </div>
               <div className="flex items-center gap-x-4">
@@ -187,7 +193,10 @@ const RightSide = () => {
 
         <div className=" h-px bg-[#C6C6C6] w-full mt-4"></div>
 
-        <div id="help-center" className="mt-10 font-manrope text-[16px] font-medium">
+        <div
+          id="help-center"
+          className="mt-10 font-manrope text-[16px] font-medium"
+        >
           <p className="text-[20px]  font-manrope font-semibold leading-[27.32px]">
             Help Center
           </p>

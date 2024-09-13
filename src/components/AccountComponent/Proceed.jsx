@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsOpen1, setIsOpen2 } from "../../features/deleteaccountmodal/deleteaccountslice";
+import {
+  setIsOpen1,
+  setIsOpen2,
+} from "../../features/deleteaccountmodal/deleteaccountslice";
 import close from "../../images/icons/close.svg";
 import bullet from "../../images/icons/bullet.svg";
 import proceed from "../../images/icons/proceed.svg";
@@ -8,6 +11,7 @@ import defaultdp from "../../images/defaultdp.jpg";
 
 const Proceed = () => {
   const dispatch = useDispatch();
+ 
   return (
     <div>
       <div
@@ -47,17 +51,21 @@ const Proceed = () => {
             </div>
             <div className="flex items-center mt-2 gap-x-2 font-medium text-[#950202] text-[16px]">
               <img src={bullet} alt="" />
-              <p className=" font-manrope">Delete all of your account Information</p>
+              <p className=" font-manrope">
+                Delete all of your account Information
+              </p>
             </div>
             <div className="flex flex-col text-center mt-20 items-center">
               <p className="font-medium text-[16px] font-manrope">
                 Are you sure you want to proceed?
               </p>
               <button
-              onClick={() => {
-                dispatch(setIsOpen1(false));
-                dispatch(setIsOpen2(true));
-              }} className="flex  font-manrope gap-3 mt-4 max-w-[181px] w-full justify-center rounded-lg items-center py-[8px] px-[16px]  bg-[#950202] text-white">
+                onClick={() => {
+                  dispatch(setIsOpen1(false));
+                  dispatch(setIsOpen2(true));
+                }}
+                className="flex  font-manrope gap-3 mt-4 max-w-[181px] w-full justify-center rounded-lg items-center py-[8px] px-[16px]  bg-[#950202] text-white"
+              >
                 Proceed <img src={proceed} alt="" />
               </button>
             </div>

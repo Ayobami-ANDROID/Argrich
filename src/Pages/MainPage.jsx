@@ -22,8 +22,6 @@ const MainPage = () => {
     <div className="flex flex-col min-h-screen bg-[#F5F5F5]">
       <Advert />
       <Header />
-   
-        {" "}
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/product/:searchQuery" element={<GetProductBySearch/>}></Route>
@@ -32,7 +30,6 @@ const MainPage = () => {
           <Route path="/cart" element={<Cart />}></Route>
           <Route path="*" element={<NotFound pathname={"/"} />}></Route>
         </Routes>
-      
       <Footer />
     </div>
   );
