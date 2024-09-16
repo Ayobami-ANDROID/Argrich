@@ -3,9 +3,30 @@ import { Link, useNavigate } from "react-router-dom";
 import backicon from "../images/icons/back.svg";
 import lock from "../images/icons/lock.svg";
 import password1 from "../images/icons/password1.svg";
+import { useFormik } from "formik";
+import { requestPasswordConfirm } from "../features/auth/authSlice";
+import { changePasswordValidate, resetPasswordValidate } from "../../Services";
+import InputField from "../components/InputField";
+import { useDispatch } from "react-redux";
 
 const NewPassword = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues: {
+      password: "",
+      confirm_Password: "",
+    },
+    validationSchema: changePasswordValidate,
+    onSubmit: async (values) => {
+      try {
+        await dispatch(requestPasswordConfirm(values)).unwrap();
+        navigate("/changepassword/success");
+      } catch (error) {
+        console.error("Registration failed:", error);
+      }
+    },
+  });
   return (
     <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full ">
       <div className="bg-white  rounded-[12px] w-full p-5 mt-2 shadow-[4px_4px_13.4px_0px_rgba(152,_152,_152,_0.25)]">
@@ -19,36 +40,36 @@ const NewPassword = () => {
           Must be at least 8 characters
         </p>
 
-        <div className="flex flex-col mt-7 ">
-          <div className="flex flex-col">
-            <label htmlFor="" className="font-manrope text-[14px]  font-medium">
-              New Password
-            </label>
-            <input
-              type="password"
-              name=""
-              id=""
-              className="border px-4 focus:outline-none font-manrope   border-[#D0D5DD] rounded-[5px] min-h-[38px]"
-            />
-          </div>
-          <div className="flex flex-col mt-4">
-            <label htmlFor="" className="font-manrope text-[14px]  font-medium">
-            Confirm Password
-            </label>
-            <input
-              type="password"
-              name=""
-              id=""
-              className="border px-4 focus:outline-none font-manrope   border-[#D0D5DD] rounded-[5px] min-h-[38px]"
-            />
-          </div>
+        <form onSubmit={formik.handleSubmit} className="flex flex-col mt-7  ">
+          <InputField
+            label={`New Password`}
+            name={`password`}
+            type={"password"}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={formik.touched.password && formik.errors.password}
+            errorText={formik.errors.password}
+          />
+          <div className="mt-2"></div>
+          <InputField
+            label={`Confirm Password`}
+            name={`confirm_Password`}
+            type={"password"}
+            value={formik.values.confirm_Password}
+            onChange={formik.handleChange}
+            error={
+              formik.touched.confirm_Password && formik.errors.confirm_Password
+            }
+            errorText={formik.errors.confirm_Password}
+          />
+
           <button
-            onClick={() => navigate("/changepassword/success")}
+            type="submit"
             className="min-h-[46px] bg-[#008A2F] rounded-lg mt-8 font-manrope font-semibold text-[16px] text-white"
           >
-           Update Password
+            Update Password
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

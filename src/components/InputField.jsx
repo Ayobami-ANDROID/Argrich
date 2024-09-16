@@ -19,7 +19,7 @@ const InputField = ({
   }) => {
   return (
     <div className="flex flex-col w-full mb-2">
-    <label htmlFor="" className="text-[#344054]">
+    <label htmlFor="" className=" font-manrope text-[14px] font-medium">
       {label}
     </label>
 
@@ -28,7 +28,7 @@ const InputField = ({
       placeholder={placeHolder}
       className={`border ${
         error ? "border-red-500" : "border"
-      } ${className}  rounded-[5px]  border-[#D0D5DD] h-[46px] border w-full pl-4 text-[#11233D] bg-[#fff] text-md font-normal placeholder:font-normal outline-none ${
+      } ${className}  rounded-[5px]  border-[#D0D5DD] min-h-[38px] border w-full pl-4 text-[#11233D] bg-[#fff] text-md font-normal placeholder:font-normal outline-none ${
         InputStyle && InputStyle.className
       }`}
       style={InputStyle && InputStyle.style}

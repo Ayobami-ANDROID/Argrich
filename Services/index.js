@@ -14,7 +14,7 @@ export const SignUpValidate = yup.object().shape({
   Gender: yup.string().required("required"),
   phoneNumber: yup
     .string()
-    .max(12,"can't contain more than 10 characters")
+    .max(12, "can't contain more than 10 characters")
     .required("required"),
   password: yup
     .string()
@@ -30,11 +30,29 @@ export const SignUpValidate = yup.object().shape({
     .required("required"),
 });
 
-
 export const signinValidate = yup.object().shape({
-    email: yup.string().email("enter valid email").required("required"),
-    password: yup
-      .string()
-      .min(8, "password must containat least 8 characters ")
-      .required("required"),
-  });
+  email: yup.string().email("enter valid email").required("required"),
+  password: yup
+    .string()
+    .min(8, "password must containat least 8 characters ")
+    .required("required"),
+});
+
+export const resetPasswordValidate = yup.object().shape({
+  email: yup.string().email("enter valid email").required("required"),
+});
+
+export const changePasswordValidate = yup.object().shape({
+  password: yup
+    .string()
+    .min(8, "password must containat least 8 characters ")
+    .matches(
+      passwordRegExp,
+      "characters with at least one of each: uppercase, lowercase, number and special"
+    )
+    .required("required"),
+    confirm_Password: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required("required"),
+});

@@ -2,9 +2,32 @@ import React from "react";
 import backicon from "../images/icons/back.svg";
 import lock from "../images/icons/lock.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { resetPasswordValidate } from "../../Services";
+import InputField from "../components/InputField";
+import { requestPasswordChange } from "../features/auth/authSlice";
+import secureLocalStorage from "react-secure-storage";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const formik = useFormik({
+    initialValues: {
+      email: secureLocalStorage.getItem("email") ?? "",
+    },
+    validationSchema: resetPasswordValidate,
+    onSubmit: async (values) => {
+      try {
+        secureLocalStorage.setItem("email", values.email);
+        await dispatch(requestPasswordChange(values)).unwrap();
+        navigate("/changepassword/confirm-otp");
+      } catch (error) {
+        console.error("Registration failed:", error);
+      }
+    },
+  });
   return (
     <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full ">
       <Link to={"/login"} className="flex items-center gap-2">
@@ -24,25 +47,27 @@ const ResetPassword = () => {
           Please enter your password a 4-digit code would be sent to your email.
         </p>
 
-        <div className="flex flex-col mt-6 gap-4">
-          <div className="flex flex-col">
-            <label htmlFor="" className="font-manrope text-[14px]  font-medium">
-              E-mail
-            </label>
-            <input
-              type="email"
-              name=""
-              id=""
-              className="border px-4 focus:outline-none font-manrope   border-[#D0D5DD] rounded-[5px] min-h-[46px]"
-            />
-          </div>
+        <form
+          onSubmit={formik.handleSubmit}
+          className="flex flex-col mt-6 gap-4"
+        >
+          <InputField
+            label={`Email address`}
+            name={`email`}
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && formik.errors.email}
+            errorText={formik.errors.email}
+            placeHolder={`Enter Your E-mail Address`}
+          />
+
           <button
-            onClick={() => navigate("/changepassword/confirm-otp")}
+            type="submit"
             className="min-h-[46px] bg-[#008A2F] rounded-lg font-manrope font-semibold text-[16px] text-white"
           >
             Send Link to Email
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

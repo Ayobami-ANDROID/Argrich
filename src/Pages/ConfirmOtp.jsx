@@ -2,14 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import password from "../images/icons/password.svg";
 import backicon from "../images/icons/back.svg";
+import { useDispatch } from "react-redux";
+import {
+  confirmOTP,
+  requestPasswordChange,
+  requestPasswordConfirm,
+} from "../features/auth/authSlice";
+import secureLocalStorage from "react-secure-storage";
 
 const ConfirmOtp = () => {
   const navigate = useNavigate();
-  const [otp, setOtp] = useState(new Array(4).fill("")); // Initialize OTP with 4 empty strings
+  const [otp, setOtp] = useState(new Array(6).fill("")); // Initialize OTP with 4 empty strings
   const [activeOTPIndex, setActiveOTPIndex] = useState(0); // Track the active input field
   const [isResendActive, setIsResendActive] = useState(false); // To track when resend can be clicked
   const [resendTimer, setResendTimer] = useState(0); // Timer starts at 60 seconds
-
+  const email = secureLocalStorage.getItem("email");
   const inputRef = useRef([]);
 
   // Handle change event when a user types into an input
@@ -40,15 +47,16 @@ const ConfirmOtp = () => {
         // Clear the current field if it has a value
         newOtp[index] = "";
         setOtp(newOtp);
+
         console.log("otp", newOtp);
       } else if (index > 0) {
         // Move focus to the previous input field
         setActiveOTPIndex(index - 1);
       }
     } else {
-        const newOtp = [...otp];
-        console.log("value",value);
-        
+      const newOtp = [...otp];
+      console.log("value", value);
+
       newOtp[index] = value;
       setOtp(newOtp);
       console.log("otp", newOtp);
@@ -76,12 +84,20 @@ const ConfirmOtp = () => {
     return () => clearInterval(interval);
   }, [resendTimer]);
 
-  const handleResendOtp = () => {
+  const handleResendOtp = async () => {
     if (isResendActive) {
-      // Resend OTP logic here
-      console.log("OTP Resent");
-      setResendTimer(60); // Reset the timer
-      setIsResendActive(false); // Disable the button again
+      try {
+        const value = {
+          email: secureLocalStorage.getItem("email"),
+        };
+        await dispatch(requestPasswordChange(value)).unwrap();
+        navigate("/changepassword/confirm-otp");
+        console.log("OTP Resent");
+        setResendTimer(60); // Reset the timer
+        setIsResendActive(false); // Disable the button again
+      } catch (error) {
+        console.error("Registration failed:", error);
+      }
     }
   };
 
@@ -90,6 +106,20 @@ const ConfirmOtp = () => {
     const minutes = Math.floor(resendTimer / 60);
     const seconds = resendTimer % 60;
     return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+  };
+  const dispatch = useDispatch();
+  const handleVerify = async () => {
+    secureLocalStorage.setItem("otp", otp.join(""));
+    try {
+      await dispatch(
+        confirmOTP({
+          otp_code: otp.join(""),
+        })
+      ).unwrap();
+      navigate("/changepassword/create-newpassword");
+    } catch (error) {
+      console.log("Registration failed:", error);
+    }
   };
 
   return (
@@ -112,8 +142,13 @@ const ConfirmOtp = () => {
         </p>
         <p className="font-manrope font-medium text-[16px] text-[#8C8C8C] ">
           Enter the 4 digit code we sent to your mail!{" "}
-          <span className="font-semibold">(john@example.com) </span>
-          <Link to={""} className="underline text-[#008A2F]  font-manrope ml-1">
+          <span className="font-semibold">
+            ({secureLocalStorage.getItem("email")}){" "}
+          </span>
+          <Link
+            to={"/changepassword/reset-password"}
+            className="underline text-[#008A2F]  font-manrope ml-1"
+          >
             Edit email
           </Link>
         </p>
@@ -134,7 +169,7 @@ const ConfirmOtp = () => {
                     : {}
                 }
                 className={`max-w-[50px] h-[60px] border spin-button-none rounded-[3px] bg-transparent outline-none text-center font-semibold text-lg text-[#262626] font-manrope  border-[#87ACA3] border-solid transition 
-   ${activeOTPIndex === index && "border-[#005F20]   border-[1.2px]"}`}
+          ${activeOTPIndex === index && "border-[#005F20]   border-[1.2px]"}`}
                 value={value}
                 maxLength={1}
                 onChange={(e) => handleOnChange(e, index)}
@@ -144,7 +179,7 @@ const ConfirmOtp = () => {
             ))}
           </div>
           <button
-            onClick={() => navigate("/changepassword/create-newpassword")}
+            onClick={handleVerify}
             className="min-h-[46px] bg-[#008A2F] rounded-lg font-manrope font-semibold text-[16px] text-white"
           >
             Verify

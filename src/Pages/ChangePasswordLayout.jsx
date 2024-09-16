@@ -1,10 +1,19 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import img1 from "../images/Argrich Logo Full 00.png";
+import { useSelector } from "react-redux";
+import { PulseLoader } from "react-spinners";
 
 const ChangePasswordLayout = () => {
+  const {isLoading}= useSelector((state)=>state.auth)
   return (
     <div className="min-h-screen w-full bg-[#F5F5F5] flex flex-col justify-between ">
+      {isLoading && (
+        <div className="fixed bg-black/[0.6] h-screen w-screen z-50 left-0 top-0 items-center flex justify-center">
+          {" "}
+          <PulseLoader speedMultiplier={0.9} color="#fff" size={20} />
+        </div>
+      )}
       <div className="py-4 bg-white lg:px-20 min-h-[78px] flex items-center ">
         <img src={img1} alt="" className="mx-auto lg:mx-0" />
       </div>
