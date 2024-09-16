@@ -1,16 +1,15 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Advert from "../components/Advert";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Sidebar from "../components/AccountComponent/Sidebar";
-import RightSide from "../components/AccountComponent/RightSide";
-import DeleteAccountModal from "../components/AccountComponent/DeleteAccountModal";
-import Proceed from "../components/AccountComponent/Proceed";
-import ActualDelete from "../components/AccountComponent/ActualDelete";
-import DeleteSuccess from "../components/AccountComponent/DeleteSuccess";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import profileImg from "../images/Ellipse 3.png";
+import defaultdp from "../images/defaultdp.jpg";
+import {
+  setIsOpen,
+  setIsOpen1,
+} from "../features/deleteaccountmodal/deleteaccountslice";
+import { getUserProfile } from "../features/account/accountSlice"
 
 const Account = () => {
+  const dispatch = useDispatch();
   const { user, isLoading } = useSelector((state) => state.account);
   console.log("user", user);
   useEffect(() => {
