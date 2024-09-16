@@ -24,6 +24,7 @@ const ConfirmOtp = () => {
     const { value } = e.target;
     if (/^[0-9]$/.test(value)) {
       const newOtp = [...otp];
+  
       newOtp[index] = value; // Update the OTP state
       setOtp(newOtp);
       console.log("otp", newOtp);
@@ -46,6 +47,7 @@ const ConfirmOtp = () => {
       if (otp[index]) {
         // Clear the current field if it has a value
         newOtp[index] = "";
+        setActiveOTPIndex(index - 1);
         setOtp(newOtp);
 
         console.log("otp", newOtp);
@@ -55,9 +57,8 @@ const ConfirmOtp = () => {
       }
     } else {
       const newOtp = [...otp];
-      console.log("value", value);
-
       newOtp[index] = value;
+      newOtp[index] = "";
       setOtp(newOtp);
       console.log("otp", newOtp);
     }

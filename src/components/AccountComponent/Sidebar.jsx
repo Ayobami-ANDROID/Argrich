@@ -1,6 +1,8 @@
 import React from "react";
 import { BiSearch } from "react-icons/bi";
 import searchicon from "../../images/search.svg";
+import { Link } from "react-router-dom";
+import order from "../../images/icons/orders.svg";
 
 const Sidebar = () => {
   return (
@@ -23,8 +25,8 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-6 mt-16">
-          <a href="#account" className="flex items-center">
+        <div className="flex flex-col gap-8 mt-16">
+          <Link to={"/account-change"} className="flex items-center">
             <svg
               className="mr-4"
               width="24"
@@ -48,8 +50,8 @@ const Sidebar = () => {
             <p className="font-semibold font-manrope text-[16px] leading-[21.86px]">
               Account Information
             </p>
-          </a>
-          <a href="#help-center" className="flex items-center">
+          </Link>
+          <Link to={"/account-change/help-center"} className="flex items-center">
             <svg
               className="mr-4"
               width="24"
@@ -70,8 +72,8 @@ const Sidebar = () => {
             <p className="font-semibold font-manrope text-[16px] leading-[21.86px]">
               Help Center
             </p>
-          </a>
-          <a href="#other" className="flex items-center">
+          </Link>
+          <Link to={"/account-change/other"} className="flex items-center">
             <svg
               className="mr-4 other"
               width="24"
@@ -92,7 +94,13 @@ const Sidebar = () => {
             <p className="font-semibold font-manrope text-[16px] leading-[21.86px]">
               Other
             </p>
-          </a>
+          </Link>
+          <Link to={"/account-change/orders"} className="flex items-center gap-4">
+          <img src={order} alt="" />
+            <p className="font-semibold font-manrope text-[16px] leading-[21.86px]">
+            Orders
+            </p>
+          </Link>
         </div>
       </div>
     </div>

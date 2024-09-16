@@ -22,6 +22,10 @@ import ChangePasswordLayout from "./Pages/ChangePasswordLayout";
 import ConfirmOtp from "./Pages/ConfirmOtp";
 import NewPassword from "./Pages/NewPassword";
 import Success from "./Pages/Success";
+import HelpCenter from "./Pages/HelpCenter";
+import AccountLayout from "./Pages/AccountLayout";
+import Other from "./Pages/Other";
+import Orders from "./Pages/Orders";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -32,17 +36,23 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/account" element={<Account />} />
+        <Route path="/account" element={<AccountLayout />} />
+        <Route path="/account-change" element={<AccountLayout />}>
+          <Route path="" element={<Account />} />
+          <Route path="help-center" element={<HelpCenter />} />
+          <Route path="other" element={<Other />} />
+          <Route path="orders" element={<Orders />} />
+        </Route>
+        <Route path="/changepassword" element={<ChangePasswordLayout />}>
+          <Route path="reset-password" element={<ResetPassword />} />
+          <Route path="confirm-otp" element={<ConfirmOtp />} />
+          <Route path="create-newpassword" element={<NewPassword />} />
+          <Route path="success" element={<Success />} />
+        </Route>
         <Route path="/homepage/*" element={<MainPage />} />
         <Route path="*" element={<NotFound pathname={"/"} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/changepassword" element={<ChangePasswordLayout />}>
-          <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="confirm-otp" element={<ConfirmOtp/>} />
-          <Route path="create-newpassword" element={<NewPassword/>} />
-          <Route path="success" element={<Success />} />
-        </Route>
       </Routes>
     </>
   );
