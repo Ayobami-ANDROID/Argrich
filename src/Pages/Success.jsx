@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Success = () => {
     const navigate = useNavigate();
   return (
-    <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full mt-16">
+    <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full ">
       <div className="bg-white  rounded-[12px] w-full p-5 mt-2 shadow-[4px_4px_13.4px_0px_rgba(152,_152,_152,_0.25)]">
         <img src={checked} alt="" className="mx-auto" />
         <p className="font-semibold text-[20px] font-manrope mt-8 text-center" >Success</p>

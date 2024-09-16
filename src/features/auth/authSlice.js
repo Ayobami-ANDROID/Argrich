@@ -37,6 +37,56 @@ export const login = createAsyncThunk(
   }
 );
 
+export const requestPasswordChange = createAsyncThunk(
+  "accounts/reset/",
+  async (userData, thunkAPI) => {
+
+    try {
+      const response = await authService.requestPasswordChange(userData);
+      return response;
+    } catch (error) {
+      console.log(error.response.data.error);
+      toast.error(error.response?.data.error || "An error occurred");
+      return thunkAPI.rejectWithValue(
+        error.response?.data || "An error occurred"
+      );
+    }
+  }
+);
+
+export const confirmOTP = createAsyncThunk(
+  "accounts/confirm-otp/",
+  async (userData, thunkAPI) => {
+  
+    try {
+      const response = await authService.confirmOTP(userData);
+      return response;
+    } catch (error) {
+      console.log(error.response.data.error);
+      toast.error(error.response?.data.error || "An error occurred");
+      return thunkAPI.rejectWithValue(
+        error.response?.data || "An error occurred"
+      );
+    }
+  }
+);
+export const requestPasswordConfirm = createAsyncThunk(
+  "accounts/confirm-reset/",
+  async (userData, thunkAPI) => {
+
+    try {
+      const response = await authService.requestPasswordConfirm(userData);
+      return response;
+    } catch (error) {
+      console.log(error.response.data.error);
+      toast.error(error.response?.data.error || "An error occurred");
+      return thunkAPI.rejectWithValue(
+        error.response?.data || "An error occurred"
+      );
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -79,6 +129,33 @@ const authSlice = createSlice({
         secureLocalStorage.setItem("user", action.payload.user);
       })
       .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(requestPasswordChange.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestPasswordChange.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(requestPasswordChange.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(requestPasswordConfirm.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestPasswordConfirm.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(requestPasswordConfirm.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(confirmOTP.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(confirmOTP.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(confirmOTP.rejected, (state, action) => {
         state.isLoading = false;
       });
   },

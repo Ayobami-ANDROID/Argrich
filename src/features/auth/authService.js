@@ -10,9 +10,27 @@ const login = async (userData) => {
   return response.data;
 };
 
+
+const requestPasswordChange = async (userData) => {
+  const response = await apiClient.post("accounts/request-reset-password/", userData);
+  return response.data;
+};
+
+const confirmOTP = async (userData) => {
+  const response = await apiClient.post("accounts/verify-email/", userData);
+  return response.data;
+};
+const requestPasswordConfirm = async (userData) => {
+  const response = await apiClient.post("accounts/reset-password-confirm/", userData);
+  return response.data;
+};
+
 const authService = {
   login,
+  confirmOTP,
   register,
+  requestPasswordChange,
+  requestPasswordConfirm
 };
 
 export default authService;
