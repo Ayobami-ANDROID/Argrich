@@ -42,6 +42,7 @@ function App() {
           <Route path="help-center" element={<HelpCenter />} />
           <Route path="other" element={<Other />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="orders-details/:id" element={<Orders />} />
         </Route>
         <Route path="/changepassword" element={<ChangePasswordLayout />}>
           <Route path="reset-password" element={<ResetPassword />} />
