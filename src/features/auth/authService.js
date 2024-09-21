@@ -17,7 +17,7 @@ const requestPasswordChange = async (userData) => {
 };
 
 const confirmOTP = async (userData) => {
-  const response = await apiClient.post("accounts/verify-email/", userData);
+  const response = await apiClient.post("accounts/reset-password-verify/", userData);
   return response.data;
 };
 const requestPasswordConfirm = async (userData) => {
