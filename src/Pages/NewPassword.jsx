@@ -4,10 +4,12 @@ import backicon from "../images/icons/back.svg";
 import lock from "../images/icons/lock.svg";
 import password1 from "../images/icons/password1.svg";
 import { useFormik } from "formik";
-import { requestPasswordConfirm } from "../features/auth/authSlice";
+
 import { changePasswordValidate, resetPasswordValidate } from "../../Services";
 import InputField from "../components/InputField";
 import { useDispatch } from "react-redux";
+import secureLocalStorage from "react-secure-storage";
+import { changePassword } from "../features/auth/authSlice";
 
 const NewPassword = () => {
   const navigate = useNavigate();
@@ -20,13 +22,21 @@ const NewPassword = () => {
     validationSchema: changePasswordValidate,
     onSubmit: async (values) => {
       try {
-        await dispatch(requestPasswordConfirm(values)).unwrap();
+        await dispatch(changePassword(
+          {
+            email: secureLocalStorage.getItem("email"),
+            OTP: secureLocalStorage.getItem("otp"),
+            password:values.password
+          }
+        )).unwrap();
         navigate("/changepassword/success");
       } catch (error) {
         console.error("Registration failed:", error);
       }
     },
   });
+
+
   return (
     <div className="max-w-[448px] px-4 lg:px-0 mx-auto w-full ">
       <div className="bg-white  rounded-[12px] w-full p-5 mt-2 shadow-[4px_4px_13.4px_0px_rgba(152,_152,_152,_0.25)]">
