@@ -21,7 +21,9 @@ import ResetPassword from "./Pages/ResetPassword";
 import ChangePasswordLayout from "./Pages/ChangePasswordLayout";
 import ConfirmOtp from "./Pages/ConfirmOtp";
 import NewPassword from "./Pages/NewPassword";
+import VerifyAccountLayout from "./Pages/VerifyAccountLayout";
 import Success from "./Pages/Success";
+import Checkout from "./Pages/Checkout";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -37,7 +39,8 @@ function App() {
         <Route path="*" element={<NotFound pathname={"/"} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/changepassword" element={<ChangePasswordLayout />}>
+        <Route path= "/signupverify" element={<VerifyAccountLayout/>}/>
+        <Route path="/changepassword" element={<ChangePasswordLayout />}>          
           <Route path="reset-password" element={<ResetPassword />} />
           <Route path="confirm-otp" element={<ConfirmOtp/>} />
           <Route path="create-newpassword" element={<NewPassword/>} />

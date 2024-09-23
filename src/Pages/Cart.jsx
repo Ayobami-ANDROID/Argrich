@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import icon1 from "../images/chevron-right.svg";
 import { useDispatch, useSelector } from "react-redux";
 import minus from "../images/minus.svg";
@@ -19,7 +19,7 @@ const Cart = () => {
         const values = await dispatch(getCart()).unwrap();
 
         console.log("values", "sdsd");
-      } catch (error) {}
+      } catch (error) { }
     };
 
     cartProduct();
@@ -43,33 +43,47 @@ const Cart = () => {
           My Cart
         </p>
       </div>
-      <div className="w-full mt-6">
-        <div className=" px-4 w-full  border-[#E4E7EC] bg-white  border-[0.8px] py-4 pb-8 max-w-[747px] rounded-xl">
-          <div className="flex gap-x-4 items-center  mb-4">
-            <p className=" text-[#101928] text-2xl font-semibold">My Cart</p>
-            <div className=" h-6 w-6 flex items-start justify-center bg-[#005C2D] rounded-full text-white">
-              {cart.length}
+
+      <div className="lg:grid grid-cols-3">
+        <div className="col-span-2 flex-c0l">
+          <div className="w-full mt-6">
+            <div className=" px-4 lg:max-w-full  border-[#E4E7EC] bg-white  border-[0.8px] py-4 pb-8 md:max-w-[747px] rounded-xl">
+              <div className="flex gap-x-4 items-center  mb-4">
+                <p className=" text-[#101928] text-2xl font-semibold">My Cart</p>
+                <div className=" h-6 w-6 flex items-start justify-center bg-[#005C2D] rounded-full text-white">
+                  {cart.length}
+                </div>
+              </div>
+              <div className="divide-y-[0.8px] divide-[#C6C6C6] gap-y-4 flex flex-col">
+                {" "}
+                {cart.map((product, index) => (
+                  <CartProduct key={index} product={product} />
+                ))}
+              </div>
             </div>
           </div>
-          <div className="divide-y-[0.8px] divide-[#C6C6C6] gap-y-4 flex flex-col">
-            {" "}
-            {cart.map((product, index) => (
-              <CartProduct key={index} product={product} />
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="w-full mt-6">
-        <div className=" px-4 w-full  border-[#E4E7EC] bg-white  border-[0.8px] py-4  max-w-[747px] rounded-xl">
-          <div className="flex items-center justify-between ">
-            {" "}
-            <p className="text-[24px] font-semibold">Subtotal:</p>
-            <p className="text-[#2A4F1A] text-[24px] font-semibold"> ₦{totalPrice.toLocaleString()}</p>
-          </div>
-          <div className="bg-[#C6C6C6] w-full h-[0.8px] "></div>
+          <div className="w-full mt-6">
+            <div className=" px-4 lg:max-w-full  border-[#E4E7EC] bg-white  border-[0.8px] py-4 md:max-w-[747px] rounded-xl">
+              <div className="flex items-center justify-between ">
+                {" "}
+                <p className="text-[24px] font-semibold">Subtotal:</p>
+                <p className="text-[#2A4F1A] text-[24px] font-semibold"> ₦{totalPrice.toLocaleString()}</p>
+              </div>
+              <div className="bg-[#C6C6C6] w-full h-[0.8px] "></div>
 
+            </div>
+          </div>
+          <div className="flex justify-between mt-8">
+             <div></div>
+            <Link to="/homepage/checkout" className="bg-[#005C2D] text-white py-2 px-8 mr-2  rounded-[20px]">
+              Checkout
+            </Link>
+          </div>
         </div>
       </div>
+
+
+
     </div>
   );
 };

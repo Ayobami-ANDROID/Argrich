@@ -9,6 +9,7 @@ import GetProduct from "../components/GetProduct";
 import { useDispatch, useSelector } from "react-redux";
 import NotFound from "./NotFound";
 import Cart from "./Cart";
+import Checkout from "./Checkout";
 import GetProductBySearch from "./GetProductBySearch";
 import GetProductByCategory from "./GetProductByCategory"
 
@@ -28,6 +29,7 @@ const MainPage = () => {
           <Route path="/category/:Category" element={<GetProductByCategory/>} ></Route>
           <Route path="/view/:id" element={<GetProduct />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/checkout" element={<Checkout/>}/>
           <Route path="*" element={<NotFound pathname={"/"} />}></Route>
         </Routes>
       <Footer />

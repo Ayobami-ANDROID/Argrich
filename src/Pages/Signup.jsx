@@ -47,8 +47,10 @@ const Signup = () => {
         phone_number: values.callCode + values.phoneNumber,
       };
       try {
+        secureLocalStorage.setItem("email", values.email)
         await dispatch(register(payload)).unwrap();
-        navigate("/login");
+      
+        navigate("/signupverify");
       } catch (error) {
         console.error("Registration failed:", error);
       }
