@@ -1,6 +1,5 @@
 import apiClient from "../../app/axiosConfig";
 
-
 const getProfile = async (userData) => {
   const response = await apiClient.get("accounts/edit/");
   return response.data;
@@ -16,12 +15,16 @@ const deleteProfile = async () => {
   return response.data;
 };
 
-
+const changePasswordService = async (passwordData) => {
+  const response = await apiClient.put("accounts/change-password/",passwordData);
+  return response.data;
+};
 
 const accountService = {
   getProfile,
   editProfile,
-  deleteProfile
+  deleteProfile,
+  changePasswordService,
 };
 
 export default accountService;

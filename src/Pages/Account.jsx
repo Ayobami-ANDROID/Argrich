@@ -6,7 +6,13 @@ import {
   setIsOpen,
   setIsOpen1,
 } from "../features/deleteaccountmodal/deleteaccountslice";
-import { getUserProfile } from "../features/account/accountSlice"
+import {
+  changePassword,
+  getUserProfile,
+} from "../features/account/accountSlice";
+import { useFormik } from "formik";
+import { changePasswordSchema } from "../../Services";
+import { PulseLoader } from "react-spinners";
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -15,6 +21,25 @@ const Account = () => {
   useEffect(() => {
     dispatch(getUserProfile()).unwrap();
   }, []);
+
+  const formik = useFormik({
+    initialValues: {
+      old_password: "",
+      new_password: "",
+      new_password_confirm: "",
+    },
+    validationSchema: changePasswordSchema,
+    onSubmit: (values) => {
+      console.log("values", values);
+      dispatch(
+        changePassword({
+          oldPassword: values.old_password,
+          newPassword: values.new_password,
+          newPasswordConfirm: values.new_password_confirm,
+        })
+      ).unwrap();
+    },
+  });
 
   return (
     <div className="border-t  ">
@@ -113,26 +138,70 @@ const Account = () => {
             </p>
 
             <div className="w-full lg:max-w-[400px]  flex flex-col gap-4">
-              <div className="flex flex-col w-full">
+              <form
+                onSubmit={formik.handleSubmit}
+                className="flex flex-col w-full"
+              >
                 <div className="w-full ">
-                  {" "}
                   <label
                     htmlFor=""
                     className="font-manrope font-medium text-[14px]"
                   >
-                    Password
-                  </label>{" "}
+                    Old Password
+                  </label>
                   <input
                     type="text"
+                    name="old_password"
+                    value={formik.values.old_password}
+                    onChange={formik.handleChange}
                     placeholder="••••••••••••"
                     className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
                   />
                 </div>
+                <div className="w-full mt-4">
+                  <label
+                    htmlFor=""
+                    className="font-manrope font-medium text-[14px]"
+                  >
+                    New Password
+                  </label>
+                  <input
+                    type="text"
+                    name="new_password"
+                    placeholder="••••••••••••"
+                    value={formik.values.new_password}
+                    onChange={formik.handleChange}
+                    className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                  />
+                </div>
+                <div className="w-full mt-4">
+                  <label
+                    htmlFor=""
+                    className="font-manrope font-medium text-[14px]"
+                  >
+                    Confirm New Password
+                  </label>
+                  <input
+                    type="text"
+                    name="new_password_confirm"
+                    placeholder="••••••••••••"
+                    value={formik.values.new_password_confirm}
+                    onChange={formik.handleChange}
+                    className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                  />
+                </div>
 
-                <button className="bg-[#005C2D] px-[16px] py-[12px] text-white rounded-[5px] self-end mt-4">
-                  Change Password
+                <button
+                  type="submit"
+                  className="bg-[#005C2D] px-[16px] w-full max-w-[170px] py-[12px] text-white rounded-[5px] self-end mt-4"
+                >
+                  {isLoading ? (
+                    <PulseLoader speedMultiplier={0.9} color="#fff" size={10} />
+                  ) : (
+                    "Change Password"
+                  )}
                 </button>
-              </div>
+              </form>
             </div>
           </div>
           <div className="flex flex-col justify-center items-start  lg:flex-row lg:justify-between mt-4 lg:mt-8">

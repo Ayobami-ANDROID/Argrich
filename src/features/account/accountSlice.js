@@ -53,6 +53,23 @@ export const deleteUserProfile = createAsyncThunk(
   }
 );
 
+export const changePassword = createAsyncThunk(
+  "accounts/changePassword/",
+  async (passwordData, thunkAPI) => {
+    try {
+      const response = await accountService.changePasswordService(passwordData);
+      // toast.success("Success");
+      return response;
+    } catch (error) {
+      console.log(error.response.data.error);
+      // toast.error(error.response?.data.error || "An error occurred");
+      return thunkAPI.rejectWithValue(
+        error.response?.data || "An error occurred"
+      );
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "account",
   initialState: {
@@ -89,6 +106,15 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(deleteUserProfile.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(changePassword.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
         state.isLoading = false;
       });
   },

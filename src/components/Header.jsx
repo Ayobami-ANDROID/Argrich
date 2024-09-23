@@ -168,7 +168,7 @@ const Header = () => {
             <div className=" flex items-center ml-2  relative ">
               <button className="rounded-full bg-[#EEEEEE] lg:h-12 lg:w-12 w-8 h-8  group">
                 <div className="">
-                  {user.profilePicture ? (
+                  {user?.profilePicture ? (
                     <img
                       src={Profile}
                       className="w-full rounded-full h-full"

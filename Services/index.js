@@ -42,16 +42,39 @@ export const resetPasswordValidate = yup.object().shape({
   email: yup.string().email("enter valid email").required("required"),
 });
 
-export const changePasswordValidate = yup.object().shape({
-  password: yup
+export const changePasswordSchema = yup.object().shape({
+  old_password: yup
     .string()
-    .min(8, "password must containat least 8 characters ")
+    .min(8, "password must contain at least 8 characters ")
     .matches(
       passwordRegExp,
       "characters with at least one of each: uppercase, lowercase, number and special"
     )
     .required("required"),
-    confirm_Password: yup
+  new_password: yup
+    .string()
+    .min(8, "password must contain at least 8 characters ")
+    .matches(
+      passwordRegExp,
+      "characters with at least one of each: uppercase, lowercase, number and special"
+    )
+    .required("required"),
+  new_password_confirm: yup
+    .string()
+    .oneOf([yup.ref("new_password")], "Passwords must match")
+    .required("required"),
+});
+
+export const changePasswordValidate = yup.object().shape({
+  password: yup
+    .string()
+    .min(8, "password must contain at least 8 characters ")
+    .matches(
+      passwordRegExp,
+      "characters with at least one of each: uppercase, lowercase, number and special"
+    )
+    .required("required"),
+  confirm_Password: yup
     .string()
     .oneOf([yup.ref("password")], "Passwords must match")
     .required("required"),
