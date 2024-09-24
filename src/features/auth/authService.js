@@ -26,7 +26,7 @@ const requestPasswordConfirm = async (userData) => {
 };
 
 const accountVerify = async(userData) => {
-  const response = await apiClient.post("accounts/users/verify-email/",userData);
+  const response = await apiClient.post("accounts/verify-email/",userData);
   return response.data
 }
 
