@@ -115,6 +115,7 @@ const SignUpVerify = () => {
         await dispatch(
           accountVerify({
             otp_code: otp.join(""),
+            email:email
           })
         ).unwrap();
         navigate("/login");
