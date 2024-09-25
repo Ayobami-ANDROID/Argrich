@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import profileImg from "../../images/Ellipse 3.png";
 import defaultdp from "../../images/defaultdp.jpg";
-import icon1 from "../../images/icons/icon1.svg";
-import icon2 from "../../images/icons/icon2.svg";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   setIsOpen,
@@ -45,7 +44,6 @@ const RightSide = () => {
               className="w-full max-w-[391px] cursor-pointer self-center mx-auto lg:mx-0   flex items-center justify-center lg:justify-start"
             >
               <div className=" relative rounded-full  h-[100px] w-[100px]">
-                
                 <img
                   src={user?.profilePicture ?? defaultdp}
                   className=" object-contain h-[100px] w-[100px] rounded-full "
@@ -106,7 +104,7 @@ const RightSide = () => {
                   value={user?.email}
                   placeholder="jamesetta@example.com"
                   className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
-                  />
+                />
               </div>
             </div>
           </div>
@@ -155,7 +153,7 @@ const RightSide = () => {
                 <input
                   type="text"
                   value={user?.address}
-                  className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none  border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                  className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none  border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
                 />
               </div>
               <div className="flex items-center gap-x-4">
@@ -169,93 +167,39 @@ const RightSide = () => {
                   </label>{" "}
                   <input
                     type="text"
-                    className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                    className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
                   />
                 </div>
                 <div className="w-full">
                   {" "}
                   <label
                     htmlFor=""
-                    className="font-manrope font-medium text-[14px]"
+                    className="font-manrope font-medium text-[14px] "
                   >
                     Zip Code
                   </label>{" "}
                   <input
                     type="text"
                     value={user?.zipcode}
-                    className=" rounded-[5px] placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none  border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                    className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none  border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
                   />
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div className=" h-px bg-[#C6C6C6] w-full mt-4"></div>
-
-        <div
-          id="help-center"
-          className="mt-10 font-manrope text-[16px] font-medium"
-        >
-          <p className="text-[20px]  font-manrope font-semibold leading-[27.32px]">
-            Help Center
-          </p>
-          <div className=" lg:mt-20 flex flex-col justify-center items-start  lg:flex-row lg:justify-between  mt-10  ">
-            <p className="lg:mb-0 mb-3">Contact Support</p>
-            <div className="flex flex-col  max-w-[422px] gap-4 w-full">
-              <p className="s">To contact customer service</p>
-              <div className="flex gap-x-3 items-center">
-                <img src={icon1} alt="" />
-                <p className="s">+234 803 239 9857</p>
-              </div>
-              <div className="flex gap-x-3 items-center">
-                <img src={icon2} alt="" />
-                <p className="s">support@argrichfarms.com</p>
-              </div>
-            </div>
-          </div>
-          <div className="mt-12 flex lg:mt-20 flex-col justify-center items-start  lg:flex-row lg:justify-between  ">
-            <p className="font-medium font-manrope text-[16px] leading-[21.86px] lg:mb-0 mb-3">
-              Feedback or Suggestions
-            </p>
-            <div className="flex flex-col  max-w-[422px] gap-4 w-full">
-              <textarea
-                name=""
-                id=""
-                placeholder="Have anything to tell us?"
-                className="max-w-[422px] placeholder:text-[#ACACAC] font-medium placeholder:font-medium font-manrope text-[16px] focus:outline-none p-4  w-full bg-[#F2F2F2] border border-[#D0D5DD] rounded-[5px] min-h-[177px]"
-              ></textarea>
-            </div>
-          </div>
-        </div>
-
-        <div className=" h-px bg-[#C6C6C6] w-full mt-10 mb-10"></div>
-
-        <div id="other" className="mt-10 font-manrope  mb-10">
-          <p className="text-[20px]  font-manrope font-semibold leading-[27.32px]">
-            Other
-          </p>
-          <div className="mt-20 flex  lg:flex-row justify-start ite flex-col lg:justify-between">
-            <div className="s">
-              <p className="text-[16px] font-medium ">Delete Account</p>
-              <p className="text-[#6C6C6C] text-[14px] font-medium mt-6">
-                Remove all data(includes addresses, billing information,
-                cookies, email, history), and delete the account
-              </p>
-            </div>
-            <div className="flex flex-col  max-w-[422px] gap-4 w-full lg:mt-0 mt-6">
-              <button
-                onClick={() => {
-                  dispatch(setIsOpen1(true));
-                  window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
-                }}
-                className="px-[16px] py-[12px] bg-[#DF2E07] text-white w-fit lg:self-end  rounded-[5px]  text-[16px]"
-              >
-                Delete Account
+              <button className="bg-[#005C2D] font-manrope px-[16px] py-[12px] text-white rounded-[5px] self-end mt-4">
+                Save Changes
               </button>
             </div>
           </div>
         </div>
+
+        {/* <div className=" h-px bg-[#C6C6C6] w-full mt-4"></div> */}
+
+       
+
+        <div className=" h-px bg-[#C6C6C6] w-full mt-10 mb-10"></div>
+
+       
+
       </div>
     </div>
   );

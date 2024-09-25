@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import {
   confirmOTP,
   requestPasswordChange,
-  requestPasswordConfirm,
 } from "../features/auth/authSlice";
 import secureLocalStorage from "react-secure-storage";
 
@@ -15,7 +14,7 @@ const ConfirmOtp = () => {
   const [otp, setOtp] = useState(new Array(6).fill("")); // Initialize OTP with 4 empty strings
   const [activeOTPIndex, setActiveOTPIndex] = useState(0); // Track the active input field
   const [isResendActive, setIsResendActive] = useState(false); // To track when resend can be clicked
-  const [resendTimer, setResendTimer] = useState(0); // Timer starts at 60 seconds
+  const [resendTimer, setResendTimer] = useState(60); // Timer starts at 60 seconds
   const email = secureLocalStorage.getItem("email");
   const inputRef = useRef([]);
 
@@ -24,6 +23,7 @@ const ConfirmOtp = () => {
     const { value } = e.target;
     if (/^[0-9]$/.test(value)) {
       const newOtp = [...otp];
+
       newOtp[index] = value; // Update the OTP state
       setOtp(newOtp);
       console.log("otp", newOtp);
@@ -46,6 +46,7 @@ const ConfirmOtp = () => {
       if (otp[index]) {
         // Clear the current field if it has a value
         newOtp[index] = "";
+        setActiveOTPIndex(index - 1);
         setOtp(newOtp);
 
         console.log("otp", newOtp);
@@ -55,9 +56,8 @@ const ConfirmOtp = () => {
       }
     } else {
       const newOtp = [...otp];
-      console.log("value", value);
-
       newOtp[index] = value;
+      newOtp[index] = "";
       setOtp(newOtp);
       console.log("otp", newOtp);
     }
@@ -73,6 +73,7 @@ const ConfirmOtp = () => {
 
   // Handle resend OTP logic
   useEffect(() => {
+
     let interval;
     if (resendTimer > 0) {
       interval = setInterval(() => {
@@ -108,18 +109,38 @@ const ConfirmOtp = () => {
     return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
   };
   const dispatch = useDispatch();
+
   const handleVerify = async () => {
     secureLocalStorage.setItem("otp", otp.join(""));
     try {
       await dispatch(
         confirmOTP({
-          otp_code: otp.join(""),
+          email: secureLocalStorage.getItem("email"),
+          OTP: otp.join(""),
         })
       ).unwrap();
       navigate("/changepassword/create-newpassword");
     } catch (error) {
       console.log("Registration failed:", error);
     }
+  };
+
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pasteData = e.clipboardData
+      .getData("text")
+      .trim()
+      .slice(0, otp.length); 
+
+    const newOtp = [...otp];
+    for (let i = 0; i < pasteData.length; i++) {
+      newOtp[i] = pasteData[i];
+    }
+
+    setOtp(newOtp);
+    setActiveOTPIndex(
+      pasteData.length < otp.length ? pasteData.length : otp.length - 1
+    ); // Move focus to the appropriate input field
   };
 
   return (
@@ -154,7 +175,7 @@ const ConfirmOtp = () => {
         </p>
 
         <div className="flex flex-col mt-8 gap-6">
-          <div className="flex gap-4 mx-auto">
+          <div className="flex gap-4 mx-auto ">
             {otp.map((value, index) => (
               <input
                 key={index}
@@ -168,13 +189,14 @@ const ConfirmOtp = () => {
                     ? { boxShadow: "0px 0px 12px 0px rgba(39, 215, 0, 0.29)" }
                     : {}
                 }
-                className={`max-w-[50px] h-[60px] border spin-button-none rounded-[3px] bg-transparent outline-none text-center font-semibold text-lg text-[#262626] font-manrope  border-[#87ACA3] border-solid transition 
+                className={` max-w-[30px] lg:max-w-[50px] h-[60px] border spin-button-none rounded-[3px] bg-transparent outline-none text-center font-semibold text-lg text-[#262626] font-manrope  border-[#87ACA3] border-solid transition 
           ${activeOTPIndex === index && "border-[#005F20]   border-[1.2px]"}`}
                 value={value}
                 maxLength={1}
                 onChange={(e) => handleOnChange(e, index)}
                 onKeyDown={(e) => handleOnKeyDown(e, index)}
                 onClick={(e) => handleOnclick(e, index)}
+                onPaste={handlePaste}
               />
             ))}
           </div>

@@ -75,8 +75,8 @@ export const confirmOTP = createAsyncThunk(
     }
   }
 );
-export const requestPasswordConfirm = createAsyncThunk(
-  "accounts/confirm-reset/",
+export const changePassword = createAsyncThunk(
+  "accounts/changePassword/",
   async (userData, thunkAPI) => {
 
     try {
@@ -163,15 +163,6 @@ const authSlice = createSlice({
       .addCase(requestPasswordChange.rejected, (state, action) => {
         state.isLoading = false;
       })
-      .addCase(requestPasswordConfirm.pending, (state, action) => {
-        state.isLoading = true;
-      })
-      .addCase(requestPasswordConfirm.fulfilled, (state, action) => {
-        state.isLoading = false;
-      })
-      .addCase(requestPasswordConfirm.rejected, (state, action) => {
-        state.isLoading = false;
-      })
       .addCase(confirmOTP.pending, (state, action) => {
         state.isLoading = true;
       })
@@ -189,7 +180,16 @@ const authSlice = createSlice({
       })
       .addCase(accountVerify.rejected, (state, action) => {
         state.isLoading = false;
-      });
+      })
+      .addCase(changePassword.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.isLoading = false;
+      })
   },
 });
 

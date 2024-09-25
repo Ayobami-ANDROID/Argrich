@@ -9,6 +9,7 @@ import {
   setIsOpen1,
 } from "../../features/deleteaccountmodal/deleteaccountslice";
 import defaultdp from "../../images/defaultdp.jpg";
+import { editUserProfile } from "../../features/account/accountSlice";
 
 const DeleteAccountModal = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const DeleteAccountModal = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setSelectedImage(reader.result);
+        dispatch(editUserProfile({ profilePicture: file }));
       };
       reader.readAsDataURL(file);
     }
@@ -59,11 +61,19 @@ const DeleteAccountModal = () => {
               <img src={close} alt="" />
             </button>
           </div>{" "}
-          <img
-            src={user?.profilePicture ?? defaultdp}
-            alt=""
-            className="rounded-full h-[170px] w-[170px] object-cover mx-auto mt-4"
-          />
+          {selectedImage ? (
+            <img
+              src={selectedImage}
+              alt=""
+              className="rounded-full h-[170px] w-[170px] object-cover mx-auto mt-4"
+            />
+          ) : (
+            <img
+              src={user?.profilePicture ?? defaultdp}
+              alt=""
+              className="rounded-full h-[170px] w-[170px] object-cover mx-auto mt-4"
+            />
+          )}
           <div className="mt-20 max-w-[320px] w-full mx-auto flex justify-between">
             <input
               id="imageInput"

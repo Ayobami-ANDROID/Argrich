@@ -76,6 +76,25 @@ export const deleteUserProfile = createAsyncThunk(
   }
 );
 
+export const changePassword = createAsyncThunk(
+  "accounts/changePassword/",
+  async (passwordData, thunkAPI) => {
+    try {
+      const response = await accountService.changePasswordService(passwordData);
+      // toast.success("Success");
+      return response;
+    } catch (error) {
+      console.log(error.response.data.error);
+      // toast.error(error.response?.data.error || "An error occurred");
+      return thunkAPI.rejectWithValue(
+        error.response?.data || "An error occurred"
+      );
+    }
+  }
+);
+
+
+
 const authSlice = createSlice({
   name: "account",
   initialState: {
@@ -90,7 +109,7 @@ const authSlice = createSlice({
       })
       .addCase(getUserProfile.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log("action.payload", action.payload);
+        // console.log("action.payload", action.payload);
         state.user = action.payload;
       })
       .addCase(getUserProfile.rejected, (state, action) => {
@@ -101,6 +120,8 @@ const authSlice = createSlice({
       })
       .addCase(editUserProfile.fulfilled, (state, action) => {
         state.isLoading = false;
+        console.log("edited", action.payload);
+        
       })
       .addCase(editUserProfile.rejected, (state, action) => {
         state.isLoading = false;
@@ -113,9 +134,20 @@ const authSlice = createSlice({
       })
       .addCase(deleteUserProfile.rejected, (state, action) => {
         state.isLoading = false;
+      })
+      .addCase(changePassword.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(changePassword.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.isLoading = false;
       });
+      
   },
 });
 
 // export const { authReset, setToken } = authSlice.actions;
 export default authSlice.reducer;
+// deleteUserProfile

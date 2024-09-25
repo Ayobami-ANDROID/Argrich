@@ -7,7 +7,7 @@ import {
   confirmOTP,
   requestPasswordChange,
   accountVerify,
-  requestPasswordConfirm,
+
 } from "../features/auth/authSlice";
 import secureLocalStorage from "react-secure-storage";
 
