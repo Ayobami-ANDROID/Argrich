@@ -26,7 +26,7 @@ const Sidebar = () => {
         </div>
 
         <div className="flex flex-col gap-8 mt-16">
-          <Link to={"/account-change"} className="flex items-center">
+          <Link to={"/account"} className="flex items-center">
             <svg
               className="mr-4"
               width="24"
@@ -51,7 +51,7 @@ const Sidebar = () => {
               Account Information
             </p>
           </Link>
-          <Link to={"/account-change/help-center"} className="flex items-center">
+          <Link to={"/account/help-center"} className="flex items-center">
             <svg
               className="mr-4"
               width="24"
@@ -73,7 +73,7 @@ const Sidebar = () => {
               Help Center
             </p>
           </Link>
-          <Link to={"/account-change/other"} className="flex items-center">
+          <Link to={"/account/other"} className="flex items-center">
             <svg
               className="mr-4 other"
               width="24"
@@ -95,7 +95,7 @@ const Sidebar = () => {
               Other
             </p>
           </Link>
-          <Link to={"/account-change/orders"} className="flex items-center gap-4">
+          <Link to={"/account/orders"} className="flex items-center gap-4">
           <img src={order} alt="" />
             <p className="font-semibold font-manrope text-[16px] leading-[21.86px]">
             Orders

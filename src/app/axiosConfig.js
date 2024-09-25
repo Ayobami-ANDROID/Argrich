@@ -4,9 +4,6 @@ import { setToken } from "../features/auth/authSlice";
 
 const apiClient = axios.create({
   baseURL: "https://agrich.onrender.com/api/v1/",
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 // Request interceptor to add authorization header

@@ -6,7 +6,7 @@ const getProfile = async (userData) => {
 };
 
 const editProfile = async (userData) => {
-  const response = await apiClient.put("accounts/edit/", userData);
+  const response = await apiClient.patchForm("accounts/edit/", userData);
   return response.data;
 };
 

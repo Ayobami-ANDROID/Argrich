@@ -8,10 +8,14 @@ import {
 } from "../features/deleteaccountmodal/deleteaccountslice";
 import {
   changePassword,
+  editUserProfile,
   getUserProfile,
 } from "../features/account/accountSlice";
 import { useFormik } from "formik";
-import { changePasswordSchema } from "../../Services";
+import {
+  changePasswordSchema,
+  editProfileValidateSchema,
+} from "../../Services";
 import { PulseLoader } from "react-spinners";
 
 const Account = () => {
@@ -19,7 +23,7 @@ const Account = () => {
   const { user, isLoading } = useSelector((state) => state.account);
   console.log("user", user);
   useEffect(() => {
-    dispatch(getUserProfile()).unwrap();
+    dispatch(getUserProfile());
   }, []);
 
   const formik = useFormik({
@@ -37,7 +41,25 @@ const Account = () => {
           newPassword: values.new_password,
           newPasswordConfirm: values.new_password_confirm,
         })
-      ).unwrap();
+      );
+    },
+  });
+
+  const formikEditProfile = useFormik({
+    initialValues: {
+      profilePicture: user?.profilePicture,
+      name: user?.name,
+      email: user?.email,
+      address: user?.address,
+      city: user?.city,
+      zipcode: user?.zipcode,
+    },
+    validationSchema: editProfileValidateSchema,
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      console.log("values", values);
+      dispatch(editUserProfile(values));
+      dispatch(getUserProfile());
     },
   });
 
@@ -94,44 +116,110 @@ const Account = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-center items-start  lg:flex-row lg:justify-between mt-8 lg:mt-8">
-            <p className="text-[16px] font-[500] font-manrope mb-4 lg:mb-0">
-              Name and Email
-            </p>
+          <form onSubmit={formikEditProfile.handleSubmit}>
+            <div className="flex flex-col justify-center items-start  lg:flex-row lg:justify-between mt-8 lg:mt-8">
+              <p className="text-[16px] font-[500] font-manrope mb-4 lg:mb-0">
+                Name and Email
+              </p>
 
-            <div className="w-full lg:max-w-[400px]   flex flex-col gap-4">
-              <div className="w-full flex flex-col md:gap-1">
-                {" "}
-                <label
-                  htmlFor=""
-                  className="font-manrope font-medium text-[14px]"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  value={user?.name}
-                  placeholder="James  Etta"
-                  className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
-                />
-              </div>
-              <div className="w-full  flex flex-col  md:gap-1 ">
-                {" "}
-                <label
-                  htmlFor=""
-                  className="font-manrope font-medium text-[14px]"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={user?.email}
-                  placeholder="jamesetta@example.com"
-                  className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
-                />
+              <div className="w-full lg:max-w-[400px]   flex flex-col gap-4">
+                <div className="w-full flex flex-col md:gap-1">
+                  <label
+                    htmlFor="name"
+                    className="font-manrope font-medium text-[14px]"
+                  >
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formikEditProfile.values.name}
+                    onChange={formikEditProfile.handleChange}
+                    placeholder="James  Etta"
+                    className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                  />
+                </div>
+                <div className="w-full  flex flex-col  md:gap-1 ">
+                  <label
+                    htmlFor="email"
+                    className="font-manrope font-medium text-[14px]"
+                  >
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formikEditProfile.values.email}
+                    onChange={formikEditProfile.handleChange}
+                    placeholder="jamesetta@example.com"
+                    className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none bg-[#F2F2F2] border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                  />
+                </div>
               </div>
             </div>
-          </div>
+            <div className="flex flex-col justify-center items-start  lg:flex-row lg:justify-between mt-4 lg:mt-8">
+              <p className="text-[16px] font-[500] font-manrope mb-4 lg:mb-0">
+                Delivery Information
+              </p>
+
+              <div className="w-full lg:max-w-[400px]  flex flex-col gap-4">
+                <div className="w-full ">
+                  <label
+                    htmlFor="address"
+                    className="font-manrope font-medium text-[14px]"
+                  >
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    value={formikEditProfile.values.address}
+                    onChange={formikEditProfile.handleChange}
+                    className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none  border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                  />
+                </div>
+                <div className="flex items-center gap-x-4">
+                  <div className="w-full">
+                    <label
+                      htmlFor="city"
+                      className="font-manrope font-medium text-[14px]"
+                    >
+                      City/Town
+                    </label>
+                    <input
+                      type="text"
+                      name="city"
+                      value={formikEditProfile.values.city}
+                      onChange={formikEditProfile.handleChange}
+                      className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                    />
+                  </div>
+                  <div className="w-full">
+                    <label
+                      htmlFor="zipcode"
+                      className="font-manrope font-medium text-[14px] "
+                    >
+                      Zip Code
+                    </label>
+                    <input
+                      type="text"
+                      name="zipcode"
+                      value={formikEditProfile.values.zipcode}
+                      onChange={formikEditProfile.handleChange}
+                      className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none  border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="bg-[#005C2D] font-manrope px-[16px] py-[12px] text-white rounded-[5px] self-end mt-4"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </form>
+
           <div className="flex flex-col justify-center items-start  lg:flex-row lg:justify-between mt-4 lg:mt-8">
             <p className="text-[16px] font-[500] font-manrope mb-4 lg:mb-0">
               Password
@@ -195,67 +283,9 @@ const Account = () => {
                   type="submit"
                   className="bg-[#005C2D] px-[16px] w-full max-w-[170px] py-[12px] text-white rounded-[5px] self-end mt-4"
                 >
-                  {isLoading ? (
-                    <PulseLoader speedMultiplier={0.9} color="#fff" size={10} />
-                  ) : (
-                    "Change Password"
-                  )}
+                  Change Password
                 </button>
               </form>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center items-start  lg:flex-row lg:justify-between mt-4 lg:mt-8">
-            <p className="text-[16px] font-[500] font-manrope mb-4 lg:mb-0">
-              Delivery Information
-            </p>
-
-            <div className="w-full lg:max-w-[400px]  flex flex-col gap-4">
-              <div className="w-full ">
-                {" "}
-                <label
-                  htmlFor=""
-                  className="font-manrope font-medium text-[14px]"
-                >
-                  Address
-                </label>{" "}
-                <input
-                  type="text"
-                  value={user?.address}
-                  className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none  border border-[#D0D5DD]  placeholder:text-base font-manrope  lg:max-w-[409px]  w-full  h-[40px] bg-inherit   "
-                />
-              </div>
-              <div className="flex items-center gap-x-4">
-                <div className="w-full">
-                  {" "}
-                  <label
-                    htmlFor=""
-                    className="font-manrope font-medium text-[14px]"
-                  >
-                    City/Town
-                  </label>{" "}
-                  <input
-                    type="text"
-                    className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
-                  />
-                </div>
-                <div className="w-full">
-                  {" "}
-                  <label
-                    htmlFor=""
-                    className="font-manrope font-medium text-[14px] "
-                  >
-                    Zip Code
-                  </label>{" "}
-                  <input
-                    type="text"
-                    value={user?.zipcode}
-                    className=" rounded-[5px]  placeholder:font-medium p-4 placeholder:text-[#6C6C6C] outline-none  border border-[#D0D5DD]  placeholder:text-base font-manrope  max-w-[409px]  w-full  h-[40px] bg-inherit   "
-                  />
-                </div>
-              </div>
-              <button className="bg-[#005C2D] font-manrope px-[16px] py-[12px] text-white rounded-[5px] self-end mt-4">
-                Save Changes
-              </button>
             </div>
           </div>
         </div>

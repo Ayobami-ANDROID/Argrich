@@ -36,12 +36,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/account" element={<AccountLayout />} />
-        <Route path="/account-change" element={<AccountLayout />}>
+        {/* <Route path="/account" element={<AccountLayout />} /> */}
+        <Route path="/account" element={<AccountLayout />}>
           <Route path="" element={<Account />} />
           <Route path="help-center" element={<HelpCenter />} />
-          <Route path="other" element={<Other />} />
           <Route path="orders" element={<Orders />} />
+          <Route path="other" element={<Other />} />
           <Route path="orders-details/:id" element={<Orders />} />
         </Route>
         <Route path="/changepassword" element={<ChangePasswordLayout />}>

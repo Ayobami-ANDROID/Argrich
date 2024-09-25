@@ -65,6 +65,15 @@ export const changePasswordSchema = yup.object().shape({
     .required("required"),
 });
 
+export const editProfileValidateSchema = yup.object().shape({
+  profilePicture: yup.string(),
+  name: yup.string(),
+  email:  yup.string().email(),
+  address: yup.string(),
+  city: yup.string(),
+  zipcode: yup.string(),
+});
+
 export const changePasswordValidate = yup.object().shape({
   password: yup
     .string()

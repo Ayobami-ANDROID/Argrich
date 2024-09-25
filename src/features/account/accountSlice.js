@@ -70,6 +70,8 @@ export const changePassword = createAsyncThunk(
   }
 );
 
+
+
 const authSlice = createSlice({
   name: "account",
   initialState: {
@@ -84,7 +86,7 @@ const authSlice = createSlice({
       })
       .addCase(getUserProfile.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log("action.payload", action.payload);
+        // console.log("action.payload", action.payload);
         state.user = action.payload;
       })
       .addCase(getUserProfile.rejected, (state, action) => {
@@ -95,6 +97,8 @@ const authSlice = createSlice({
       })
       .addCase(editUserProfile.fulfilled, (state, action) => {
         state.isLoading = false;
+        console.log("edited", action.payload);
+        
       })
       .addCase(editUserProfile.rejected, (state, action) => {
         state.isLoading = false;
@@ -117,8 +121,10 @@ const authSlice = createSlice({
       .addCase(changePassword.rejected, (state, action) => {
         state.isLoading = false;
       });
+      
   },
 });
 
 // export const { authReset, setToken } = authSlice.actions;
 export default authSlice.reducer;
+// deleteUserProfile

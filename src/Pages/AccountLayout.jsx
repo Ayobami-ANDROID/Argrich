@@ -9,15 +9,29 @@ import DeleteAccountModal from "../components/AccountComponent/DeleteAccountModa
 import Proceed from "../components/AccountComponent/Proceed";
 import ActualDelete from "../components/AccountComponent/ActualDelete";
 import DeleteSuccess from "../components/AccountComponent/DeleteSuccess";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { PulseLoader } from "react-spinners";
 
 const AccountLayout = () => {
   const { isOpen, isOpen1, isOpen2, isOpen3 } = useSelector(
     (state) => state.deleteAccount
   );
+  const { token } = useSelector((state) => state.auth);
+  const { user, isLoading } = useSelector((state) => state.account);
+console.log("token", token?.access);
+
+  if (!token?.access) {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
+         {isLoading && (
+        <div className="fixed bg-black/[0.6] h-screen w-screen z-50 left-0 top-0 items-center flex justify-center">
+          {" "}
+          <PulseLoader speedMultiplier={0.9} color="#fff" size={20} />
+        </div>
+      )}
       {isOpen && <DeleteAccountModal />}
       {isOpen1 && <Proceed />}
       {isOpen2 && <ActualDelete />}
@@ -29,7 +43,7 @@ const AccountLayout = () => {
       <div className="flex flex-grow">
         <Sidebar />
         <div className="flex-grow">
-         <Outlet />
+          <Outlet />
         </div>
       </div>
       <Footer />

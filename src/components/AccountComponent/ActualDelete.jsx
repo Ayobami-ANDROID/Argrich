@@ -49,7 +49,7 @@ const ActualDelete = () => {
             >
               <p className="text-[16px] font-semibold font-manrope">
                 {" "}
-                Edit Profile Photo
+              Delete Account
               </p>
               <button
                 onClick={() => {
