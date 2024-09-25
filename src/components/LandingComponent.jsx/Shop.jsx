@@ -43,7 +43,7 @@ const Shop = () => {
           </Link>
         </div>
         <div className="mt-10 w-full">
-          <div className="lg:flex gap-4 p-4 grid grid-cols-2 justify-items-center overflow-hidden no-scrollbar">
+          <div className="lg:flex gap-4 p-4 grid  md:grid-cols-3 justify-items-center overflow-hidden no-scrollbar">
             {isLoading ? (
               <p>Loading products...</p>
             ) : displayedProducts.length > 0 ? (

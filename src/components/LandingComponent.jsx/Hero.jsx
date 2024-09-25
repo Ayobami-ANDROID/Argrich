@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Header from "../../components/LandingComponent.jsx/Header";
 import herobg from "../../images/bgheros.png";
 import bag from "../../images/bag.svg";
@@ -28,8 +28,8 @@ const Hero = () => {
         trigger: container,
         start: "top 80%",
         end: "top 20%",
-        toggleActions: "play none none reverse"
-      }
+        toggleActions: "play none none reverse",
+      },
     });
 
     gsap.fromTo(
@@ -46,8 +46,8 @@ const Hero = () => {
           trigger: container,
           start: "top 70%",
           end: "top 20%",
-          toggleActions: "play none none reverse"
-        }
+          toggleActions: "play none none reverse",
+        },
       }
     );
 
@@ -65,8 +65,8 @@ const Hero = () => {
           trigger: container,
           start: "top 70%",
           end: "top 20%",
-          toggleActions: "play none none reverse"
-        }
+          toggleActions: "play none none reverse",
+        },
       }
     );
 
@@ -78,8 +78,8 @@ const Hero = () => {
         trigger: container,
         start: "top 70%",
         end: "top 20%",
-        toggleActions: "play none none reverse"
-      }
+        toggleActions: "play none none reverse",
+      },
     });
 
     gsap.from("#corn", {
@@ -90,8 +90,8 @@ const Hero = () => {
         trigger: container,
         start: "top 70%",
         end: "top 20%",
-        toggleActions: "play none none reverse"
-      }
+        toggleActions: "play none none reverse",
+      },
     });
 
     gsap.from("#heroimg", {
@@ -103,13 +103,14 @@ const Hero = () => {
         trigger: container,
         start: "top 50%",
         end: "top 20%",
-        toggleActions: "play none none reverse"
-      }
+        toggleActions: "play none none reverse",
+      },
     });
   }, []);
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="overflow-hidden" ref={containerRef}>
-      <SmallHeader />
+      <SmallHeader isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="px-4">
         <div className="relative">
           <div className="  bg-[#FFE6AE]   w-full   mt-2 rounded-[15px] ">
