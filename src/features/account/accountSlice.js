@@ -10,6 +10,14 @@ export const getUserProfile = createAsyncThunk(
       // toast.success("Success");
       return response;
     } catch (error) {
+      console.log(error?.response?.data?.detail)
+      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
+          toast.error(error?.response?.data?.detail)
+          window.location.replace('/login')
+      }
+      else {
+          toast.error(error?.response?.data?.detail || 'An error Occured')
+      }
       // toast.error(error.response?.data?.message || "An error occurred");
       console.log(error);
       return thunkAPI.rejectWithValue(
@@ -27,7 +35,15 @@ export const editUserProfile = createAsyncThunk(
       // toast.success("Success");
       return response;
     } catch (error) {
-      console.log(error.response.data.error);
+   
+      console.log(error?.response?.data?.detail)
+      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
+          toast.error(error?.response?.data?.detail)
+          window.location.replace('/login')
+      }
+      else {
+          toast.error(error?.response?.data?.detail || 'An error Occured')
+      }
       // toast.error(error.response?.data.error || "An error occurred");
       return thunkAPI.rejectWithValue(
         error.response?.data || "An error occurred"
@@ -44,7 +60,14 @@ export const deleteUserProfile = createAsyncThunk(
       // toast.success("Success");
       return response;
     } catch (error) {
-      console.log(error.response.data.error);
+      console.log(error?.response?.data?.detail)
+      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
+          toast.error(error?.response?.data?.detail)
+          window.location.replace('/login')
+      }
+      else {
+          toast.error(error?.response?.data?.detail || 'An error Occured')
+      }
       // toast.error(error.response?.data.error || "An error occurred");
       return thunkAPI.rejectWithValue(
         error.response?.data || "An error occurred"

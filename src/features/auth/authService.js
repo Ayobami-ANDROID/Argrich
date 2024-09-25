@@ -25,12 +25,18 @@ const requestPasswordConfirm = async (userData) => {
   return response.data;
 };
 
+const accountVerify = async(userData) => {
+  const response = await apiClient.post("accounts/verify-email/",userData);
+  return response.data
+}
+
 const authService = {
   login,
   confirmOTP,
   register,
   requestPasswordChange,
-  requestPasswordConfirm
+  requestPasswordConfirm,
+  accountVerify
 };
 
 export default authService;

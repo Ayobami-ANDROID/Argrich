@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 import authService from "./authService";
 import secureLocalStorage from "react-secure-storage";
 import { toast } from "react-toastify";
+
+
+
 
 export const register = createAsyncThunk(
   "accounts/signup/",
@@ -9,6 +13,7 @@ export const register = createAsyncThunk(
     try {
       const response = await authService.register(userData);
       toast.success("Registration successful!");
+  
       return response;
     } catch (error) {
       toast.error(error.response?.data?.message || "An error occurred");
@@ -87,6 +92,24 @@ export const changePassword = createAsyncThunk(
   }
 );
 
+
+export const accountVerify = createAsyncThunk(
+  "/accounts/otp/",
+  async (userData, thunkAPI) => {
+
+    try {
+      const response = await authService.accountVerify(userData);
+      return response;
+    } catch (error) {
+      console.log(error.response.data.error);
+      toast.error(error.response?.data.error || "An error occurred");
+      return thunkAPI.rejectWithValue(
+        error.response?.data || "An error occurred"
+      );
+    }
+  }
+)
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -147,6 +170,15 @@ const authSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(confirmOTP.rejected, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(accountVerify.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(accountVerify.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(accountVerify.rejected, (state, action) => {
         state.isLoading = false;
       })
       .addCase(changePassword.pending, (state, action) => {

@@ -16,6 +16,14 @@ export const getCart = createAsyncThunk(
       
       return response;
     } catch (error) {
+      console.log(error?.response?.data?.detail)
+      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
+          toast.error(error?.response?.data?.detail)
+          window.location.replace('/login')
+      }
+      else {
+          toast.error(error?.response?.data?.detail || 'An error Occured')
+      }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
       );
@@ -31,7 +39,14 @@ export const postCart = createAsyncThunk(
       toast.success("Added to Cart!");
       return response;
     } catch (error) {
-      toast.error(error.response?.data?.detail  || "An error occurred");
+      console.log(error?.response?.data?.detail)
+      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
+          toast.error(error?.response?.data?.detail)
+          window.location.replace('/login')
+      }
+      else {
+          toast.error(error?.response?.data?.detail || 'An error Occured')
+      }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
       );
@@ -47,7 +62,14 @@ export const putCart = createAsyncThunk(
       toast.success("Cart updated successfully!");
       return response;
     } catch (error) {
-      toast.error(error.response?.data?.detail || "An error occurred while updating the cart");
+      console.log(error?.response?.data?.detail)
+      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
+          toast.error(error?.response?.data?.detail)
+          window.location.replace('/login')
+      }
+      else {
+          toast.error(error?.response?.data?.detail || 'An error Occured')
+      }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred while updating the cart"
       );
@@ -64,7 +86,14 @@ export const deleteCart = createAsyncThunk(
       return response;
     } catch (error) {
     
-      toast.error(error.response?.data?.detail  || "An error occurred");
+      console.log(error?.response?.data?.detail)
+      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
+          toast.error(error?.response?.data?.detail)
+          window.location.replace('/login')
+      }
+      else {
+          toast.error(error?.response?.data?.detail || 'An error Occured')
+      }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
       );
