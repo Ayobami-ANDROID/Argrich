@@ -75,9 +75,10 @@ const Cart = () => {
           </div>
           <div className="flex justify-between mt-8">
              <div></div>
-            <Link to="/homepage/checkout" className="bg-[#005C2D] text-white py-2 px-8 mr-2  rounded-[20px]">
+             {cart.length !== 0 ? (   <Link to="/homepage/checkout" className="bg-[#005C2D] text-white py-2 px-8 mr-2  rounded-[20px]">
               Checkout
-            </Link>
+            </Link>) : 'Nothing in Cart yet'}
+         
           </div>
         </div>
       </div>

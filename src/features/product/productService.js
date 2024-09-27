@@ -1,7 +1,7 @@
 import apiClient from "../../app/axiosConfig";
 
-const getProducts = async () => {
-  const response = await apiClient.get(`products/`);
+const getProducts = async (limit,offset) => {
+  const response = await apiClient.get(`products?limit=${limit}&offset=${offset}`);
   return response.data;
 };
 
