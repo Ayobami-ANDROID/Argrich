@@ -6,11 +6,11 @@ import { getProducts, productReset } from "../features/product/productSlice";
 
 const TodayDeals = () => {
   const dispatch = useDispatch();
-  const limit = 3; // Increased limit for better pagination example
+  const limit = 16; // Increased limit for better pagination example
   const [currentPage, setCurrentPage] = useState(1);
-  const { isLoading, products, totalProducts } = useSelector((state) => state.product);
+  const { isLoading, products, totalProducts,count } = useSelector((state) => state.product);
 
-  const totalPages = Math.ceil(totalProducts / limit);
+  const totalPages = Math.ceil(count / limit);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -31,11 +31,10 @@ const TodayDeals = () => {
 
 
 
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const renderPageNumbers = () => {
-    const totalPages = Math.ceil(5 / limit);
+    // const totalPages = Math.ceil(5 / limit);
     const visiblePages = 3; // Number of visible page numbers at once
     const pages = [];
     const middlePage = Math.ceil(visiblePages / 2);
@@ -145,13 +144,13 @@ const TodayDeals = () => {
           Next
         </button> */}
         <button
-          className={`ml-2 ${currentPage === 2
+          className={`ml-2 ${currentPage === totalPages
             ? 'opacity-50 cursor-not-allowed bg-[#919EAB] border-2 h-[3opx] w-[30px] border-[#919EAB] rounded-full'
             : 'cursor-pointer  border-[1px] h-[30px] w-[30px] rounded-full border-[rgba(42,79,26,1)]'
             }`}
           onClick={() => handlePageChange(currentPage + 1)}
           // disabled={currentPage === totalPages}
-          disabled={currentPage === 2}
+          disabled={currentPage === totalPages}
         >
 
           <svg

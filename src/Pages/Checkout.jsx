@@ -1,5 +1,6 @@
 import React, { useEffect,useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import icon1 from "../images/chevron-right.svg";
 import { useDispatch, useSelector } from "react-redux";
 import minus from "../images/minus.svg";
@@ -7,6 +8,8 @@ import plus from "../images/plus.svg";
 import deleteimg from "../images/delete.svg";
 import CheckoutItem from "../components/CheckoutItem";
 import { getCart } from "../features/cart/cartSlice";
+import PaystackPop from '@paystack/inline-js'
+import { createOrder } from "../features/product/productSlice";
 
 const Checkout = () => {
     const navigate = useNavigate();
@@ -14,6 +17,7 @@ const Checkout = () => {
     const { cart } = useSelector((state) => state.cart);
     const [payNow, setPayNow] = useState(false);
     const [payOnDelivery, setPayOnDelivery] = useState(false);
+    const { isLoading, } = useSelector((state) => state.product);
     console.log(cart);
     useEffect(() => {
         const cartProduct = async () => {
@@ -32,15 +36,42 @@ const Checkout = () => {
     }, 0);
 
 
-    const handlePayNowChange = () => {
+    const handlePayNowChange = async () => {
+        const body = {
+            payment_method: "pay_now"
+        }
         setPayNow(true);
         setPayOnDelivery(false);
+       
     };
 
     const handlePayOnDeliveryChange = () => {
         setPayOnDelivery(true);
         setPayNow(false);
     };
+
+    const handleSubmit = async () =>{
+        if(payNow === true){
+            const body = {
+                payment_method: "pay_now"
+            }
+
+           const result= await dispatch(createOrder(body)).unwrap()
+           console.log(result)
+            const popup = new PaystackPop()
+            popup.resumeTransaction(result.access_code)
+        }
+        else if(payOnDelivery === true){
+            const body = {
+                payment_method: "on_delivery"
+            }
+            await dispatch(createOrder(body)).unwrap()
+            
+        }
+        else{
+          toast.error('Select a payment method')
+        }
+    }
 
     return (
         <div className="px-10 bg-[#F5F5F5]  pt-10 pb-20 flex-1">
@@ -136,7 +167,7 @@ const Checkout = () => {
                         </div>
                     </div>
                    <div className="flex flex-col items-center">
-                   <button className="bg-[rgba(42,79,26,1)]  w-[260px] rounded-[30px] mt-4  text-[rgba(255,255,255,1)] py-[16px] px-[24px]"> Proceed</button>
+                   <button onClick={handleSubmit} className="bg-[rgba(42,79,26,1)]  w-[260px] rounded-[30px] mt-4  text-[rgba(255,255,255,1)] py-[16px] px-[24px]"> Proceed</button>
                    </div>
                    
                 </div>

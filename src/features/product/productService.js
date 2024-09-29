@@ -15,9 +15,15 @@ const getSearchProduct = async (name,category) => {
   return response.data
 }
 
+const createProductOrder = async (userData) => {
+  const response = await apiClient.post(`/products/orders/`,userData)
+  return response.data
+}
+
 const productService = {
   getProducts,
   getSingleProduct,
-  getSearchProduct
+  getSearchProduct,
+  createProductOrder
 };
 export default productService;

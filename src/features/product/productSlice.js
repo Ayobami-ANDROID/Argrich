@@ -6,6 +6,7 @@ const initialState = {
   products: [],
   product: null,
   isLoading: false,
+ 
 };
 export const getProducts = createAsyncThunk(
   "products/",
@@ -51,6 +52,29 @@ export const getSingleProduct = createAsyncThunk(
   }
 );
 
+
+export const createOrder = createAsyncThunk(
+  "products/orders/",
+  async (userData, thunkAPI) => {
+    try {
+      const response = await productService.createProductOrder(userData);
+      return response;
+    } catch (error) {
+      console.log(error?.response?.data?.detail)
+      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
+          toast.error(error?.response?.data?.detail)
+          window.location.replace('/login')
+      }
+      else {
+          toast.error(error?.response?.data?.detail || 'An error Occured')
+      }
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "An error occurred"
+      );
+    }
+  }
+);
+
 export const getSearchProduct = createAsyncThunk(
   "products/search",
    async({name,search},thunkAPI) => {
@@ -78,6 +102,7 @@ const productSlice = createSlice({
   initialState: {
     products: [],
     product: {},
+    count:0,
     isLoading: true,
   },
   reducers: {
@@ -91,6 +116,7 @@ const productSlice = createSlice({
       .addCase(getProducts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.products = action.payload.results
+        state.count =action.payload.count
         console.log("getProduct", action.payload);
       })
       .addCase(getProducts.rejected, (state, action) => {
@@ -116,6 +142,15 @@ const productSlice = createSlice({
       })
       .addCase(getSearchProduct.rejected,(state,action) => {
         state.isLoading = false
+      })
+      .addCase(createOrder.pending,(state,action)=>{
+        state.isLoading = true
+      })
+      .addCase(createOrder.rejected,(state,action)=>{
+        state.isLoading = false
+      })
+      .addCase(createOrder.fulfilled,(state,action)=>{
+        state.isLoading = true;
       })
   },
 });
