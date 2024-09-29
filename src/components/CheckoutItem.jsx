@@ -5,7 +5,7 @@ import plus from "../images/plus.svg";
 import deleteimg from "../images/delete.svg";
 import { deleteCart, getCart, putCart } from "../features/cart/cartSlice";
 
-const CheckoutItem = () => {
+const CheckoutItem = ({product}) => {
     const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
   const [count, setCount] = useState(product?.quantity);

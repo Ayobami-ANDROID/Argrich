@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import icon1 from "../images/chevron-right.svg";
 import { useDispatch, useSelector } from "react-redux";
 import minus from "../images/minus.svg";
@@ -7,11 +8,16 @@ import plus from "../images/plus.svg";
 import deleteimg from "../images/delete.svg";
 import CheckoutItem from "../components/CheckoutItem";
 import { getCart } from "../features/cart/cartSlice";
+import PaystackPop from '@paystack/inline-js'
+import { createOrder } from "../features/product/productSlice";
 
 const Checkout = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { cart } = useSelector((state) => state.cart);
+    const [payNow, setPayNow] = useState(false);
+    const [payOnDelivery, setPayOnDelivery] = useState(false);
+    const { isLoading, } = useSelector((state) => state.product);
     console.log(cart);
     useEffect(() => {
         const cartProduct = async () => {
@@ -28,6 +34,45 @@ const Checkout = () => {
     const totalPrice = cart.reduce((acc, item) => {
         return acc + item.product.price * item.quantity;
     }, 0);
+
+
+    const handlePayNowChange = async () => {
+        const body = {
+            payment_method: "pay_now"
+        }
+        setPayNow(true);
+        setPayOnDelivery(false);
+       
+    };
+
+    const handlePayOnDeliveryChange = () => {
+        setPayOnDelivery(true);
+        setPayNow(false);
+    };
+
+    const handleSubmit = async () =>{
+        if(payNow === true){
+            const body = {
+                payment_method: "pay_now"
+            }
+
+           const result= await dispatch(createOrder(body)).unwrap()
+           console.log(result)
+            const popup = new PaystackPop()
+            popup.resumeTransaction(result.access_code)
+        }
+        else if(payOnDelivery === true){
+            const body = {
+                payment_method: "on_delivery"
+            }
+            await dispatch(createOrder(body)).unwrap()
+            
+        }
+        else{
+          toast.error('Select a payment method')
+        }
+    }
+
     return (
         <div className="px-10 bg-[#F5F5F5]  pt-10 pb-20 flex-1">
             <div className="flex gap-x-4">
@@ -79,14 +124,52 @@ const Checkout = () => {
                         </Link>
                     </div> */}
                 </div>
-                <div className="bg-[#fff] py-8 px-4 rounded-[5px]">
-                    <div className="border-b-[1px] border-[#E4E7EC] pb-2">
-                        <h1 className="text-[#101928] font-[600] text-[24px] ">Payment Information</h1>
+                <div className="bg-[#fff] py-8 px-4 rounded-[12px] border-[1px] border-[rgba(228,231,236,1)]">
+                    <div className="border-b-[1px] border-[#E4E7EC] pb-4">
+                        <h1 className="text-[#101928] font-[600] text-[24px] font-manrope ">Payment Information</h1>
                     </div>
-                    <form className="py-2">
-                        <h4 className="text-[#101928] text-[16px] mb-4">Pay Now</h4>
+                    <form className="py-4 border-[#E4E7EC] border-b-[1px]">
+                        <h4 className="text-[#101928] text-[16px] my-4 font-[600] font-manrope">Pay with</h4>
+                        <div className="flex flex-col gap-4">
+                            <div className="flex">
+                                
+                            <input 
+                                type="radio" 
+                                className="mr-4 h-5 w-5"
+                                checked={payNow}
+                                onChange={handlePayNowChange}
+                                style={{ accentColor: 'rgba(0, 138, 47, 1)' }}
+                            />
+                                <p className="font-[600] text-[16px] font-manrope">Pay Now</p>
+                            </div>
+                            <div className="flex">
+                            <input 
+                                type="radio" 
+                                className="mr-4 h-5 w-5"
+                                checked={payOnDelivery}
+                                onChange={handlePayOnDeliveryChange}
+                                style={{ accentColor: 'rgba(0, 138, 47, 1)' }}
+                            />
+                                <p className="font-[600] text-[16px] font-manrope">Pay On Delivery</p>
+                            </div>
+                        </div>
+
                     </form>
 
+                    <div className="flex flex-col gap-4 my-4 ">
+                        <div className="flex justify-between ">
+                            <p>Sub Total</p>
+                            <h1> ₦{totalPrice.toLocaleString()}</h1>
+                        </div>
+                        <div className="flex justify-between ">
+                            <p>Sub Total</p>
+                            <h1> ₦{2000}</h1>
+                        </div>
+                    </div>
+                   <div className="flex flex-col items-center">
+                   <button onClick={handleSubmit} className="bg-[rgba(42,79,26,1)]  w-[260px] rounded-[30px] mt-4  text-[rgba(255,255,255,1)] py-[16px] px-[24px]"> Proceed</button>
+                   </div>
+                   
                 </div>
             </div>
 

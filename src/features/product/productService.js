@@ -1,7 +1,7 @@
 import apiClient from "../../app/axiosConfig";
 
-const getProducts = async () => {
-  const response = await apiClient.get(`products/`);
+const getProducts = async (limit,offset) => {
+  const response = await apiClient.get(`products?limit=${limit}&offset=${offset}`);
   return response.data;
 };
 
@@ -15,9 +15,15 @@ const getSearchProduct = async (name,category) => {
   return response.data
 }
 
+const createProductOrder = async (userData) => {
+  const response = await apiClient.post(`/products/orders/`,userData)
+  return response.data
+}
+
 const productService = {
   getProducts,
   getSingleProduct,
-  getSearchProduct
+  getSearchProduct,
+  createProductOrder
 };
 export default productService;
