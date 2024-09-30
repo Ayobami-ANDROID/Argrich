@@ -66,7 +66,7 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((product, index) => (
+            {orders?.map((product, index) => (
               <tr key={index} className="hover:bg-gray-50">
                 <td className="px-4 py-2 font-manrope">{product.id}</td>
                 <td className="px-4 py-2 font-manrope">{formatDate(product.created_at)}</td>
@@ -74,9 +74,9 @@ const Orders = () => {
                 <td className="px-4 py-2 font-manrope">₦{product.total_price}</td>
                 <td>
                   <p className={`px-4 text-[12px] font-medium rounded-md py-2 w-full mx-auto max-w-[69px] font-manrope flex items-center justify-center ${
-                    product.status === "Received" ? "text-[#0010C5] bg-[#B3B5FF]" :
+                    product.status === "Cancelled" ? "text-[#fff] bg-[red]" :
                     product.status === "Pending" ? "bg-[#FFB3B3] text-[#C50000]" :
-                    product.status === "Status" ? "text-[#B3FFBD] bg-[#B3FFBD]" : ""
+                    product.status === "Completed" ? "text-[#ffff] bg-[#5d9f65] " : ""
                   }`}>
                     {product.status}
                   </p>
