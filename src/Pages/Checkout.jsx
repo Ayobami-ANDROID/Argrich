@@ -23,6 +23,7 @@ const Checkout = () => {
         const cartProduct = async () => {
             try {
                 const values = await dispatch(getCart()).unwrap();
+                
 
                 console.log("values", "sdsd");
             } catch (error) { }
@@ -30,6 +31,11 @@ const Checkout = () => {
 
         cartProduct();
     }, []);
+
+    if(cart.length === 0 ){
+        toast.error("Nothing added to Cart")
+        navigate("/homepage/cart")
+    }
 
     const totalPrice = cart.reduce((acc, item) => {
         return acc + item.product.price * item.quantity;

@@ -53,6 +53,20 @@ const GetProduct = () => {
 
     }
   }
+
+
+  const buyNow = async () => {
+    const body={
+      product:id,
+      quantity:count
+    }
+    try {
+      await dispatch(postCart(body)).unwrap()
+      navigate("/homepage/checkout")
+    } catch (error) {
+      
+    }
+  }
   const [count, setCount] = useState(1);
 
   if (isLoading) {
@@ -165,7 +179,7 @@ const GetProduct = () => {
               </div>
             </div>
             <div className="flex">
-              <button className="bg-[#005C2D] text-white py-2 px-8 mr-2  rounded-[20px]">
+              <button className="bg-[#005C2D] text-white py-2 px-8 mr-2  rounded-[20px]" onClick={() => buyNow()}>
                 BUY NOW
               </button>
               <button className="border-2 border-[#2A4F1A] rounded-[20px] py-2 px-8 text-[#2A4F1A]" onClick={() => addToCart()}>
