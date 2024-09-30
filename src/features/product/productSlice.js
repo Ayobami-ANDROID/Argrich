@@ -58,6 +58,53 @@ export const createOrder = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await productService.createProductOrder(userData);
+      toast.success('Order Created')
+      return response;
+     
+    } catch (error) {
+      console.log(error?.response?.data?.detail)
+      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
+          toast.error(error?.response?.data?.detail)
+          window.location.replace('/login')
+      }
+      else {
+          toast.error(error?.response?.data?.detail || 'An error Occured')
+      }
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "An error occurred"
+      );
+    }
+  }
+);
+
+
+export const getOrder = createAsyncThunk(
+  "'getproducts/orders/",
+  async (_, thunkAPI) => {
+    try {
+      const response = await productService.getProductOrder();
+      return response;
+    } catch (error) {
+      console.log(error?.response?.data?.detail)
+      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
+          toast.error(error?.response?.data?.detail)
+          window.location.replace('/login')
+      }
+      else {
+          toast.error(error?.response?.data?.detail || 'An error Occured')
+      }
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "An error occurred"
+      );
+    }
+  }
+);
+
+export const getOrderById = createAsyncThunk(
+  "'getproductsById/orders/",
+  async (id, thunkAPI) => {
+    try {
+      const response = await productService.getProductOrderById(id)
       return response;
     } catch (error) {
       console.log(error?.response?.data?.detail)
@@ -101,6 +148,8 @@ const productSlice = createSlice({
   name: "product",
   initialState: {
     products: [],
+    orders:[],
+    order:{},
     product: {},
     count:0,
     isLoading: true,
@@ -151,6 +200,26 @@ const productSlice = createSlice({
       })
       .addCase(createOrder.fulfilled,(state,action)=>{
         state.isLoading = true;
+      })
+      .addCase(getOrder.rejected,(state,action)=>{
+        state.isLoading = false
+      })
+      .addCase(getOrder.pending,(state,action)=>{
+        state.isLoading = true
+      })
+      .addCase(getOrder.fulfilled,(state,action)=>{
+        state.isLoading = false
+        state.orders = action.payload
+      })
+      .addCase(getOrderById.pending,(state,action) => {
+        state.isLoading= ture
+      })
+      .addCase(getOrderById.rejected,(state,asction)=> {
+        state.isLoading = false
+      })
+      .addCase(getOrderById.fulfilled,(state,action)=>{
+        state.isLoading = false
+        state.order = action.payload
       })
   },
 });

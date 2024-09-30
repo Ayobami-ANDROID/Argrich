@@ -20,10 +20,22 @@ const createProductOrder = async (userData) => {
   return response.data
 }
 
+const getProductOrder = async () => {
+  const response = await apiClient.get(`/products/orders/`)
+  return response.data
+}
+
+const getProductOrderById = async (id) => {
+  const response = await apiClient.get(`/products/orders/{id}`)
+  return response.data
+}
+
 const productService = {
   getProducts,
   getSingleProduct,
   getSearchProduct,
-  createProductOrder
+  createProductOrder,
+  getProductOrder,
+  getProductOrderById
 };
 export default productService;
