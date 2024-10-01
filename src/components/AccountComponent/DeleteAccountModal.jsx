@@ -4,6 +4,7 @@ import iconupload from "../../images/icons/icon4.svg";
 import close from "../../images/icons/close.svg";
 import dp from "../../images/dp.jpeg";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   setIsOpen,
   setIsOpen1,
