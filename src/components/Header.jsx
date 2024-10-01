@@ -26,8 +26,11 @@ const Header = () => {
   // const [click, setClick] = useState(false);
   const [value,setValue] = useState('')
   const { token, user } = useSelector((state) => state.auth);
+  const limit = 6; // Increased limit for better pagination example
+
+  const [currentPage, setCurrentPage] = useState(1);
   const { category } = useSelector((state) => state.category);
-  const { cart } = useSelector((state) => state.cart);
+  const { cart,count } = useSelector((state) => state.cart);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
@@ -44,7 +47,7 @@ const Header = () => {
     const fetchProduct = async () => {
       try {
         await dispatch(getCategory()).unwrap();
-        await dispatch(getCart()).unwrap()
+        await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap()
       } catch (error) { }
     };
 
