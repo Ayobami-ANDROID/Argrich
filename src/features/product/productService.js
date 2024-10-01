@@ -10,8 +10,8 @@ const getSingleProduct = async (id) => {
   return response.data;
 };
 
-const getSearchProduct = async (name,category) => {
-  const response = await apiClient.get(`products?name=${name}&category=${category}`)
+const getSearchProduct = async (name,category,limit,offset) => {
+  const response = await apiClient.get(`products?name=${name}&category=${category}&limit=${limit}&offset=${offset}`)
   return response.data
 }
 

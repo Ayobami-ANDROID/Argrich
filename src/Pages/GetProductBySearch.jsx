@@ -12,20 +12,68 @@ const GetProductBySearch = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { isLoading, products } = useSelector((state) => state.product);
+    const limit = 6; // Increased limit for better pagination example
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const { isLoading, products,count } = useSelector((state) => state.product);
     let { searchQuery } = useParams();
+    const totalPages = Math.ceil(count / limit);
 
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                await dispatch(getSearchProduct({ name: searchQuery, search: '' })).unwrap();
+                await dispatch(getSearchProduct({ name: searchQuery, search: '',limit:limit, offset: (currentPage - 1) })).unwrap();
             } catch (error) {
                 console.error("Error fetching products:", error);
             }
         };
 
         fetchProduct();
-    }, [dispatch, searchQuery]);
+    }, [dispatch, searchQuery,limit,currentPage]);
+
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+      };
+    
+    
+    
+      const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    
+      const renderPageNumbers = () => {
+        // const totalPages = Math.ceil(5 / limit);
+        const visiblePages = 3; // Number of visible page numbers at once
+        const pages = [];
+        const middlePage = Math.ceil(visiblePages / 2);
+        let startPage = Math.max(1, currentPage - middlePage + 1);
+        let endPage = Math.min(totalPages, startPage + visiblePages - 1);
+    
+        // Adjust start and end page numbers if current page is near the beginning or end
+        if (currentPage <= middlePage) {
+          startPage = 1;
+          endPage = Math.min(totalPages, visiblePages);
+        } else if (currentPage >= totalPages - middlePage + 1) {
+          startPage = Math.max(1, totalPages - visiblePages + 1);
+          endPage = totalPages;
+        }
+    
+    
+    
+        for (let i = startPage; i <= endPage; i++) {
+          console.log(i)
+          console.log(currentPage)
+          pages.push(
+            <button
+              key={i}
+              className={`mx-1 h-[30px] w-[30px]  rounded-full  ${i === currentPage ? "bg-[rgba(42,79,26,1)] text-[rgba(255,255,255,1)]" : "bg-white border-[1px] border-[rgba(42,79,26,1)]"
+                }`}
+              onClick={() => paginate(i)}
+            >
+              {i}
+            </button>
+          );
+        }
+        return pages;
+      };
 
     return (
         <div className='px-10 py-4 min-h-screen'>
@@ -110,6 +158,75 @@ const GetProductBySearch = () => {
 
                 </div>
             </div>
+            <div className="flex justify-center items-center mt-8">
+        {/* <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 mx-1 bg-[#318000] text-white rounded disabled:bg-gray-300"
+        >
+          Previous
+        </button> */}
+        <button
+          className={`mr-2 ${currentPage === 1
+            ? 'opacity-50 cursor-not-allowed bg-[#919EAB] h-[30px] w-[30px] border-2 border-[#919EAB] rounded-full'
+            : 'cursor-pointer border-[1px]  h-[30px] w-[30px] rounded-full border-[rgba(42,79,26,1)]'
+            }`}
+          // onClick={() => onPageChange(currentPage - 1)}
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          <svg
+            className="w-6 h-6 inline-block align-middle"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+
+        </button>
+
+        {renderPageNumbers()}
+
+        {/* <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 mx-1 bg-[#318000] text-white rounded disabled:bg-gray-300"
+        >
+          Next
+        </button> */}
+        <button
+          className={`ml-2 ${currentPage === totalPages
+            ? 'opacity-50 cursor-not-allowed bg-[#919EAB] border-2 h-[3opx] w-[30px] border-[#919EAB] rounded-full'
+            : 'cursor-pointer  border-[1px] h-[30px] w-[30px] rounded-full border-[rgba(42,79,26,1)]'
+            }`}
+          onClick={() => handlePageChange(currentPage + 1)}
+          // disabled={currentPage === totalPages}
+          disabled={currentPage === totalPages}
+        >
+
+          <svg
+            className="w-6 h-6 inline-block align-middle"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      </div>
         </div>
 
     )
