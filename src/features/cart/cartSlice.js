@@ -120,7 +120,8 @@ const cartSlice = createSlice({
       })
       .addCase(getCart.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.cart = action.payload;
+        const { results }  = action.payload;
+        state.cart =results;
         console.log("get cart", action.payload);
       })
       .addCase(postCart.pending, (state, action) => {
