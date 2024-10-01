@@ -13,9 +13,12 @@ import { Navigate, Outlet } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 
 const AccountLayout = () => {
+  const product = useSelector((state) => state.product);
   const { isOpen, isOpen1, isOpen2, isOpen3 } = useSelector(
     (state) => state.deleteAccount
   );
+  console.log("product",product.isLoading);
+  
   const { token } = useSelector((state) => state.auth);
   const { user, isLoading } = useSelector((state) => state.account);
 console.log("token", token?.access);
@@ -26,7 +29,7 @@ console.log("token", token?.access);
 
   return (
     <div className="flex flex-col min-h-screen">
-         {isLoading && (
+         {(isLoading ||product.isLoading) && (
         <div className="fixed bg-black/[0.6] h-screen w-screen z-50 left-0 top-0 items-center flex justify-center">
           {" "}
           <PulseLoader speedMultiplier={0.9} color="#fff" size={20} />

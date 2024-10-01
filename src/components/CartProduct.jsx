@@ -73,7 +73,7 @@ const CartProduct = ({ product }) => {
           </div>
         </div>
         <div className="flex lg:w-fit justify-between lg:flex-col lg:items-end lg:h-[136px] flex-1">
-          <p className="text-2xl font-semibold">₦{product?.product?.price}</p>
+          <p className="text-2xl font-semibold">₦{product?.product?.price.toLocaleString()}</p>
           <button className="lg:self-end" onClick={() => deleteItem(product?.product?.id)}>
             <img src={deleteimg} alt="Delete" />
           </button>

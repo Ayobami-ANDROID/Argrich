@@ -6,22 +6,23 @@ const initialState = {
   products: [],
   product: null,
   isLoading: false,
- 
 };
 export const getProducts = createAsyncThunk(
   "products/",
-  async ({limit,offset}, thunkAPI) => {
+  async ({ limit, offset }, thunkAPI) => {
     try {
-      const response = await productService.getProducts(limit,offset);
+      const response = await productService.getProducts(limit, offset);
       return response;
     } catch (error) {
-      console.log(error?.response?.data?.detail)
-      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
-          toast.error(error?.response?.data?.detail)
-          window.location.replace('/login')
-      }
-      else {
-          toast.error(error?.response?.data?.detail || 'An error Occured')
+      console.log(error?.response?.data?.detail);
+      if (
+        error?.response?.data?.detail ===
+        "Authentication credentials were not provided."
+      ) {
+        toast.error(error?.response?.data?.detail);
+        window.location.replace("/login");
+      } else {
+        toast.error(error?.response?.data?.detail || "An error Occured");
       }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
@@ -37,13 +38,15 @@ export const getSingleProduct = createAsyncThunk(
       const response = await productService.getSingleProduct(id);
       return response;
     } catch (error) {
-      console.log(error?.response?.data?.detail)
-      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
-          toast.error(error?.response?.data?.detail)
-          window.location.replace('/login')
-      }
-      else {
-          toast.error(error?.response?.data?.detail || 'An error Occured')
+      console.log(error?.response?.data?.detail);
+      if (
+        error?.response?.data?.detail ===
+        "Authentication credentials were not provided."
+      ) {
+        toast.error(error?.response?.data?.detail);
+        window.location.replace("/login");
+      } else {
+        toast.error(error?.response?.data?.detail || "An error Occured");
       }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
@@ -51,24 +54,24 @@ export const getSingleProduct = createAsyncThunk(
     }
   }
 );
-
 
 export const createOrder = createAsyncThunk(
   "products/orders/",
   async (userData, thunkAPI) => {
     try {
       const response = await productService.createProductOrder(userData);
-      toast.success('Order Created')
+      toast.success("Order Created");
       return response;
-     
     } catch (error) {
-      console.log(error?.response?.data?.detail)
-      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
-          toast.error(error?.response?.data?.detail)
-          window.location.replace('/login')
-      }
-      else {
-          toast.error(error?.response?.data?.detail || 'An error Occured')
+      console.log(error?.response?.data?.detail);
+      if (
+        error?.response?.data?.detail ===
+        "Authentication credentials were not provided."
+      ) {
+        toast.error(error?.response?.data?.detail);
+        window.location.replace("/login");
+      } else {
+        toast.error(error?.response?.data?.detail || "An error Occured");
       }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
@@ -76,7 +79,6 @@ export const createOrder = createAsyncThunk(
     }
   }
 );
-
 
 export const getOrder = createAsyncThunk(
   "'getproducts/orders/",
@@ -85,13 +87,15 @@ export const getOrder = createAsyncThunk(
       const response = await productService.getProductOrder();
       return response;
     } catch (error) {
-      console.log(error?.response?.data?.detail)
-      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
-          toast.error(error?.response?.data?.detail)
-          window.location.replace('/login')
-      }
-      else {
-          toast.error(error?.response?.data?.detail || 'An error Occured')
+      console.log(error?.response?.data?.detail);
+      if (
+        error?.response?.data?.detail ===
+        "Authentication credentials were not provided."
+      ) {
+        toast.error(error?.response?.data?.detail);
+        window.location.replace("/login");
+      } else {
+        toast.error(error?.response?.data?.detail || "An error Occured");
       }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
@@ -104,16 +108,18 @@ export const getOrderById = createAsyncThunk(
   "'getproductsById/orders/",
   async (id, thunkAPI) => {
     try {
-      const response = await productService.getProductOrderById(id)
+      const response = await productService.getProductOrderById(id);
       return response;
     } catch (error) {
-      console.log(error?.response?.data?.detail)
-      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
-          toast.error(error?.response?.data?.detail)
-          window.location.replace('/login')
-      }
-      else {
-          toast.error(error?.response?.data?.detail || 'An error Occured')
+      console.log(error?.response?.data?.detail);
+      if (
+        error?.response?.data?.detail ===
+        "Authentication credentials were not provided."
+      ) {
+        toast.error(error?.response?.data?.detail);
+        window.location.replace("/login");
+      } else {
+        toast.error(error?.response?.data?.detail || "An error Occured");
       }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
@@ -124,35 +130,37 @@ export const getOrderById = createAsyncThunk(
 
 export const getSearchProduct = createAsyncThunk(
   "products/search",
-   async({name,search},thunkAPI) => {
+  async ({ name, search }, thunkAPI) => {
     try {
-      const response = await productService.getSearchProduct(name,search)
-      return response
+      const response = await productService.getSearchProduct(name, search);
+      return response;
     } catch (error) {
-      console.log(error?.response?.data?.detail)
-      if (error?.response?.data?.detail === "Authentication credentials were not provided.") {
-          toast.error(error?.response?.data?.detail)
-          window.location.replace('/login')
-      }
-      else {
-          toast.error(error?.response?.data?.detail || 'An error Occured')
+      console.log(error?.response?.data?.detail);
+      if (
+        error?.response?.data?.detail ===
+        "Authentication credentials were not provided."
+      ) {
+        toast.error(error?.response?.data?.detail);
+        window.location.replace("/login");
+      } else {
+        toast.error(error?.response?.data?.detail || "An error Occured");
       }
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "An error occurred"
       );
     }
-   }
-)
+  }
+);
 
 const productSlice = createSlice({
   name: "product",
   initialState: {
     products: [],
-    orders:[],
-    order:{},
+    orders: [],
+    order: {},
     product: {},
-    count:0,
-    isLoading: true,
+    count: 0,
+    isLoading: false,
   },
   reducers: {
     productReset: () => initialState,
@@ -164,8 +172,8 @@ const productSlice = createSlice({
       })
       .addCase(getProducts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.products = action.payload.results
-        state.count =action.payload.count
+        state.products = action.payload.results;
+        state.count = action.payload.count;
         console.log("getProduct", action.payload);
       })
       .addCase(getProducts.rejected, (state, action) => {
@@ -177,50 +185,53 @@ const productSlice = createSlice({
       })
       .addCase(getSingleProduct.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.product = action.payload
+        state.product = action.payload;
       })
       .addCase(getSingleProduct.rejected, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getSearchProduct.pending,(state,action) => {
+      .addCase(getSearchProduct.pending, (state, action) => {
         state.isLoading = true;
-      }) 
-      .addCase(getSearchProduct.fulfilled,(state,action) => {
+      })
+      .addCase(getSearchProduct.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.products = action.payload.results
+        state.products = action.payload.results;
       })
-      .addCase(getSearchProduct.rejected,(state,action) => {
-        state.isLoading = false
+      .addCase(getSearchProduct.rejected, (state, action) => {
+        state.isLoading = false;
       })
-      .addCase(createOrder.pending,(state,action)=>{
-        state.isLoading = true
-      })
-      .addCase(createOrder.rejected,(state,action)=>{
-        state.isLoading = false
-      })
-      .addCase(createOrder.fulfilled,(state,action)=>{
+      .addCase(createOrder.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(getOrder.rejected,(state,action)=>{
-        state.isLoading = false
+      .addCase(createOrder.rejected, (state, action) => {
+        state.isLoading = false;
       })
-      .addCase(getOrder.pending,(state,action)=>{
-        state.isLoading = true
+      .addCase(createOrder.fulfilled, (state, action) => {
+        state.isLoading = true;
       })
-      .addCase(getOrder.fulfilled,(state,action)=>{
-        state.isLoading = false
-        state.orders = action.payload
+
+      .addCase(getOrder.pending, (state, action) => {
+        state.isLoading = true;
       })
-      .addCase(getOrderById.pending,(state,action) => {
-        state.isLoading= ture
+      .addCase(getOrder.rejected, (state, action) => {
+        state.isLoading = false;
       })
-      .addCase(getOrderById.rejected,(state,asction)=> {
-        state.isLoading = false
+      .addCase(getOrder.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const { results } = action.payload;
+        state.orders = results;
+        console.log("action.payload", action.payload);
       })
-      .addCase(getOrderById.fulfilled,(state,action)=>{
-        state.isLoading = false
-        state.order = action.payload
+      .addCase(getOrderById.pending, (state, action) => {
+        state.isLoading = ture;
       })
+      .addCase(getOrderById.rejected, (state, asction) => {
+        state.isLoading = false;
+      })
+      .addCase(getOrderById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.order = action.payload;
+      });
   },
 });
 
