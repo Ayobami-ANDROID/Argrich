@@ -130,7 +130,7 @@ const Checkout = () => {
                         </Link>
                     </div> */}
                 </div>
-                <div className="bg-[#fff] py-8 px-4 rounded-[12px] border-[1px] border-[rgba(228,231,236,1)]">
+                <div className="bg-[#fff] py-8 px-4 rounded-[12px] border-[1px] border-[rgba(228,231,236,1)] lg:mt-0 mt-4">
                     <div className="border-b-[1px] border-[#E4E7EC] pb-4">
                         <h1 className="text-[#101928] font-[600] text-[24px] font-manrope ">Payment Information</h1>
                     </div>
