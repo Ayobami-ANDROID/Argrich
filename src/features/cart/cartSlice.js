@@ -4,14 +4,15 @@ import { toast } from "react-toastify";
 
 const initialState = {
   cart: [],
+  count:'',
   isLoading: false,
 };
 
 export const getCart = createAsyncThunk(
   "products/cart/",
-  async (_, thunkAPI) => {
+  async ({limit,offset}, thunkAPI) => {
     try {
-      const response = await cartService.getCart();
+      const response = await cartService.getCart(limit,offset);
       console.log("respons", response);
       
       return response;
@@ -106,6 +107,7 @@ const cartSlice = createSlice({
   initialState: {
     cart: [],
     isLoading: false,
+    count:0
   },
   reducers: {
     cartReset: () => initialState,
@@ -120,8 +122,9 @@ const cartSlice = createSlice({
       })
       .addCase(getCart.fulfilled, (state, action) => {
         state.isLoading = false;
-        const { results }  = action.payload;
-        state.cart =results;
+       
+        state.cart =action.payload.results;
+        state.count = action.payload.count
         console.log("get cart", action.payload);
       })
       .addCase(postCart.pending, (state, action) => {

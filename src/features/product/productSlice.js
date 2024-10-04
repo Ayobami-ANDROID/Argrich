@@ -130,9 +130,9 @@ export const getOrderById = createAsyncThunk(
 
 export const getSearchProduct = createAsyncThunk(
   "products/search",
-  async ({ name, search }, thunkAPI) => {
+  async ({ name, search, limit, offset }, thunkAPI) => {
     try {
-      const response = await productService.getSearchProduct(name, search);
+      const response = await productService.getSearchProduct(name, search,limit,offset);
       return response;
     } catch (error) {
       console.log(error?.response?.data?.detail);
@@ -195,6 +195,7 @@ const productSlice = createSlice({
       })
       .addCase(getSearchProduct.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.count = action.payload.count;
         state.products = action.payload.results;
       })
       .addCase(getSearchProduct.rejected, (state, action) => {
