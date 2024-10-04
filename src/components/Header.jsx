@@ -18,25 +18,28 @@ import { IoPersonSharp } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
 import { getCart } from "../features/cart/cartSlice";
 import { toast, Bounce } from "react-toastify";
+import { getUserProfile } from "../features/account/accountSlice";
 
 
 
 const Header = () => {
   // const [clicked, setClicked] = useState(false);
   // const [click, setClick] = useState(false);
+  const dispatch = useDispatch();
+  const { user, isLoading } = useSelector((state) => state.account);
   const [value,setValue] = useState('')
-  const { token, user } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth);
   const { category } = useSelector((state) => state.category);
   const { cart } = useSelector((state) => state.cart);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
-  console.log(cart, 'cart')
+  console.log(user, 'user')
 
-  const dispatch = useDispatch();
+ 
 
-  console.log(user);
+
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -45,6 +48,7 @@ const Header = () => {
       try {
         await dispatch(getCategory()).unwrap();
         await dispatch(getCart()).unwrap()
+        await dispatch(getUserProfile()).unwrap();
       } catch (error) { }
     };
 
@@ -170,8 +174,8 @@ const Header = () => {
                 <div className="">
                   {user?.profilePicture ? (
                     <img
-                      src={Profile}
-                      className="w-full rounded-full h-full"
+                      src={user?.profilePicture}
+                      className=" rounded-full  w-8 h-8  lg:h-12 lg:w-12 object-cover"
                     ></img>
                   ) : (
                     <div className="w-full rounded-full h-full flex items-center justify-center">

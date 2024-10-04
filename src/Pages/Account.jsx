@@ -92,7 +92,7 @@ const Account = () => {
               <div className=" relative rounded-full  h-[100px] w-[100px]">
                 <img
                   src={user?.profilePicture ?? defaultdp}
-                  className=" object-contain h-[100px] w-[100px] rounded-full "
+                  className=" object-cover h-[100px] w-[100px] rounded-full "
                   alt="Profile Img"
                 />
                 <div className="rounded-full flex absolute bg-white p-1 top-[70%] right-0 shadow-[0_0_10px_-1px_rgba(0,0,0,0.25)]">
