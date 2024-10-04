@@ -121,6 +121,8 @@ const authSlice = createSlice({
       .addCase(editUserProfile.fulfilled, (state, action) => {
         state.isLoading = false;
         console.log("edited", action.payload);
+        state.user = action.payload;
+      
         
       })
       .addCase(editUserProfile.rejected, (state, action) => {

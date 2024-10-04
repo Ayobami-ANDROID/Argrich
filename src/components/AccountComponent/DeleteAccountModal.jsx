@@ -24,6 +24,7 @@ const DeleteAccountModal = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setSelectedImage(reader.result);
+        dispatch(setIsOpen(false));
         dispatch(editUserProfile({ profilePicture: file }));
       };
       reader.readAsDataURL(file);
