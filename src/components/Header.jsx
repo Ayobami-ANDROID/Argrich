@@ -165,14 +165,13 @@ const Header = () => {
             className="lg:flex hidden items-center text-[#000]  mx-2 cursor-pointer relative "
           >
             <div className="mr-2">
-             <img src={carticon} alt="cart" />
+              <img src={carticon} alt="cart" />
             </div>
             <div className="sm:block xs:hidden">Cart</div>
             {cart.length <= 0 ? (
               ""
             ) : (
               <div className="w-6 h-6 bg-[#008A2F] rounded-full absolute top-[-55%] right-[-15%] text-center  text-white">
-                {" "}
                 {cart.length}
               </div>
             )}
