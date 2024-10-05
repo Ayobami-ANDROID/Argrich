@@ -115,16 +115,17 @@ const Checkout = () => {
            
             const popup =  new PaystackPop()
             popup.resumeTransaction(result.access_code)
-            cartReset()
-            
+           
+            navigate('/homepage/cart')
+
         }
         else if(payOnDelivery === true){
             const body = {
                 payment_method: "on_delivery"
             }
             await dispatch(createOrder(body)).unwrap()
-            // navigate('/homepage/')
-            cartReset()
+            navigate('/homepage/cart')
+            
         }
         else{
           toast.error('Select a payment method')

@@ -60,7 +60,7 @@ export const createOrder = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await productService.createProductOrder(userData);
-      toast.success("Order Created");
+      
       return response;
     } catch (error) {
       console.log(error?.response?.data?.detail);
