@@ -13,6 +13,8 @@ import { getCategory } from "../features/category/categorySlice";
 import { authReset } from "../features/auth/authSlice";
 import { getSearchProduct } from "../features/product/productSlice";
 import Skeleton from "react-loading-skeleton";
+import searchicon from "../images/search2.svg";
+import carticon from "../images/carticon.svg";
 import { Navigate } from "react-router-dom";
 import { IoPersonSharp } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
@@ -83,7 +85,7 @@ const Header = () => {
 
   const search = () => {
     if (!value.trim()) {
-      navigate("/");
+      navigate("/homepage/");
     } else {
       navigate(`/homepage/product/${value}`);
     }
@@ -139,22 +141,22 @@ const Header = () => {
           </div>
         </div>
         <div className="flex items-center gap-x-4 justify-end border-none w-full ">
-          <div className="flex  bg-[#F0F0F0] rounded-[300px] border-[#E4E4E4] ">
+          <div className="flex px-2 pr-4 bg-[#F0F0F0] rounded-[300px] border-[#E4E4E4] ">
             <div>
               <input
                 placeholder="Search Product"
                 type="text "
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                className=" outline-none px-4 max-w-[409px]  w-full  h-[40px] bg-inherit   "
-              ></input>
+                className=" outline-none font-manrope px-4 max-w-[409px]  w-full  h-[40px] bg-inherit   "
+              />
             </div>
 
             <div
               className="flex items-center    cursor-pointer"
               onClick={() => search()}
             >
-              <BiSearch />
+              <img src={searchicon} alt="search" />
             </div>
           </div>
 
@@ -163,7 +165,7 @@ const Header = () => {
             className="lg:flex hidden items-center text-[#000]  mx-2 cursor-pointer relative "
           >
             <div className="mr-2">
-              <CiShoppingCart size={"1.5em"} />
+             <img src={carticon} alt="cart" />
             </div>
             <div className="sm:block xs:hidden">Cart</div>
             {cart.length <= 0 ? (
