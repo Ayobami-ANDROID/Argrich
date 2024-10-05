@@ -7,13 +7,16 @@ import { deleteCart, getCart, putCart } from "../features/cart/cartSlice";
 
 const CartProduct = ({ product }) => {
   const dispatch = useDispatch();
-  const { cart } = useSelector((state) => state.cart);
-  const [count, setCount] = useState(product?.quantity);
+  const { cart,count } = useSelector((state) => state.cart);
+  const [counts, setCounts] = useState(product?.quantity);
+  const limit = 6; 
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(count / limit);
 
   const deleteItem = async (id) => {
     try {
       await dispatch(deleteCart(id)).unwrap();
-      await dispatch(getCart()).unwrap();
+      await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap();
     } catch (error) {
       console.error("Error deleting item:", error);
     }
@@ -22,15 +25,15 @@ const CartProduct = ({ product }) => {
   const updateCartItem = async (newQuantity) => {
     try {
       await dispatch(putCart({id: product.product.id, quantity: newQuantity })).unwrap();
-      await dispatch(getCart()).unwrap();
+      await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap();
     } catch (error) {
       console.error("Error updating item quantity:", error);
     }
   };
 
   const handleIncrement = () => {
-    const newCount = count + 1;
-    setCount(newCount);
+    const newCount = counts + 1;
+    setCounts(newCount);
     updateCartItem(newCount);
   };
 
@@ -54,14 +57,14 @@ const CartProduct = ({ product }) => {
             </p>
             <div className="rounded-[40px] px-4 h-[48px] w-[136px] self-end lg:self-auto my-4 lg:my-0 flex items-center justify-between gap-x-2 border-[#F0F2F5] border bg-[#F9FAFB]">
               <button
-                className={`${count === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} text-[20px] text-[#006C0B]`}
-                disabled={count === 1}
+                className={`${counts === 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"} text-[20px] text-[#006C0B]`}
+                disabled={counts === 1}
                 onClick={handleDecrement}
               >
                 -
               </button>
               <span className="text-[#006C0B] font-semibold text-[20px]">
-                {count}
+                {counts}
               </span>
               <button
                 className="text-[20px] text-[#006C0B]"
@@ -73,7 +76,7 @@ const CartProduct = ({ product }) => {
           </div>
         </div>
         <div className="flex lg:w-fit justify-between lg:flex-col lg:items-end lg:h-[136px] flex-1">
-          <p className="text-2xl font-semibold">₦{product?.product?.price.toLocaleString()}</p>
+          <p className="text-2xl font-semibold">₦{product?.product?.price === undefined ? '0' : product?.product?.price.toLocaleString()}</p>
           <button className="lg:self-end" onClick={() => deleteItem(product?.product?.id)}>
             <img src={deleteimg} alt="Delete" />
           </button>

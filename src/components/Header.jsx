@@ -52,7 +52,6 @@ const Header = () => {
       try {
         await dispatch(getCategory()).unwrap();
         await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap()
-        await dispatch(getCart()).unwrap()
         await dispatch(getUserProfile()).unwrap();
       } catch (error) { }
     };
