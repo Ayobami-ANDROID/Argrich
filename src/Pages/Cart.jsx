@@ -6,7 +6,7 @@ import minus from "../images/minus.svg";
 import plus from "../images/plus.svg";
 import deleteimg from "../images/delete.svg";
 import CartProduct from "../components/CartProduct";
-import { getCart } from "../features/cart/cartSlice";
+import { getCart,cartReset } from "../features/cart/cartSlice";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -17,10 +17,12 @@ const Cart = () => {
   const { cart,count } = useSelector((state) => state.cart);
   const totalPages = Math.ceil(count / limit);
   console.log(cart);
+
   useEffect(() => {
     const cartProduct = async () => {
       try {
-        const values = await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap();
+        // cartReset()
+         await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap();
 
         console.log("values", values);
       } catch (error) { }
@@ -75,7 +77,7 @@ const Cart = () => {
   };
 
   const totalPrice = cart.reduce((acc, item) => {
-    return acc + item.product.price * item.quantity;
+    return acc + (item?.product?.price || 0) * (item?.quantity || 0);
   }, 0);
 
 
@@ -118,7 +120,7 @@ const Cart = () => {
               <div className="flex items-center justify-between ">
                 {" "}
                 <p className="text-[24px] font-semibold">Subtotal:</p>
-                <p className="text-[#2A4F1A] text-[24px] font-semibold"> ₦{totalPrice.toLocaleString()}</p>
+                <p className="text-[#2A4F1A] text-[24px] font-semibold"> ₦{totalPrice !== undefined ? totalPrice.toLocaleString() : '0'}</p>
               </div>
               <div className="bg-[#C6C6C6] w-full h-[0.8px] "></div>
 

@@ -21,6 +21,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { getCart } from "../features/cart/cartSlice";
 import { toast, Bounce } from "react-toastify";
 import { getUserProfile } from "../features/account/accountSlice";
+import secureLocalStorage from "react-secure-storage";
 
 const Header = () => {
   // const [clicked, setClicked] = useState(false);
@@ -51,13 +52,11 @@ const Header = () => {
     const fetchProduct = async () => {
       try {
         await dispatch(getCategory()).unwrap();
-        await dispatch(
-          getCart({ limit: limit, offset: currentPage - 1 })
-        ).unwrap();
-        await dispatch(getCart()).unwrap();
+        await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap()
+        await dispatch(getUserProfile()).unwrap();
       } catch (error) {
-        console.log("error");
-      }
+      
+      console.log("error");}
     };
 
     fetchProduct();
@@ -227,6 +226,7 @@ const Header = () => {
                         className="hover:text-[#008A2F] flex items-center transition"
                         onClick={(e) => {
                           e.stopPropagation();
+                          secureLocalStorage.clear()
                           logout();
                         }}
                       >
