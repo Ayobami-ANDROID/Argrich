@@ -62,16 +62,18 @@ const Checkout = () => {
                 payment_method: "pay_now"
             }
 
-           const result= await dispatch(createOrder(body)).unwrap()
-           console.log(result)
-            const popup = new PaystackPop()
+           await dispatch(createOrder(body)).unwrap()
+           
+            const popup =  new PaystackPop()
             popup.resumeTransaction(result.access_code)
+            navigate('/homepage/')
         }
         else if(payOnDelivery === true){
             const body = {
                 payment_method: "on_delivery"
             }
             await dispatch(createOrder(body)).unwrap()
+            navigate('/homepage/')
             
         }
         else{

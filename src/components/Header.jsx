@@ -19,6 +19,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { getCart } from "../features/cart/cartSlice";
 import { toast, Bounce } from "react-toastify";
 import { getUserProfile } from "../features/account/accountSlice";
+import secureLocalStorage from "react-secure-storage";
 
 
 
@@ -215,6 +216,7 @@ const Header = () => {
                         className="hover:text-[#008A2F] flex items-center transition"
                         onClick={(e) => {
                           e.stopPropagation();
+                          secureLocalStorage.clear()
                           logout();
                         }}
     
