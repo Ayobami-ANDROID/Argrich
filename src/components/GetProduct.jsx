@@ -194,7 +194,7 @@ const GetProduct = () => {
          <div className="mt-24">
          <h1 className="font-[600] font-manrope text-[28px] mb-5">Similar Items You Might Like</h1>
          <div className="">
-           <div className="flex overflow-x-scroll  gap-4 no-scrollbar justify-between py-4">
+           <div className="flex overflow-x-scroll  flex-col lg:flex-row gap-2 lg:gap-4 no-scrollbar justify-between py-4">
              {relatedProducts.map((relate,index) => (
                <Item
                key={index}
