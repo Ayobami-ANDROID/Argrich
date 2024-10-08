@@ -10,9 +10,9 @@ const initialState = {
 
 export const getCart = createAsyncThunk(
   "products/cart/",
-  async ({limit,offset}, thunkAPI) => {
+  async ({page_size,page}, thunkAPI) => {
     try {
-      const response = await cartService.getCart(limit,offset);
+      const response = await cartService.getCart(page_size,page);
       console.log("respons", response);
       
       return response;

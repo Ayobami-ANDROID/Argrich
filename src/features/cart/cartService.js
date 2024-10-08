@@ -1,8 +1,8 @@
 import apiClient from "../../app/axiosConfig";
 
 
-const getCart = async (limit,offset) =>{
-    const response = await apiClient.get(`/products/cart/?limit=${limit}&offset=${offset}`)
+const getCart = async (page_size,page) =>{
+    const response = await apiClient.get(`/products/cart/?page_size=${page_size}&page=${page}`)
     return response.data
 }
 

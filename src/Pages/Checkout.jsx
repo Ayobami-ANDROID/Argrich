@@ -19,15 +19,15 @@ const Checkout = () => {
     const [payNow, setPayNow] = useState(false);
     const [payOnDelivery, setPayOnDelivery] = useState(false);
     const { isLoading, } = useSelector((state) => state.product);
-    const limit = 6;
+    const page_size = 6;
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = Math.ceil(count / limit);
+    const totalPages = Math.ceil(count / page_size);
 
     console.log(cart);
     useEffect(() => {
         const cartProduct = async () => {
             try {
-                 await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap();
+                 await dispatch(getCart({ page_size:page_size, page: (currentPage)})).unwrap();
                 
 
                 console.log("values", "sdsd");
@@ -51,7 +51,7 @@ const Checkout = () => {
       const paginate = (pageNumber) => setCurrentPage(pageNumber);
     
       const renderPageNumbers = () => {
-        // const totalPages = Math.ceil(5 / limit);
+        // const totalPages = Math.ceil(5 / page_size);
         const visiblePages = 3; // Number of visible page numbers at once
         const pages = [];
         const middlePage = Math.ceil(visiblePages / 2);
@@ -236,7 +236,7 @@ const Checkout = () => {
 
             <div className="flex justify-center items-center mt-8">
         {/* <button
-          onClick={() => handlePageChange(currentPage - 1)}
+          onClick={() => handlePageChange(currentPage)}
           disabled={currentPage === 1}
           className="px-4 py-2 mx-1 bg-[#318000] text-white rounded disabled:bg-gray-300"
         >
@@ -247,8 +247,8 @@ const Checkout = () => {
             ? 'opacity-50 cursor-not-allowed bg-[#919EAB] h-[30px] w-[30px] border-2 border-[#919EAB] rounded-full'
             : 'cursor-pointer border-[1px]  h-[30px] w-[30px] rounded-full border-[rgba(42,79,26,1)]'
             }`}
-          // onClick={() => onPageChange(currentPage - 1)}
-          onClick={() => handlePageChange(currentPage - 1)}
+          // onClick={() => onPageChange(currentPage)}
+          onClick={() => handlePageChange(currentPage)}
           disabled={currentPage === 1}
         >
           <svg

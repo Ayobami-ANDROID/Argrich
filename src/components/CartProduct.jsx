@@ -9,14 +9,14 @@ const CartProduct = ({ product }) => {
   const dispatch = useDispatch();
   const { cart,count } = useSelector((state) => state.cart);
   const [counts, setCounts] = useState(product?.quantity);
-  const limit = 6; 
+  const page_size = 6; 
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(count / limit);
+  const totalPages = Math.ceil(count / page_size);
 
   const deleteItem = async (id) => {
     try {
       await dispatch(deleteCart(id)).unwrap();
-      await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap();
+      await dispatch(getCart({ page_size:page_size, page: (currentPage)})).unwrap();
     } catch (error) {
       console.error("Error deleting item:", error);
     }
@@ -25,7 +25,7 @@ const CartProduct = ({ product }) => {
   const updateCartItem = async (newQuantity) => {
     try {
       await dispatch(putCart({id: product.product.id, quantity: newQuantity })).unwrap();
-      await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap();
+      await dispatch(getCart({ page_size:page_size, page: (currentPage)})).unwrap();
     } catch (error) {
       console.error("Error updating item quantity:", error);
     }
