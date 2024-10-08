@@ -9,17 +9,17 @@ import icon1 from "../images/chevron-right.svg";
 const GetProductByCategory = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const limit = 6; // Increased limit for better pagination example
+  const page_size = 6; // Increased page_size for better pagination example
 
   const [currentPage, setCurrentPage] = useState(1);
   const { isLoading, products,count } = useSelector((state) => state.product);
   let { Category } = useParams();
-  const totalPages = Math.ceil(count / limit);
+  const totalPages = Math.ceil(count / page_size);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         await dispatch(
-          getSearchProduct({ name: "", search: Category, limit:limit, offset: (currentPage - 1)  })
+          getSearchProduct({ name: "", search: Category, page_size:page_size, page: (currentPage)  })
         ).unwrap();
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -27,7 +27,7 @@ const GetProductByCategory = () => {
     };
 
     fetchProduct();
-  }, [dispatch, Category,limit,currentPage]);
+  }, [dispatch, Category,page_size,currentPage]);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
@@ -38,7 +38,7 @@ const GetProductByCategory = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const renderPageNumbers = () => {
-    // const totalPages = Math.ceil(5 / limit);
+    // const totalPages = Math.ceil(5 / page_size);
     const visiblePages = 3; // Number of visible page numbers at once
     const pages = [];
     const middlePage = Math.ceil(visiblePages / 2);
@@ -128,7 +128,7 @@ const GetProductByCategory = () => {
 
       <div className="flex justify-center items-center mt-8">
         {/* <button
-          onClick={() => handlePageChange(currentPage - 1)}
+          onClick={() => handlePageChange(currentPage)}
           disabled={currentPage === 1}
           className="px-4 py-2 mx-1 bg-[#318000] text-white rounded disabled:bg-gray-300"
         >
@@ -139,8 +139,8 @@ const GetProductByCategory = () => {
             ? 'opacity-50 cursor-not-allowed bg-[#919EAB] h-[30px] w-[30px] border-2 border-[#919EAB] rounded-full'
             : 'cursor-pointer border-[1px]  h-[30px] w-[30px] rounded-full border-[rgba(42,79,26,1)]'
             }`}
-          // onClick={() => onPageChange(currentPage - 1)}
-          onClick={() => handlePageChange(currentPage - 1)}
+          // onClick={() => onPageChange(currentPage)}
+          onClick={() => handlePageChange(currentPage)}
           disabled={currentPage === 1}
         >
           <svg

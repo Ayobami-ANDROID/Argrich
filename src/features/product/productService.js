@@ -1,7 +1,7 @@
 import apiClient from "../../app/axiosConfig";
 
-const getProducts = async (limit,offset) => {
-  const response = await apiClient.get(`products?limit=${limit}&offset=${offset}`);
+const getProducts = async (page_size,page) => {
+  const response = await apiClient.get(`products?page_size=${page_size}&page=${page}`);
   return response.data;
 };
 
@@ -10,8 +10,8 @@ const getSingleProduct = async (id) => {
   return response.data;
 };
 
-const getSearchProduct = async (name,category,limit,offset) => {
-  const response = await apiClient.get(`products?name=${name}&category=${category}&limit=${limit}&offset=${offset}`)
+const getSearchProduct = async (name,category,page_size,page) => {
+  const response = await apiClient.get(`products?name=${name}&category=${category}&page_size=${page_size}&page=${page}`)
   return response.data
 }
 

@@ -30,7 +30,7 @@ const Header = () => {
   const { user, isLoading } = useSelector((state) => state.account);
   const [value,setValue] = useState('')
 
-  const limit = 6; // Increased limit for better pagination example
+  const page_size = 6; // Increased page_size for better pagination example
   const [currentPage, setCurrentPage] = useState(1);
   const { token } = useSelector((state) => state.auth);
   const { category } = useSelector((state) => state.category);
@@ -51,7 +51,7 @@ const Header = () => {
     const fetchProduct = async () => {
       try {
         await dispatch(getCategory()).unwrap();
-        await dispatch(getCart({ limit:limit, offset: (currentPage - 1)})).unwrap()
+        await dispatch(getCart({ page_size:page_size, page: (currentPage)})).unwrap()
         await dispatch(getUserProfile()).unwrap();
       } catch (error) { }
     };

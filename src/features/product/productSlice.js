@@ -9,9 +9,9 @@ const initialState = {
 };
 export const getProducts = createAsyncThunk(
   "products/",
-  async ({ limit, offset }, thunkAPI) => {
+  async ({ page_size, page }, thunkAPI) => {
     try {
-      const response = await productService.getProducts(limit, offset);
+      const response = await productService.getProducts(page_size, page);
       return response;
     } catch (error) {
       console.log(error?.response?.data?.detail);
@@ -130,9 +130,9 @@ export const getOrderById = createAsyncThunk(
 
 export const getSearchProduct = createAsyncThunk(
   "products/search",
-  async ({ name, search, limit, offset }, thunkAPI) => {
+  async ({ name, search, page_size, page }, thunkAPI) => {
     try {
-      const response = await productService.getSearchProduct(name, search,limit,offset);
+      const response = await productService.getSearchProduct(name, search,page_size,page);
       return response;
     } catch (error) {
       console.log(error?.response?.data?.detail);

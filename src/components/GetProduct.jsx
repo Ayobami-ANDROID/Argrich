@@ -28,7 +28,7 @@ const GetProduct = () => {
         
         if (fetchedProduct?.category) {
           // Dispatch the getSearchProduct action to search by category
-          await dispatch(getSearchProduct({ name: '', search: fetchedProduct.category })).unwrap();
+          await dispatch(getSearchProduct({ name: '', search: fetchedProduct.category, page_size:20, page:1 })).unwrap();
         }
       } catch (error) {
         // Handle error
