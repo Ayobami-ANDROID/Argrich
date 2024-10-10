@@ -10,16 +10,16 @@ const Shop = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      dispatch(productReset());
+      // dispatch(productReset());
       try {
-        await dispatch(getProducts()).unwrap();
+        await dispatch(getProducts({ page_size: 10, page: 1 })).unwrap();
       } catch (error) {
         console.error("Error fetching products:", error);
       }
     };
 
     fetchProduct();
-  }, [dispatch]);
+  }, []);
 
   // Slice the products array to get only the first 4 items
   const displayedProducts = products.slice(0, 4);
