@@ -47,5 +47,9 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
+  },
+  
+  "engines": {
+    "node": "20.5.0"
   }
 }
